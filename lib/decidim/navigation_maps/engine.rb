@@ -18,6 +18,13 @@ module Decidim
       initializer "decidim_navigation_maps.assets" do |app|
         app.config.assets.precompile += %w[decidim_navigation_maps_manifest.js decidim_navigation_maps_manifest.css]
       end
+
+      initializer "decidim.navigation_maps.content_blocks" do
+        Decidim.content_blocks.register(:homepage, :navigation_map) do |content_block|
+          content_block.cell = "decidim/content_blocks/navigation_map"
+          content_block.public_name_key = "decidim.content_blocks.navigation_map.name"
+        end
+      end
     end
   end
 end

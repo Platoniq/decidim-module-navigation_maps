@@ -4,3 +4,6 @@ en:
     components:
       navigation_maps:
         name: NavigationMaps
+    content_blocks:
+      navigation_map:
+        name: Navigation Map
