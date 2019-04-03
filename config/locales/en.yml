@@ -1,0 +1,6 @@
+---
+en:
+  decidim:
+    components:
+      navigation_maps:
+        name: NavigationMaps
