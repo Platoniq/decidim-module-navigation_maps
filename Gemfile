@@ -14,7 +14,6 @@ gem "uglifier", "~> 4.1"
 
 group :development, :test do
   gem "byebug", "~> 10.0", platform: :mri
-
   gem "decidim-dev", DECIDIM_VERSION
 end
 

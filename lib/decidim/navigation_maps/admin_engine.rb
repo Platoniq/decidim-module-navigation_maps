@@ -11,12 +11,12 @@ module Decidim
 
       routes do
         # Add admin engine routes here
-        # resources :navigation_maps do
-        #   collection do
-        #     resources :exports, only: [:create]
-        #   end
-        # end
-        # root to: "navigation_maps#index"
+        resources :navigation_maps do
+          collection do
+            resources :exports, only: [:index, :new, :create]
+          end
+        end
+        root to: "navigation_maps#index"
       end
 
       def load_seed

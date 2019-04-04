@@ -2,7 +2,7 @@
 
 module Decidim
   module ContentBlocks
-    class NavigationMap < Decidim::ViewModel
+    class NavigationMapCell < Decidim::ViewModel
       def show
         'hi'
       end
