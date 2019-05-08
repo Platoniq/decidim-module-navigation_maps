@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
   s.authors = ["Ivan Vergés"]
   s.email = ["ivan@platoniq.net"]
   s.license = "AGPL-3.0"
-  s.homepage = "https://github.com/decidim/decidim-module-navigation_maps"
+  s.homepage = "https://github.com/Platoniq/decidim-module-navigation_maps"
   s.required_ruby_version = ">= 2.5"
 
   s.name = "decidim-navigation_maps"
@@ -19,4 +19,8 @@ Gem::Specification.new do |s|
   s.files = Dir["{app,config,lib}/**/*", "LICENSE-AGPLv3.txt", "Rakefile", "README.md"]
 
   s.add_dependency "decidim-core", Decidim::NavigationMaps::DECIDIM_VERSION
+  s.add_dependency "decidim-admin", Decidim::NavigationMaps::DECIDIM_VERSION
+
+  s.add_development_dependency "decidim-dev", Decidim::NavigationMaps::DECIDIM_VERSION
+
 end

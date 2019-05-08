@@ -4,7 +4,11 @@ module Decidim
   module ContentBlocks
     class NavigationMapCell < Decidim::ViewModel
       def show
-        'hi'
+    		render
+      end
+
+      def html_content
+        model.settings.html_content.html_safe
       end
     end
   end
