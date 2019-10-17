@@ -19,6 +19,10 @@ module Decidim
         root to: "navigation_maps#index"
       end
 
+      initializer "decidim_navigation_maps.admin_assets" do |app|
+        app.config.assets.precompile += %w(admin/decidim_navigation_maps_manifest.js admin/decidim_navigation_maps_manifest.css)
+      end
+
       def load_seed
         nil
       end
