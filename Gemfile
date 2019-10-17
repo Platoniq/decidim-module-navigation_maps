@@ -4,7 +4,7 @@ source "https://rubygems.org"
 
 ruby RUBY_VERSION
 # DECIDIM_VERSION =  { git: "https://github.com/decidim/decidim" }
-DECIDIM_VERSION =  "0.17"
+DECIDIM_VERSION =  "0.18"
 gem "decidim", DECIDIM_VERSION
 gem "decidim-navigation_maps", path: "."
 
