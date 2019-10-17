@@ -1,7 +1,10 @@
 <section class="extended home-section">
   <div class="row">
     <div class="columns small-centered large-10">
-      <%= html_content %>
+      <div id="map" class="map"></div>
     </div>
   </div>
 </section>
+
+<%= javascript_include_tag "decidim/navigation_maps/admin/navigation_controller" %>
+<%= stylesheet_link_tag "decidim/navigation_maps/admin/navigation_controller" %>

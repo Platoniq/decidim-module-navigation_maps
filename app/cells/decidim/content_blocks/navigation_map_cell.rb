@@ -3,7 +3,7 @@
 module Decidim
   module ContentBlocks
     class NavigationMapCell < Decidim::ViewModel
-      def show
+      def show       
     		render
       end
 

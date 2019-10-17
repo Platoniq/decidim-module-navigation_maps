@@ -6,3 +6,22 @@
   <%= settings_fields.text_area :html_content, label: label %>
 <% end %>
 
+<div id="map" class="map" data-value="<%= form.object.images.map_image.url %>"></div>
+
+<table id ="leaflet-info">
+  <thead>
+    <tr>
+      <th> Shape </th>
+      <th> LatLngs </th>
+    <tr>
+  <tbody>
+  </tbody>
+</table>
+
+<div class="button" id = "leaflet-save"> Save map </button>
+
+
+
+<%= javascript_include_tag "decidim/navigation_maps/admin/navigation_controller_settings_form_cell" %>
+<%= stylesheet_link_tag "decidim/navigation_maps/admin/navigation_controller" %>
+
