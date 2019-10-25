@@ -21,7 +21,21 @@ $(function() {
   var blueprint = $('#map').data('blueprint');
   for (area in blueprint) {
     var geoarea = blueprint[area];
-    new L.GeoJSON(geoarea).addTo(map);
+    var coordinates = $.map(geoarea.geometry.coordinates, function(value, index) {
+      var array = $.map(value, function(elem, index) {
+        return [elem];
+      });
+      return array;
+    });
+    geoarea.geometry.coordinates = [coordinates];
+
+    new L.GeoJSON(geoarea, {
+      onEachFeature: function(feature, layer) {
+        layer.on('click', function(e) {
+          window.open(feature.properties.link, '_blank');
+        })
+      }
+    }).addTo(map);
   }
   
   map.invalidateSize();

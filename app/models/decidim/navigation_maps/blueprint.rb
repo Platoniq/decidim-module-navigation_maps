@@ -7,7 +7,7 @@ module Decidim
         self.table_name = "decidim_navigation_maps_blueprints"
         belongs_to :organization, foreign_key: :decidim_organization_id, class_name: "Decidim::Organization"
 
-        validates :blueprint, presence: true
+        # validates :blueprint, presence: true
       end
     end
   end

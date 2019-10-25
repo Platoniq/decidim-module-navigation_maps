@@ -24,24 +24,58 @@ map.pm.addControls({
   cutPolygon: false
 });
 
+var blueprint = $('#map').data('blueprint');
+for (area in blueprint) {
+  var geoarea = blueprint[area];
+  var coordinates = $.map(geoarea.geometry.coordinates, function(value, index) {
+    var array = $.map(value, function(elem, index) {
+      return [elem];
+    });
+    return array;
+  });
+  geoarea.geometry.coordinates = [coordinates];
+
+  
+  new L.GeoJSON(geoarea, {
+    onEachFeature: function(feature, layer) {
+      $('#leaflet-body').append('<tr id="leaflet-tr-' + layer._leaflet_id + '"> '
+                                    + ' <th id="leaflet-th-' + layer._leaflet_id + '-type">' + feature.geometry.type +'</th>'
+                                    + ' <th id="leaflet-th-' + layer._leaflet_id + '-coordinates">' + JSON.stringify(feature.geometry.coordinates[0]) + '</th>'
+                                    + ' <th id="leaflet-th-' + layer._leaflet_id + '-link"> <input type="text" id="leaflet-th-' + layer._leaflet_id + '-link-input" value="' + feature.properties.link + '"> </th>'
+                                    + '</tr>');
+    }
+  }).addTo(map);
+
+}
+
+
 map.invalidateSize();
 
-var features = [];
+var features = {};
 
 map.on('pm:create', e => {
-  features[e.layer._leaflet_id] = e.layer.toGeoJSON();
+  var geojson = e.layer.toGeoJSON();
+  features[e.layer._leaflet_id] = geojson;
+  $('#leaflet-body').append('<tr id="leaflet-tr-' + e.layer._leaflet_id + '"> '
+                                + ' <th id="leaflet-th-' + e.layer._leaflet_id + '-type">' + geojson.geometry.type +'</th>'
+                                + ' <th id="leaflet-th-' + e.layer._leaflet_id + '-coordinates">' + JSON.stringify(geojson.geometry.coordinates[0]) + '</th>'
+                                + ' <th id="leaflet-th-' + e.layer._leaflet_id + '-link"> <input type="text" id="leaflet-th-' + e.layer._leaflet_id + '-link-input"></th>'
+                                + '</tr>');
   e.layer.on('pm:edit', e => {
-    features[e.target._leaflet_id] = e.target.toGeoJSON();
+    features[e.layer._leaflet_id] = e.target.toGeoJSON();
   });
 });
 
 map.on('pm:remove', e => {
-  features.pop(e.layer.toGeoJSON());
+  delete features[e.layer._leaflet_id];
+  document.getElementById('leaflet-tr-' + e.layer._leaflet_id).remove();
 });
 
 $('#leaflet-save').click(function(e) {
   e.preventDefault();
-  console.info(features);
+  Object.keys(features).forEach(function(key) {
+    features[key].properties.link = document.getElementById('leaflet-th-' + key + '-link-input').value;
+  });
   $.post({
     url: '/admin/navigation_maps/blueprints',
     data: {blueprint: features},
