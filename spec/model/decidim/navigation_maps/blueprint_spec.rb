@@ -1,15 +1,15 @@
 # frozen_string_literal: true
 
-require 'spec_helper'
+require "spec_helper"
 
 module Decidim
   module NavigationMaps
     describe Blueprint do
       subject { blueprint }
+
       let(:organization) { create(:organization) }
       let(:data) { [x: "test"] }
       let(:blueprint) { build(:blueprint, blueprint: data, organization: organization) }
-
 
       it { is_expected.to be_valid }
 

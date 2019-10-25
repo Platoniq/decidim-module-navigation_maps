@@ -17,9 +17,8 @@ module Decidim
       end
 
       initializer "decidim_navigation_maps.assets" do |app|
-        app.config.assets.precompile += %w[decidim_navigation_maps_manifest.js decidim_navigation_maps_manifest.css]
+        app.config.assets.precompile += %w(decidim_navigation_maps_manifest.js decidim_navigation_maps_manifest.css)
       end
-
 
       initializer "decidim.navigation_maps.content_blocks" do
         # Add custom form_builder method to handle map images uploads
@@ -48,7 +47,6 @@ module Decidim
         Cell::ViewModel.view_paths << File.expand_path("#{Decidim::NavigationMaps::Engine.root}/app/cells")
         Cell::ViewModel.view_paths << File.expand_path("#{Decidim::NavigationMaps::Engine.root}/app/views") # for partials
       end
-
     end
   end
 end

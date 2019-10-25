@@ -3,7 +3,6 @@
 module Decidim
   module ContentBlocks
     class NavigationMapSettingsFormCell < Decidim::ViewModel
-
       alias form model
 
       def content_block
@@ -12,7 +11,7 @@ module Decidim
 
       def map_image_url
         model.images_container.map_image.url
-      end 
+      end
 
       def label
         I18n.t("decidim.content_blocks.html.html_content")

@@ -23,7 +23,7 @@ module Decidim::NavigationMaps::Admin
         expect(response.body).to eq("[]")
       end
     end
-    
+
     describe "GET #new" do
       it "returns http success" do
         get :new
@@ -40,6 +40,5 @@ module Decidim::NavigationMaps::Admin
         # context: when blueprint is is valid json
       end
     end
-
   end
 end

@@ -8,21 +8,18 @@ module Decidim
           render json: []
         end
 
-        def new
-        end
+        def new; end
 
         def create
           blueprint = Blueprint.first || Blueprint.new(organization: current_organization)
           blueprint.blueprint = params[:blueprint]
           blueprint.save!
-          render json: {"blueprint": blueprint.blueprint}
+          render json: { "blueprint": blueprint.blueprint }
         end
 
-        def update
-        end
+        def update; end
 
-        def destroy
-        end
+        def destroy; end
       end
     end
   end
