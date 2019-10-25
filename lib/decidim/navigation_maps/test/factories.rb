@@ -3,10 +3,9 @@
 require "decidim/core/test/factories"
 
 FactoryBot.define do
-  factory :navigation_maps_component, parent: :component do
-    name { Decidim::Components::Namer.new(participatory_space.organization.available_locales, :navigation_maps).i18n_name }
-    manifest_name { :navigation_maps }
-    participatory_space { create(:participatory_process, :with_steps) }
+  factory :blueprint, class: Decidim::NavigationMaps::Blueprint do
+    organization { create(:organization) }
+    blueprint { {x: 1} }
   end
 
   # Add engine factories here

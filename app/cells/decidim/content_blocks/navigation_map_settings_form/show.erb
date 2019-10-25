@@ -2,7 +2,22 @@
   <%= images_fields.upload_map :map_image %>
 <% end %>
 
-<% form.fields_for :settings, form.object.settings do |settings_fields| %>
-  <%= settings_fields.text_area :html_content, label: label %>
-<% end %>
+<%= content_tag(:div, "", id: "map", class: "map", data: { map: form.object.images.map_image.url, blueprint: blueprint_data }) %>
+
+<button class="button" id="leaflet-save"> SAVE </button>
+
+<table>
+  <thead>
+    <tr>
+      <th> Type </th>
+      <th> Coordinates</th>
+      <th> link</th>
+    </tr>
+  </thead>
+  <tbody id="leaflet-body">
+  </tbody>
+</table>
+
+<%= javascript_include_tag "decidim/navigation_maps/admin/navigation_controller_settings_form_cell" %>
+<%= stylesheet_link_tag "decidim/navigation_maps/admin/navigation_controller" %>
 
