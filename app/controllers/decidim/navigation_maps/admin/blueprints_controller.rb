@@ -4,11 +4,11 @@ module Decidim
   module NavigationMaps
     module Admin
       class BlueprintsController < ApplicationController
+        include NeedsPermission
+
         def index
           render json: []
         end
-
-        def new; end
 
         def create
           blueprint = Blueprint.first || Blueprint.new(organization: current_organization)

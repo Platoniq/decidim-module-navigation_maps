@@ -18,7 +18,7 @@ module Decidim
       end
 
       def blueprint_data
-        Decidim::NavigationMaps::Blueprint.first.blueprint.to_json.html_safe
+        Decidim::NavigationMaps::Blueprint&.first&.blueprint&.to_json&.html_safe
       end
     end
   end
