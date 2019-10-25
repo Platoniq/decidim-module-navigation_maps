@@ -2,6 +2,8 @@
 
 Allows to map processes to image parts using maps.
 
+> NOTE: This is in PREALPHA status. Please do not use it on production.
+
 ## Usage
 
 NavigationMaps will be available as a Component for a Participatory
