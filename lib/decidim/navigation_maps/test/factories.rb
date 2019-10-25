@@ -8,6 +8,4 @@ FactoryBot.define do
     blueprint { { x: 1, y: 1 } }
     image { Decidim::Dev.test_file("city.jpeg", "image/jpeg") }
   end
-
-  # Add engine factories here
 end

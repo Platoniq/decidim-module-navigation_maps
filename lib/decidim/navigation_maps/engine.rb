@@ -27,9 +27,9 @@ module Decidim
         end
 
         Decidim.content_blocks.register(:homepage, :navigation_map) do |content_block|
-          content_block.cell = "decidim/content_blocks/navigation_map"
+          content_block.cell = "decidim/navigation_maps/content_blocks/navigation_map"
           content_block.public_name_key = "decidim.content_blocks.navigation_map.name"
-          content_block.settings_form_cell = "decidim/content_blocks/navigation_map_settings_form"
+          content_block.settings_form_cell = "decidim/navigation_maps/content_blocks/navigation_map_settings_form"
 
           content_block.images = [
             {
