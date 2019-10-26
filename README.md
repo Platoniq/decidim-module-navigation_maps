@@ -1,6 +1,7 @@
 # Decidim::NavigationMaps
 
 [![Build Status](https://travis-ci.org/Platoniq/decidim-module-navigation_maps.svg?branch=master)](https://travis-ci.org/Platoniq/decidim-module-navigation_maps)
+[![Maintainability](https://api.codeclimate.com/v1/badges/f69b2b0ab0ffcd26f002/maintainability)](https://codeclimate.com/github/Platoniq/decidim-module-navigation_maps/maintainability)
 
 Allows to map processes to image parts using maps.
 
