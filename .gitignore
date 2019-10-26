@@ -6,7 +6,10 @@
 /pkg/
 /spec/reports/
 /tmp/
-
+node_modules/
+.vscode
+.byebug_history
+npm_debug.log
 # rspec failure tracking
 .rspec-failures
 
