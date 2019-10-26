@@ -8,6 +8,7 @@ addons:
 
 env:
   global:
+    - CC_TEST_REPORTER_ID=bb2a496f0bd3c281ad9c7fc934bb3d16284bdd66f13956f7feb283f4958623de
     - BUNDLE_GEMFILE="$TRAVIS_BUILD_DIR/Gemfile"
     - BUNDLE_PATH="$HOME/.bundle"
   matrix:
