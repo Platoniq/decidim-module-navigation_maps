@@ -1,6 +1,6 @@
 
 <!-- Override rails default patch (always post as creating a new item) -->
-<%= hidden_field_tag :_method, 'post' %>
+<%= hidden_field_tag :_method, "post" %>
 <%= hidden_field_tag :id, form.id %>
 <%= hidden_field_tag :action, blueprints_path %>
 <%= hidden_field_tag :blueprint, form.blueprint %>
@@ -29,7 +29,5 @@
 <%= t ".image_missing" %>
 <% end %>
 
-
 <%= javascript_include_tag "decidim/navigation_maps/admin/navigation_maps" %>
 <%= stylesheet_link_tag "decidim/navigation_maps/admin/navigation_maps" %>
-

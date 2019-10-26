@@ -5,11 +5,11 @@ en:
       navigation_maps:
         name: NavigationMaps
     navigation_maps:
-      create:
-        success: Blueprint created successfully
-        error: Error creating blueprint
       content_blocks:
         name: Navigation Map
         navigation_map_settings_form:
           blueprint_image: Blueprint image
           image_missing: Please add a blueprint image to start
+      create:
+        error: Error creating blueprint
+        success: Blueprint created successfully
