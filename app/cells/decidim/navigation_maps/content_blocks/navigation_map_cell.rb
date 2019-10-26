@@ -5,15 +5,15 @@ module Decidim
     module ContentBlocks
       class NavigationMapCell < Decidim::ViewModel
         def show
-          render
+          render if map_image_url
         end
 
         def map_image_url
-          model.images_container.map_image.url
+          organization_blueprints.first&.image&.url
         end
 
         def blueprint_data
-          organization_blueprints.first&.blueprint&.to_json&.html_safe
+          organization_blueprints.first&.blueprint
         end
 
         private

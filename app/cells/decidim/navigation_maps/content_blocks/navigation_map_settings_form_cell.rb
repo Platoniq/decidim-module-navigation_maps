@@ -3,25 +3,21 @@
 module Decidim
   module NavigationMaps
     module ContentBlocks
-      class NavigationMapSettingsFormCell < Decidim::ViewModel
-        alias form model
-
-        def map_image_url
-          model.images_container.map_image.url
+      class NavigationMapSettingsFormCell < NavigationMapCell
+        # Custom form for this Cell
+        def form
+          blueprint = organization_blueprints.first
+          form = if blueprint
+                   BlueprintForm.from_model(blueprint)
+                 else
+                   BlueprintForm.new
+                 end
+          form.with_context(organization: current_organization)
         end
 
-        def label
-          I18n.t("decidim.content_blocks.html.html_content")
-        end
-
-        def blueprint_data
-          organization_blueprints.first&.blueprint&.to_json&.html_safe
-        end
-
-        private
-
-        def organization_blueprints
-          @organization_blueprints ||= OrganizationBlueprints.new(current_organization).query
+        # it should come from the Engine Routes
+        def blueprints_path
+          "/admin/navigation_maps/blueprints"
         end
       end
     end

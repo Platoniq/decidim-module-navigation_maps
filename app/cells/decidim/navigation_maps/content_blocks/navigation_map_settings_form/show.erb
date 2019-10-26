@@ -1,23 +1,35 @@
-<% form.fields_for :images, form.object.images do |images_fields| %>
-  <%= images_fields.upload_map :map_image %>
+
+<!-- Override rails default patch (always post as creating a new item) -->
+<%= hidden_field_tag :_method, 'post' %>
+<%= hidden_field_tag :id, form.id %>
+<%= hidden_field_tag :action, blueprints_path %>
+<%= hidden_field_tag :blueprint, form.blueprint %>
+<%= label_tag t(".blueprint_image") %>
+<%= file_field_tag :image %>
+<div class="progress">
+    <div class="bar"></div>
+    <div class="percent">0%</div>
+</div>
+
+<% if form.image %>
+  <%= content_tag(:div, "", id: "map", class: "map", data: { image: form.image.url, blueprint: blueprint_data }) %>
+
+  <table>
+    <thead>
+      <tr>
+        <th> Type </th>
+        <th> Coordinates</th>
+        <th> link</th>
+      </tr>
+    </thead>
+    <tbody id="leaflet-body">
+    </tbody>
+  </table>
+<% else %>
+<%= t ".image_missing" %>
 <% end %>
 
-<%= content_tag(:div, "", id: "map", class: "map", data: { map: form.object.images.map_image.url, blueprint: blueprint_data }) %>
 
-<button class="button" id="leaflet-save"> SAVE </button>
-
-<table>
-  <thead>
-    <tr>
-      <th> Type </th>
-      <th> Coordinates</th>
-      <th> link</th>
-    </tr>
-  </thead>
-  <tbody id="leaflet-body">
-  </tbody>
-</table>
-
-<%= javascript_include_tag "decidim/navigation_maps/admin/navigation_controller_settings_form_cell" %>
-<%= stylesheet_link_tag "decidim/navigation_maps/admin/navigation_controller" %>
+<%= javascript_include_tag "decidim/navigation_maps/admin/navigation_maps" %>
+<%= stylesheet_link_tag "decidim/navigation_maps/admin/navigation_maps" %>
 

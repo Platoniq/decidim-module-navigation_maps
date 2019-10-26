@@ -4,22 +4,33 @@ module Decidim
   module NavigationMaps
     module Admin
       class BlueprintsController < ApplicationController
-        include NeedsPermission
+        include NeedsOrganization
 
         def index
-          render json: []
+          render json: organization_blueprints
         end
 
         def create
-          blueprint = Blueprint.first || Blueprint.new(organization: current_organization)
-          blueprint.blueprint = params[:blueprint]
-          blueprint.save!
-          render json: { "blueprint": blueprint.blueprint }
+          enforce_permission_to :update, :organization, organization: current_organization
+          params[:blueprint] = JSON.parse params[:blueprint] if params[:blueprint]
+          puts params[:blueprint]
+          @form = form(BlueprintForm).from_params(params).with_context(current_organization: current_organization)
+          CreateBlueprint.call(@form) do
+            on(:ok) do
+              render json: { success: I18n.t("navigation_maps.create.success", scope: "decidim") }
+            end
+
+            on(:invalid) do
+              render json: { error: I18n.t("navigation_maps.create.error", scope: "decidim") }, status: :unprocessable_entity
+            end
+          end
         end
 
-        def update; end
+        private
 
-        def destroy; end
+        def organization_blueprints
+          @organization_blueprints ||= OrganizationBlueprints.new(current_organization).query
+        end
       end
     end
   end

@@ -22,14 +22,7 @@ module Decidim
           template += label(attribute, label_for(attribute) + required_for_attribute(attribute))
           template += @template.file_field @object_name, attribute
 
-          if file_is_image?(file)
-            template += if file.present?
-                          @template.content_tag :label, I18n.t("current_image", scope: "decidim.forms")
-                        else
-                          @template.content_tag :label, I18n.t("default_image", scope: "decidim.forms")
-                        end
-            template += @template.image_tag(file.url)
-          elsif file_is_present?(file)
+          if file_is_present?(file)
             template += @template.label_tag I18n.t("current_file", scope: "decidim.forms")
             template += file.file.filename
           end
