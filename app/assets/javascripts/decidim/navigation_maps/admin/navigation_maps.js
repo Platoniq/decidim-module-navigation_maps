@@ -65,6 +65,14 @@ MapEditor.prototype.createMap = function() {
       self.blueprint[area] = e.target.toGeoJSON();
       $('#leaflet-tr-' + area).replaceWith(self.getTr(area, self.blueprint[area]));
     });
+    e.layer.on('mouseover', function(e) {
+      e.target.setStyle(self.highlightStyle);
+      $('#leaflet-tr-' + e.target._leaflet_id).addClass('selected');
+    });
+    e.layer.on('mouseout', function(e) {
+      e.target.setStyle(self.defaultStyle);
+      $('#leaflet-tr-' + e.target._leaflet_id).removeClass('selected');
+    });
   });
 
   self.map.on('pm:remove', function(e) {
