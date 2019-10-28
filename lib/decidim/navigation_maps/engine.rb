@@ -30,13 +30,11 @@ module Decidim
           content_block.cell = "decidim/navigation_maps/content_blocks/navigation_map"
           content_block.public_name_key = "decidim.navigation_maps.content_blocks.name"
           content_block.settings_form_cell = "decidim/navigation_maps/content_blocks/navigation_map_settings_form"
-
-          content_block.images = [
-            {
-              name: :map_image,
-              uploader: "Decidim::NavigationMaps::BlueprintUploader"
-            }
-          ]
+          # Todo find a way to show settings
+          content_block.settings do |settings|
+            settings.attribute :dummy_variable,
+                               type: :integer
+          end
         end
       end
 

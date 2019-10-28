@@ -8,12 +8,26 @@
 function MapEditor(image_path, blueprint) {
   var self = this;
   self.features = {};
-  self.blueprint = blueprint;
+  self.blueprint = blueprint || {};
   self.image = new Image();
   self.image.onload = function() {
     self.createMap();
   }
   self.image.src = image_path;
+  self.defaultStyle = {
+    color: "#2262CC",
+    weight: 3,
+    opacity: 0.6,
+    fillOpacity: 0.1,
+    fillColor: "#2262CC"
+  };
+  self.highlightStyle = {
+    color: '#2262CC', 
+    weight: 3,
+    opacity: 0.6,
+    fillOpacity: 0.65,
+    fillColor: '#2262CC'
+  };
 }
 
 MapEditor.prototype.createMap = function() {
@@ -42,15 +56,14 @@ MapEditor.prototype.createMap = function() {
     self.createAreas();
   }
 
-  self.map.invalidateSize();
-
   self.map.on('pm:create', function(e) {
     var geojson = e.layer.toGeoJSON();
-    console.log(e.layer._leaflet_id, geojson)
     self.blueprint[e.layer._leaflet_id] = geojson;
     self.renderTr(e.layer._leaflet_id, geojson);
     e.layer.on('pm:edit', function(e) {
-      self.blueprint[e.layer._leaflet_id] = e.target.toGeoJSON();
+      var area = e.target._leaflet_id;
+      self.blueprint[area] = e.target.toGeoJSON();
+      $('#leaflet-tr-' + area).replaceWith(self.getTr(area, self.blueprint[area]));
     });
   });
 
@@ -58,6 +71,7 @@ MapEditor.prototype.createMap = function() {
     delete self.blueprint[e.layer._leaflet_id];
     document.getElementById('leaflet-tr-' + e.layer._leaflet_id).remove();
   });
+
 };
 
 MapEditor.prototype.createAreas = function() {
@@ -65,20 +79,21 @@ MapEditor.prototype.createAreas = function() {
   for (area in self.blueprint) {
     var geoarea = self.blueprint[area];
     if(geoarea.geometry.type !== 'Polygon') continue;
-    var coordinates = $.map(geoarea.geometry.coordinates, function(value, index) {
-      return $.map(value, function(elem, index) {
-        return [elem];
-      });
-    });
-    geoarea.geometry.coordinates = [coordinates];
 
     new L.GeoJSON(geoarea, {
       onEachFeature: function(feature, layer) {
-        console.log('add', area, feature, layer)
+        layer._leaflet_id = area;
         self.renderTr(area, feature);
         layer.on('pm:edit', function(e) {
           self.blueprint[area] = e.target.toGeoJSON();
-          $('#leaflet-tr-' + area).replaceWith(self.getTr(area, self.blueprint[area]));
+        });
+        layer.on('mouseover', function(e) {
+          layer.setStyle(self.highlightStyle);
+          $('#leaflet-tr-' + layer._leaflet_id).addClass('selected');
+        });
+        layer.on('mouseout', function(e) {
+          layer.setStyle(self.defaultStyle);
+          $('#leaflet-tr-' + layer._leaflet_id).removeClass('selected');
         });
       }
     }).addTo(self.map);
@@ -86,32 +101,44 @@ MapEditor.prototype.createAreas = function() {
 };
 
 MapEditor.prototype.renderTr = function (area, feature) {
-  $('#leaflet-body').append(this.getTr(area, feature));
+  var self = this;
+  var tr = $('#leaflet-body').append(this.getTr(area, feature))
+  $('#leaflet-tr-'+area).mouseover(function() { self.highlightArea(area) });
+  $('#leaflet-tr-'+area).mouseout(function() { self.defaultArea(area) });
 };
 
 MapEditor.prototype.getTr = function (area, feature) {
   var link = feature.properties && feature.properties.link || '#';
-  return '<tr id="leaflet-tr-' + area + '"> '
-    + ' <th id="leaflet-th-' + area + '-type">' + feature.geometry.type +'</th>'
-    + ' <th id="leaflet-th-' + area + '-coordinates">' + JSON.stringify(feature.geometry.coordinates[0]) + '</th>'
-    + ' <th id="leaflet-th-' + area + '-link"> <input type="text" id="leaflet-feature-link-' + area + '" value="' + link + '"> </th>'
+  return '<tr id="leaflet-tr-' + area + '" data-id="' + area + '"> '
+    + ' <td id="leaflet-td-' + area + '-id">' + area +'</td>'
+    + ' <td id="leaflet-td-' + area + '-type">' + feature.geometry.type +'</td>'
+    + ' <td id="leaflet-td-' + area + '-link"> <input type="text" id="leaflet-feature-link-' + area + '" value="' + link + '"> </td>'
     + '</tr>';
 };
 
 MapEditor.prototype.getBlueprint = function () {
   var self = this;
-  console.log(self.blueprint)
   Object.keys(self.blueprint).forEach(function(key) {
     self.blueprint[key].properties.link = $('#leaflet-feature-link-' + key).val();
   });
   return self.blueprint;
 };
 
+MapEditor.prototype.highlightArea = function(blueprint) {
+  var self = this;
+  self.map._layers[blueprint].setStyle(self.highlightStyle);
+}
+
+MapEditor.prototype.defaultArea = function(blueprint) {
+  var self = this;
+  self.map._layers[blueprint].setStyle(self.defaultStyle);
+}
+
 $(function() {
 
   var $map = $('#map');
-  var bar = $('.bar');
-  var percent = $('.percent');
+  var bar = $('.progress-meter');
+  var percent = $('.progress-meter');
   var status = $('#status');
   var $form = $('form');
   var editor;
@@ -138,11 +165,11 @@ $(function() {
         bar.width(percentVal)
         percent.html(percentVal);
     },
-    success: function() {
+    success: function(responseText, statusText, xhr, $form) {
         var percentVal = '100%';
         bar.width(percentVal)
         percent.html(percentVal);
-        if(!editor) {
+        if($form.find('input[type=file]').val()) {
           location.reload();
         }
     },
