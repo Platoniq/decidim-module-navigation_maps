@@ -4,7 +4,6 @@ module Decidim
   module NavigationMaps
     module ContentBlocks
       class NavigationMapSettingsFormCell < NavigationMapCell
-
         def show
           render
         end

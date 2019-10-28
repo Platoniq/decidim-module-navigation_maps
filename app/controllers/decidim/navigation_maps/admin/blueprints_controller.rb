@@ -4,7 +4,6 @@ module Decidim
   module NavigationMaps
     module Admin
       class BlueprintsController < ::Decidim::NavigationMaps::Admin::ApplicationController
-
         def index
           render json: organization_blueprints
         end
@@ -26,9 +25,8 @@ module Decidim
 
         private
 
-
         def parse_blueprint
-          params[:blueprint] = JSON.parse params[:blueprint] unless params[:blueprint].blank?
+          params[:blueprint] = JSON.parse params[:blueprint] if params[:blueprint].present?
         end
 
         def organization_blueprints
