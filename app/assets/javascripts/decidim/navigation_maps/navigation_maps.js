@@ -13,6 +13,20 @@ function MapView(image_path, blueprint) {
     self.createMap();
   }
   self.image.src = image_path;
+  self.defaultStyle = {
+    color: "#2262CC",
+    weight: 3,
+    opacity: 0.6,
+    fillOpacity: 0.1,
+    fillColor: "#2262CC"
+  };
+  self.highlightStyle = {
+    color: '#2262CC', 
+    weight: 3,
+    opacity: 0.6,
+    fillOpacity: 0.65,
+    fillColor: '#2262CC'
+  };
   
 }
 
@@ -44,7 +58,15 @@ MapView.prototype.createAreas = function() {
       onEachFeature: function(feature, layer) {
         layer.on('click', function(e) {
           if(feature.properties && feature.properties.link) location = feature.properties.link;
-        })
+        });
+        layer.on('mouseover', function(e) {
+          layer.setStyle(self.highlightStyle);
+          $('#leaflet-tr-' + layer._leaflet_id).addClass('selected');
+        });
+        layer.on('mouseout', function(e) {
+          layer.setStyle(self.defaultStyle);
+          $('#leaflet-tr-' + layer._leaflet_id).removeClass('selected');
+        });
       }
     }).addTo(self.map);
   }

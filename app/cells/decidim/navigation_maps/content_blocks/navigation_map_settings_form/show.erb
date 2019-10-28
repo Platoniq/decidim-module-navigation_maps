@@ -5,10 +5,13 @@
 <%= hidden_field_tag :action, blueprints_path %>
 <%= hidden_field_tag :blueprint, form.blueprint %>
 <%= label_tag t(".blueprint_image") %>
+<div class="button" data-toggle="image-upload"> UPLOAD IMAGE </div>
+<div id="image-upload" class="hidden" data-toggler=".hidden">
 <%= file_field_tag :image %>
-<div class="progress">
-    <div class="bar"></div>
-    <div class="percent">0%</div>
+
+<div class="progress" role="progressbar" tabindex="0" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
+  <div class="progress-meter">&nbsp;0%</div>
+</div>
 </div>
 
 <% if form.image %>
@@ -17,9 +20,9 @@
   <table>
     <thead>
       <tr>
+        <th> Id </th>
         <th> Type </th>
-        <th> Coordinates</th>
-        <th> link</th>
+        <th> Link</th>
       </tr>
     </thead>
     <tbody id="leaflet-body">

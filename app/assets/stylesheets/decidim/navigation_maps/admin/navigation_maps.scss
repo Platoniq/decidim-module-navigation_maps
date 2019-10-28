@@ -5,3 +5,18 @@
 .map { 
     height: 475px; 
 }
+
+tbody > tr {
+    &.selected {
+        background-color: #2262CC !important;
+    }
+    &:hover {
+        background-color: #2262CC !important;
+  }
+}
+
+.progress-meter {
+    color:white;
+    font-size: 0.7em;
+    font-weight: bold;
+}
