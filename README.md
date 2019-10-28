@@ -24,7 +24,9 @@ gem "decidim-navigation_maps", git: "https://github.com/Platoniq/decidim-module-
 And then execute:
 
 ```bash
-bundle
+$ bundle
+$ bundle exec rails decidim_navigation_maps:install:migrations
+$ bundle exec rails db:migrate
 ```
 
 ## Contributing
