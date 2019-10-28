@@ -8,7 +8,7 @@
 function MapEditor(image_path, blueprint) {
   var self = this;
   self.features = {};
-  self.blueprint = blueprint;
+  self.blueprint = blueprint || {};
   self.image = new Image();
   self.image.onload = function() {
     self.createMap();
@@ -42,15 +42,14 @@ MapEditor.prototype.createMap = function() {
     self.createAreas();
   }
 
-  self.map.invalidateSize();
-
   self.map.on('pm:create', function(e) {
     var geojson = e.layer.toGeoJSON();
-    console.log(e.layer._leaflet_id, geojson)
     self.blueprint[e.layer._leaflet_id] = geojson;
     self.renderTr(e.layer._leaflet_id, geojson);
     e.layer.on('pm:edit', function(e) {
-      self.blueprint[e.layer._leaflet_id] = e.target.toGeoJSON();
+      var area = e.target._leaflet_id;
+      self.blueprint[area] = e.target.toGeoJSON();
+      $('#leaflet-tr-' + area).replaceWith(self.getTr(area, self.blueprint[area]));
     });
   });
 
@@ -58,6 +57,7 @@ MapEditor.prototype.createMap = function() {
     delete self.blueprint[e.layer._leaflet_id];
     document.getElementById('leaflet-tr-' + e.layer._leaflet_id).remove();
   });
+
 };
 
 MapEditor.prototype.createAreas = function() {
@@ -65,16 +65,9 @@ MapEditor.prototype.createAreas = function() {
   for (area in self.blueprint) {
     var geoarea = self.blueprint[area];
     if(geoarea.geometry.type !== 'Polygon') continue;
-    var coordinates = $.map(geoarea.geometry.coordinates, function(value, index) {
-      return $.map(value, function(elem, index) {
-        return [elem];
-      });
-    });
-    geoarea.geometry.coordinates = [coordinates];
 
     new L.GeoJSON(geoarea, {
       onEachFeature: function(feature, layer) {
-        console.log('add', area, feature, layer)
         self.renderTr(area, feature);
         layer.on('pm:edit', function(e) {
           self.blueprint[area] = e.target.toGeoJSON();

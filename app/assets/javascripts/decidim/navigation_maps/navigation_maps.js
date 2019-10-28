@@ -4,49 +4,52 @@
 //= require leaflet-geoman.min
 //= require_self
 
-function loadMap(image, blueprint) {
-  var map = L.map('map', {
+function MapView(image_path, blueprint) {
+  var self = this;
+  self.features = {};
+  self.blueprints = blueprint || {};
+  self.image = new Image();
+  self.image.onload = function() {
+    self.createMap();
+  }
+  self.image.src = image_path;
+  
+}
+
+MapView.prototype.createMap = function() {
+  var self = this;
+  self.map = L.map('map', {
     minZoom: -1,
     maxZoom: 2,
     crs: L.CRS.Simple,
-    center: [image.height/2,image.width/2],
+    center: [self.image.height/2,self.image.width/2],
     zoom: -1,
   });
 
-  var bounds = [[0,0], [image.height,image.width]];
-  L.imageOverlay(image.src, bounds).addTo(map);
+  var bounds = [[0,0], [self.image.height,self.image.width]];
+  L.imageOverlay(self.image.src, bounds).addTo(self.map);
 
-  if(blueprint) {
-    for (area in blueprint) {
-      var geoarea = blueprint[area];
-      if(geoarea.geometry.type !== 'Polygon') continue;
-      console.log(geoarea)
-      var coordinates = $.map(geoarea.geometry.coordinates, function(value, index) {
-        var array = $.map(value, function(elem, index) {
-          return [elem];
-        });
-        return array;
-      });
-      geoarea.geometry.coordinates = [coordinates];
-
-      new L.GeoJSON(geoarea, {
-        onEachFeature: function(feature, layer) {
-          layer.on('click', function(e) {
-            // window.open(feature.properties.link, '_blank');
-            if(feature.properties && feature.properties.link) location = feature.properties.link;
-          })
-        }
-      }).addTo(map);
-    }
+  if(self.blueprints) {
+    self.createAreas();
   }
+}
 
-  map.invalidateSize();
+MapView.prototype.createAreas = function() {
+  var self = this;
+  for (area in self.blueprints) {
+    var geoarea = self.blueprints[area];
+    if(geoarea.geometry.type !== 'Polygon') continue;
+
+    new L.GeoJSON(geoarea, {
+      onEachFeature: function(feature, layer) {
+        layer.on('click', function(e) {
+          if(feature.properties && feature.properties.link) location = feature.properties.link;
+        })
+      }
+    }).addTo(self.map);
+  }
 }
 
 $(function() {
-  var image = new Image();
-  image.onload = function () {
-    loadMap(image, $('#map').data('blueprint'));
-  }
-  image.src = $('#map').data('map');
+  new MapView($('#map').data('map'), $('#map').data('blueprint'));
 });
