@@ -10,6 +10,10 @@ en:
         navigation_map_settings_form:
           blueprint_image: Blueprint image
           image_missing: Please add a blueprint image to start
+          upload_image: Upload image
+          id: Id
+          type: Type
+          link: Link
       create:
         error: Error creating blueprint
         success: Blueprint created successfully

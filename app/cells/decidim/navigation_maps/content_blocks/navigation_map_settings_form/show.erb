@@ -5,7 +5,7 @@
 <%= hidden_field_tag :action, blueprints_path %>
 <%= hidden_field_tag :blueprint, form.blueprint %>
 <%= label_tag t(".blueprint_image") %>
-<div class="button" data-toggle="image-upload"> UPLOAD IMAGE </div>
+<div class="button" data-toggle="image-upload"> <%= t(".upload_image") %> </div>
 <div id="image-upload" class="hidden" data-toggler=".hidden">
 <%= file_field_tag :image %>
 
@@ -20,9 +20,9 @@
   <table>
     <thead>
       <tr>
-        <th> Id </th>
-        <th> Type </th>
-        <th> Link</th>
+        <th> <%= t('.id') %> </th>
+        <th> <%= t('.type') %> </th>
+        <th> <%= t('.link') %></th>
       </tr>
     </thead>
     <tbody id="leaflet-body">
