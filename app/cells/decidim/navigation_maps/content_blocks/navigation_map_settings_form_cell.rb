@@ -4,6 +4,11 @@ module Decidim
   module NavigationMaps
     module ContentBlocks
       class NavigationMapSettingsFormCell < NavigationMapCell
+
+        def show
+          render
+        end
+
         # Custom form for this Cell
         def form
           blueprint = organization_blueprints.first
