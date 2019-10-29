@@ -21,18 +21,18 @@ function MapView(image_path, blueprint) {
     fillColor: "#2262CC"
   };
   self.highlightStyle = {
-    color: '#2262CC', 
+    color: '#2262CC',
     weight: 3,
     opacity: 0.6,
     fillOpacity: 0.65,
     fillColor: '#2262CC'
   };
-  
+
 }
 
 MapView.prototype.createMap = function() {
   var self = this;
-  self.map = L.map('map', {
+  self.map = L.map('navigation_maps-map', {
     minZoom: -1,
     maxZoom: 2,
     crs: L.CRS.Simple,
@@ -52,7 +52,7 @@ MapView.prototype.createAreas = function() {
   var self = this;
   for (area in self.blueprints) {
     var geoarea = self.blueprints[area];
-    if(geoarea.geometry.type !== 'Polygon') continue;
+    if(!geoarea.geometry || geoarea.geometry.type !== 'Polygon') continue;
 
     new L.GeoJSON(geoarea, {
       onEachFeature: function(feature, layer) {
@@ -73,5 +73,6 @@ MapView.prototype.createAreas = function() {
 }
 
 $(function() {
-  new MapView($('#map').data('map'), $('#map').data('blueprint'));
+  $map = $('#navigation_maps-map')
+  new MapView($map.data('map'), $map.data('blueprint'));
 });

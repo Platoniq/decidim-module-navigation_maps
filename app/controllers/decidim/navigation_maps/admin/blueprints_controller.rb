@@ -26,6 +26,7 @@ module Decidim
         private
 
         def parse_blueprint
+          return if params[:image]
           params[:blueprint] = JSON.parse params[:blueprint] if params[:blueprint].present?
         end
 

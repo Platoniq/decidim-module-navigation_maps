@@ -22,7 +22,7 @@ function MapEditor(image_path, blueprint) {
     fillColor: "#2262CC"
   };
   self.highlightStyle = {
-    color: '#2262CC', 
+    color: '#2262CC',
     weight: 3,
     opacity: 0.6,
     fillOpacity: 0.65,
@@ -32,7 +32,7 @@ function MapEditor(image_path, blueprint) {
 
 MapEditor.prototype.createMap = function() {
   var self = this;
-  self.map = L.map('map', {
+  self.map = L.map('navigation_maps-map', {
       minZoom: -1,
       maxZoom: 2,
       crs: L.CRS.Simple,
@@ -86,7 +86,7 @@ MapEditor.prototype.createAreas = function() {
   var self = this;
   for (area in self.blueprint) {
     var geoarea = self.blueprint[area];
-    if(geoarea.geometry.type !== 'Polygon') continue;
+    if(!geoarea.geometry || geoarea.geometry.type !== 'Polygon') continue;
 
     new L.GeoJSON(geoarea, {
       onEachFeature: function(feature, layer) {
@@ -127,6 +127,7 @@ MapEditor.prototype.getTr = function (area, feature) {
 MapEditor.prototype.getBlueprint = function () {
   var self = this;
   Object.keys(self.blueprint).forEach(function(key) {
+    self.blueprint[key].properties = self.blueprint[key] && self.blueprint[key].properties || {link: '#'}
     self.blueprint[key].properties.link = $('#leaflet-feature-link-' + key).val();
   });
   return self.blueprint;
@@ -144,7 +145,7 @@ MapEditor.prototype.defaultArea = function(blueprint) {
 
 $(function() {
 
-  var $map = $('#map');
+  var $map = $('#navigation_maps-map');
   var bar = $('.progress-meter');
   var percent = $('.progress-meter');
   var status = $('#status');
