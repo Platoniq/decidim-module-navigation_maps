@@ -14,6 +14,11 @@ en:
           id: Id
           type: Type
           link: Link
+          title: Title
+          description: Description
+          add: Add
+          info: General info
+          editor: Map Editor
       create:
         error: Error creating blueprint
         success: Blueprint created successfully

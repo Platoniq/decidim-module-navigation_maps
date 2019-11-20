@@ -2,7 +2,6 @@
 
 require "rails"
 require "decidim/core"
-require "decidim/navigation_maps/admin/form_builder_helpers"
 
 module Decidim
   module NavigationMaps
@@ -21,10 +20,6 @@ module Decidim
       end
 
       initializer "decidim.navigation_maps.content_blocks" do
-        # Add custom form_builder method to handle map images uploads
-        ActionView::Base.default_form_builder.class_eval do
-          include Decidim::NavigationMaps::Admin::FormBuilderHelpers
-        end
 
         Decidim.content_blocks.register(:homepage, :navigation_map) do |content_block|
           content_block.cell = "decidim/navigation_maps/content_blocks/navigation_map"

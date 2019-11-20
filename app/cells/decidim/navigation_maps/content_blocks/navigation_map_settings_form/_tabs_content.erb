@@ -1,0 +1,11 @@
+
+<div class="tabs-content" data-tabs-content="example-tabs">
+  <% tabs.each_with_index do |item, index| %>
+    <div class="tabs-panel<%= " is-active" if index.zero? %>" id="panel<%= index %>">
+      <%= render partial: "form", locals: { form: blueprint_form(item) } %>
+    </div>
+  <% end %>
+  <div class="tabs-panel" id="panel-new">
+    <%= render partial: "form", locals: { form: blueprint_form } %>
+  </div>
+</div>

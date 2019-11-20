@@ -1,0 +1,41 @@
+<ul class="accordion" data-accordion>
+  <li class="accordion-item<%= " is-active" unless form.image? %>" data-accordion-item>
+    <a href="#" class="accordion-title"><%= t ".info" %></a>
+
+    <div class="accordion-content" data-tab-content>
+      <%= translated_field_tag :text_field_tag, form.id, t(".title"), form.title %>
+
+      <%= label_tag t(".blueprint_image") %>
+      <%= image_tag form.image&.thumbnail.url if form.image&.thumbnail.url %>
+      <%= file_field_tag :image %>
+
+    </div>
+  </li>
+  <% if form.image? %>
+  <li class="accordion-item is-active" data-accordion-item>
+    <a href="#" class="accordion-title"><%= t ".editor" %></a>
+    <div class="accordion-content" data-tab-content>
+
+      <%= hidden_field_tag :id, form.id %>
+      <%= hidden_field_tag :blueprint, form.blueprint %>
+
+      <%= content_tag(:div, "", id: "navigation_maps-map", class: "map", data: { image: form.image.url, blueprint: form.blueprint }) %>
+
+      <table>
+        <thead>
+          <tr>
+            <th> <%= t('.id') %> </th>
+            <th> <%= t('.type') %> </th>
+            <th> <%= t('.link') %></th>
+          </tr>
+        </thead>
+        <tbody id="leaflet-body">
+        </tbody>
+      </table>
+
+    </div>
+  </li>
+  <% end %>
+</ul>
+
+

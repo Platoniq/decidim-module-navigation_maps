@@ -9,6 +9,13 @@ module Decidim
 
       attribute :blueprint, Object
       attribute :image
+      attribute :title
+      attribute :description
+
+      def image?
+        return unless image && image.respond_to?(:url)
+        return image.content_type.start_with? "image" if image.content_type.present?
+      end
     end
   end
 end

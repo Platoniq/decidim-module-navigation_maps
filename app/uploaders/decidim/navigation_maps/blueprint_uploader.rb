@@ -6,6 +6,10 @@ module Decidim
     class BlueprintUploader < Decidim::ImageUploader
       process :validate_size, :validate_dimensions
 
+      version :thumbnail do
+        process resize_to_fill: [nil, 237]
+      end
+
       def extension_white_list
         %w(jpg jpeg png svg)
       end
