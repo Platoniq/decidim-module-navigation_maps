@@ -3,23 +3,31 @@
     <a href="#" class="accordion-title"><%= t ".info" %></a>
 
     <div class="accordion-content" data-tab-content>
-      <%= translated_field_tag :text_field_tag, form.id, t(".title"), form.title %>
+      <%= translated_field_tag :text_field_tag, "blueprints[#{form.ident}]", :title, form.title, { tabs_id: "blueprints_#{form.ident}_title", label: t('.title')} %>
 
       <%= label_tag t(".blueprint_image") %>
-      <%= image_tag form.image&.thumbnail.url if form.image&.thumbnail.url %>
-      <%= file_field_tag :image %>
+      <%= image_tag form.image.thumbnail.url if form.image? %>
+      <%= file_field_tag "blueprints[#{form.ident}][image]", { id: "blueprints_#{form.ident}_image", label: t('.title')} %>
 
-    </div>
+      <%= hidden_field_tag "blueprints[#{form.ident}][id]", form.id %>
+      <%= hidden_field_tag "blueprints[#{form.ident}][blueprint]", form.blueprint.to_json %>
+
+      <% if form.id  %>
+        <label>
+          <%= check_box_tag("blueprints[#{form.ident}][remove]", form.id) %>
+          <%= t(".remove_blueprint") %>
+        </label>
+      <% end %>
+  </div>
   </li>
+
   <% if form.image? %>
   <li class="accordion-item is-active" data-accordion-item>
     <a href="#" class="accordion-title"><%= t ".editor" %></a>
     <div class="accordion-content" data-tab-content>
 
-      <%= hidden_field_tag :id, form.id %>
-      <%= hidden_field_tag :blueprint, form.blueprint %>
 
-      <%= content_tag(:div, "", id: "navigation_maps-map", class: "map", data: { image: form.image.url, blueprint: form.blueprint }) %>
+      <%= content_tag(:div, "", id: "navigation_maps-map-#{form.ident}", class: "navigation_maps map", data: { id: form.ident, image: form.image.url, blueprint: form.blueprint }) %>
 
       <table>
         <thead>

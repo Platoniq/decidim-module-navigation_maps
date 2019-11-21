@@ -10,9 +10,9 @@ module Decidim
 
         def create
           enforce_permission_to :update, :organization, organization: current_organization
-          parse_blueprint
-          @form = form(BlueprintForm).from_params(params).with_context(current_organization: current_organization)
-          CreateBlueprint.call(@form) do
+          parse_blueprints
+          @form = form(BlueprintForms).from_params(params).with_context(current_organization: current_organization)
+          CreateBlueprints.call(@form) do
             on(:ok) do
               render json: { success: I18n.t("navigation_maps.create.success", scope: "decidim") }
             end
@@ -25,9 +25,12 @@ module Decidim
 
         private
 
-        def parse_blueprint
-          return if params[:image]
-          params[:blueprint] = JSON.parse params[:blueprint] if params[:blueprint].present?
+        def parse_blueprints
+          # return if params[:image]
+          return unless params[:blueprints]
+          params[:blueprints].each do |key, data|
+            data[:blueprint] = JSON.parse data[:blueprint] if data[:blueprint].present?
+          end
         end
 
         def organization_blueprints

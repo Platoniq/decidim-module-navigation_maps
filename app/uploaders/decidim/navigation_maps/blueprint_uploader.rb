@@ -7,7 +7,7 @@ module Decidim
       process :validate_size, :validate_dimensions
 
       version :thumbnail do
-        process resize_to_fill: [nil, 237]
+        process resize_to_fit: [nil, 237]
       end
 
       def extension_white_list

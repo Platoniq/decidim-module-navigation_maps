@@ -145,22 +145,22 @@ MapEditor.prototype.defaultArea = function(blueprint) {
 
 $(function() {
 
-  var $map = $('#navigation_maps-map');
+  var $maps = $('.navigation_maps.map');
   var bar = $('.progress-meter');
   var percent = $('.progress-meter');
   var status = $('#status');
   var $form = $('form');
   var editor;
 
-  if($map.length) {
-    editor = new MapEditor($map.data('image'), $map.data('blueprint'));
-  }
+  // if($map.length) {
+    // editor = new MapEditor($map.data('image'), $map.data('blueprint'));
+  // }
 
   $form.ajaxForm({
     url: $form.find('[name=action]').val(),
     beforeSerialize: function() {
       if(editor) {
-        $form.find('[name=blueprint]').val(JSON.stringify(editor.getBlueprint()));
+        // $form.find('[name=blueprint]').val(JSON.stringify(editor.getBlueprint()));
       }
     },
     beforeSend: function() {
@@ -178,9 +178,9 @@ $(function() {
         var percentVal = '100%';
         bar.width(percentVal)
         percent.html(percentVal);
-        if($form.find('input[type=file]').val()) {
+        // if($form.find('input[type=file]').val()) {
           location.reload();
-        }
+        // }
     },
     complete: function(xhr) {
       status.html(xhr.responseText);
