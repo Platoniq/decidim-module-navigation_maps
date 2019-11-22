@@ -6,11 +6,11 @@
 
 Allows to map processes to image parts using maps.
 
-> NOTE: This is in PREALPHA status. Please do not use it on production.
+> NOTE: This is in Beta status. Use it at your own risk, expect breaking changes at any time.
 
 ## Usage
 
-NavigationMaps is avalable as a Content Block widget (currently for the homepage only).
+NavigationMaps is available as a Content Block widget (currently for the homepage only).
 
 ## Installation
 
@@ -23,9 +23,9 @@ gem "decidim-navigation_maps", git: "https://github.com/Platoniq/decidim-module-
 And then execute:
 
 ```bash
-$ bundle
-$ bundle exec rails decidim_navigation_maps:install:migrations
-$ bundle exec rails db:migrate
+bundle
+bundle exec rails decidim_navigation_maps:install:migrations
+bundle exec rails db:migrate
 ```
 
 ## Contributing
@@ -47,8 +47,8 @@ You can create the development app by running the following commands after
 cloning this project:
 
 ```bash
-$ bundle
-$ DATABASE_USERNAME=<username> DATABASE_PASSWORD=<password> bundle exec rake development_app
+bundle
+DATABASE_USERNAME=<username> DATABASE_PASSWORD=<password> bundle exec rake development_app
 ```
 
 Note that the database user has to have rights to create and drop a database in
@@ -57,8 +57,8 @@ order to create the dummy test app database.
 Then to test how the module works in Decidim, start the development server:
 
 ```bash
-$ cd development_app
-$ DATABASE_USERNAME=<username> DATABASE_PASSWORD=<password> bundle exec rails s
+cd development_app
+DATABASE_USERNAME=<username> DATABASE_PASSWORD=<password> bundle exec rails s
 ```
 
 In case you are using [rbenv](https://github.com/rbenv/rbenv) and have the
@@ -79,7 +79,7 @@ You can run the code styling checks by running the following commands from the
 console:
 
 ```
-$ bundle exec rubocop
+bundle exec rubocop
 ```
 
 To ease up following the style guide, you should install the plugin to your
@@ -94,9 +94,9 @@ favorite editor, such as:
 To run the tests run the following in the gem development path:
 
 ```bash
-$ bundle
-$ DATABASE_USERNAME=<username> DATABASE_PASSWORD=<password> bundle exec rake test_app
-$ DATABASE_USERNAME=<username> DATABASE_PASSWORD=<password> bundle exec rspec
+bundle
+DATABASE_USERNAME=<username> DATABASE_PASSWORD=<password> bundle exec rake test_app
+DATABASE_USERNAME=<username> DATABASE_PASSWORD=<password> bundle exec rspec
 ```
 
 Note that the database user has to have rights to create and drop a database in
@@ -114,7 +114,7 @@ If you want to generate the code coverage report for the tests, you can use
 the `SIMPLECOV=1` environment variable in the rspec command as follows:
 
 ```bash
-$ SIMPLECOV=1 bundle exec rspec
+SIMPLECOV=1 bundle exec rspec
 ```
 
 This will generate a folder named `coverage` in the project root which contains
