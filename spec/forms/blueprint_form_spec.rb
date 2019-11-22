@@ -29,6 +29,7 @@ module Decidim::NavigationMaps
 
     context "when there is no title" do
       let(:title) { nil }
+
       it { is_expected.not_to be_valid }
     end
   end

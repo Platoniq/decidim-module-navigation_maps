@@ -27,7 +27,7 @@ module Decidim
       # end
 
       def ident
-        id || '_'
+        id || "_"
       end
 
       def image?

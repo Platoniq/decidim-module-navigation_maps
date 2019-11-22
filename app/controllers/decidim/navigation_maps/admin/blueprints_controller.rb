@@ -28,7 +28,8 @@ module Decidim
         def parse_blueprints
           # return if params[:image]
           return unless params[:blueprints]
-          params[:blueprints].each do |key, data|
+
+          params[:blueprints].each do |_key, data|
             data[:blueprint] = JSON.parse data[:blueprint] if data[:blueprint].present?
           end
         end

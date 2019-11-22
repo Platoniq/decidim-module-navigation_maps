@@ -6,7 +6,7 @@ module Decidim
       class NavigationMapCell < Decidim::ViewModel
         include NavigationMaps::NavigationMapCellHelpers
 
-        self.view_paths << "#{Decidim::NavigationMaps::Engine.root}/app/cells/decidim/navigation_maps/content_blocks/navigation_map"
+        view_paths << "#{Decidim::NavigationMaps::Engine.root}/app/cells/decidim/navigation_maps/content_blocks/navigation_map"
 
         def show
           render if valid_blueprints?

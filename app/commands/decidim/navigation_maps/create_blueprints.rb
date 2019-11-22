@@ -21,6 +21,7 @@ module Decidim
       def call
         @blueprints.each do |form|
           next if form.invalid?
+
           create_blueprint(form)
           if form.remove?
             destroy_blueprint!(form)

@@ -6,7 +6,7 @@ module Decidim
       class NavigationMapSettingsFormCell < Decidim::ViewModel
         include NavigationMaps::NavigationMapCellHelpers
 
-        self.view_paths << "#{Decidim::NavigationMaps::Engine.root}/app/cells/decidim/navigation_maps/content_blocks/navigation_map_settings_form"
+        view_paths << "#{Decidim::NavigationMaps::Engine.root}/app/cells/decidim/navigation_maps/content_blocks/navigation_map_settings_form"
 
         def show
           render
@@ -18,7 +18,7 @@ module Decidim
         end
 
         def blueprint_form(blueprint = nil)
-          blueprint = Blueprint.new unless blueprint
+          blueprint ||= Blueprint.new
           BlueprintForm.from_model(blueprint).with_context(organization: current_organization)
         end
 
