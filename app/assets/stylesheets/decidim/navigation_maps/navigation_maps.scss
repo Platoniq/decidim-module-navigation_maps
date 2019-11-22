@@ -2,7 +2,21 @@
 //= require leaflet-geoman
 //= require_self
 
-.map {
-  margin-top: 1em;
-  height: 475px;
+.home-section {
+  .navigation_maps {
+    margin: 1em 0;
+    .tabs {
+      background-color: #f4f4f4;
+    }
+    .tabs-content {
+      border-color: #f4f4f4;
+    }
+    .map {
+      height: 475px;
+    }
+    .leaflet-container {
+      background-color: #fafafa;
+      border-color:#f4f4f4;
+    }
+  }
 }

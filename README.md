@@ -10,8 +10,7 @@ Allows to map processes to image parts using maps.
 
 ## Usage
 
-NavigationMaps will be available as a Component for a Participatory
-Space.
+NavigationMaps is avalable as a Content Block widget (currently for the homepage only).
 
 ## Installation
 

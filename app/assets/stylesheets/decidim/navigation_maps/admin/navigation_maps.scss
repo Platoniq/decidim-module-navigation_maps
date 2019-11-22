@@ -2,21 +2,98 @@
 //= require leaflet-geoman
 //= require_self
 
-.map { 
-    height: 475px; 
+@import "decidim/variables";
+@import "decidim/utils/settings";
+@import "decidim/utils/mixins";
+
+:root {
+  --leaflet-background-color: 34,98,204;
 }
 
-tbody > tr {
-    &.selected {
-        background-color: #2262CC !important;
+.navigation_maps.admin {
+  .accordion-item {
+    .accordion-title {
+      border: 1px solid #ccc !important;
     }
-    &:hover {
-        background-color: #2262CC !important;
+    &.is-active {
+      .accordion-title {
+        background-color: #039be5;
+        border-color: rgba(var(--leaflet-background-color),1) !important;
+      }
+    }
   }
-}
 
-.progress-meter {
-    color:white;
-    font-size: 0.7em;
-    font-weight: bold;
+  >.content {
+    position: relative;
+  }
+  .loading {
+    display: none;
+    z-index: 10000;
+    content: "";
+    position: absolute;
+    background-color: rgba(255,255,255,.8);
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    .inner-loading {
+      margin-top: 25%;
+      width: 90%;
+      display: inline-block;
+      text-align: center;
+
+    }
+    .spinner {
+      @include spinner(25px, #aaa, var(--primary), 800ms);
+      vertical-align: middle;
+    }
+    .progress {
+      background-color: #aaa;
+      display: inline-block;
+      width: 90%;
+      margin-left: 1em;
+    }
+    .progress-meter {
+      color: #fff;
+      background-color: var(--primary);
+      width: 30%;
+      padding:0 0.5em;
+      font-size: 0.7em;
+      font-weight: bold;
+    }
+
+  }
+
+  .tabs-content {
+    .map {
+      height: 475px;
+    }
+    .thumbnail {
+      img {
+        max-height: 100px;
+      }
+    }
+    .delete-tab {
+      border-top: 1px solid $dark-gray;
+      padding: 1em 1em 0;
+    }
+    tbody > tr {
+        &.selected {
+          background-color: rgba(var(--leaflet-background-color), 0.5) !important;
+        }
+        &:hover {
+          background-color: rgba(var(--leaflet-background-color), 0.5) !important;
+      }
+    }
+    .leaflet-interactive {
+      fill: rgba(var(--leaflet-background-color), 1);
+      color: rgba(var(--leaflet-background-color), 1);
+      weight: 3;
+      opacity: 0.6;
+      fill-opacity: 0.5;
+      &.selected {
+        opacity: 1;
+      }
+    }
+  }
 }

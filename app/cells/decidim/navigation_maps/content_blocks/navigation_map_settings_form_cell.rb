@@ -3,20 +3,23 @@
 module Decidim
   module NavigationMaps
     module ContentBlocks
-      class NavigationMapSettingsFormCell < NavigationMapCell
+      class NavigationMapSettingsFormCell < Decidim::ViewModel
+        include NavigationMaps::NavigationMapCellHelpers
+
+        view_paths << "#{Decidim::NavigationMaps::Engine.root}/app/cells/decidim/navigation_maps/content_blocks/navigation_map_settings_form"
+
         def show
           render
         end
 
         # Custom form for this Cell
         def form
-          blueprint = organization_blueprints.first
-          form = if blueprint
-                   BlueprintForm.from_model(blueprint)
-                 else
-                   BlueprintForm.new
-                 end
-          form.with_context(organization: current_organization)
+          blueprint_form(organization_blueprints.first)
+        end
+
+        def blueprint_form(blueprint = nil)
+          blueprint ||= Blueprint.new
+          BlueprintForm.from_model(blueprint).with_context(organization: current_organization)
         end
 
         # it should come from the Engine Routes

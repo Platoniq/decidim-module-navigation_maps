@@ -3,13 +3,13 @@
 require "spec_helper"
 
 module Decidim::NavigationMaps
-  describe CreateBlueprint do
+  describe CreateBlueprints do
     subject { described_class.new(form) }
 
     let(:organization) { create :organization }
     let(:form) do
       instance_double(
-        BlueprintForm,
+        BlueprintForms,
         organization: organization
       )
 

@@ -1,7 +1,10 @@
 <section class="extended home-section">
   <div class="row">
     <div class="columns small-centered large-10">
-      <%= content_tag(:div, "", id: "navigation_maps-map", class: "map", data: { map: map_image_url, blueprint: blueprint_data }) %>
+      <div class="navigation_maps">
+        <%= render partial: "tabs", locals: { tabs: valid_blueprints } %>
+        <%= render partial: "tabs_content", locals: { tabs: valid_blueprints } %>
+      </div>
     </div>
   </div>
 </section>
