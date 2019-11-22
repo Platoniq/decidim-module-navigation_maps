@@ -1,9 +1,6 @@
 version: "2"
 
 plugins:
-  csslint:
-    enabled: true
-
   duplication:
     enabled: true
 
@@ -17,15 +14,6 @@ plugins:
 
     exclude_patterns:
       - "spec/**/*"
-
-  eslint:
-    enabled: false
-
-  fixme:
-    enabled: true
-
-    exclude_patterns:
-      - .rubocop.yml
 
   grep:
     enabled: true
