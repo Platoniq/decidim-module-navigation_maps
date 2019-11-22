@@ -9,7 +9,6 @@ module Decidim
         self.view_paths << "#{Decidim::NavigationMaps::Engine.root}/app/cells/decidim/navigation_maps/content_blocks/navigation_map_settings_form"
 
         def show
-          console
           render
         end
 

@@ -14,11 +14,11 @@ module Decidim
           @form = form(BlueprintForms).from_params(params).with_context(current_organization: current_organization)
           CreateBlueprints.call(@form) do
             on(:ok) do
-              render json: { success: I18n.t("navigation_maps.create.success", scope: "decidim") }
+              render plain: I18n.t("navigation_maps.create.success", scope: "decidim")
             end
 
             on(:invalid) do
-              render json: { error: I18n.t("navigation_maps.create.error", scope: "decidim") }, status: :unprocessable_entity
+              render plain: I18n.t("navigation_maps.create.error", scope: "decidim"), status: :unprocessable_entity
             end
           end
         end

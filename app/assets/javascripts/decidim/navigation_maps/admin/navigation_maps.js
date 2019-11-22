@@ -9,49 +9,63 @@
 $(function() {
 
   var $maps = $('.navigation_maps.map');
-  var bar = $('.progress-meter');
-  var percent = $('.progress-meter');
-  var status = $('#status');
+  var $progress = $('.navigation_maps .progress');
+  var $bar = $('.navigation_maps .progress-meter');
+  var $loading = $('.navigation_maps .loading');
+  var $callout = $('.navigation_maps .callout');
   var $form = $('form');
-  var editors = [];
+  var $tabs = $('#navigation_maps-tabs');
+  var editors = {};
 
   $maps.each(function() {
     var table = document.getElementById("navigation_maps-table-" + $(this).data('id'));
-    editors.push(new MapEditor(this, table));
+    editors[$(this).data('id')] = new MapEditor(this, table);
   });
-  // if($map.length) {
-    // editor = new MapEditor($map.data('image'), $map.data('blueprint'));
-  // }
+
+  $tabs.on('change.zf.tabs', function(e, $tab, $content) {
+    var id = $content.find('.map').data('id');
+    editors[id].reload();
+  });
 
   $form.ajaxForm({
     url: $form.find('[name=action]').val(),
     beforeSerialize: function() {
-      editors.forEach(function(editor) {
-        console.log(editor, `#blueprints_${editor.id}_blueprint` );
+      Object.keys(editors).forEach(function(key) {
+        var editor = editors[key];
         $(`#blueprints_${editor.id}_blueprint`).val(JSON.stringify(editor.getBlueprint()));
       });
     },
     beforeSend: function() {
-        status.empty();
         var percentVal = '0%';
-        bar.width(percentVal)
-        percent.html(percentVal);
+        $bar.width(percentVal).html(percentVal);
+        $progress.show();
+        $callout.hide();
+        $callout.removeClass('alert success');
+        $loading.show();
     },
     uploadProgress: function(event, position, total, percentComplete) {
         var percentVal = percentComplete + '%';
-        bar.width(percentVal)
-        percent.html(percentVal);
+        $bar.width(percentVal).html(percentVal);
     },
     success: function(responseText, statusText, xhr, $form) {
-        var percentVal = '100%';
-        bar.width(percentVal)
-        percent.html(percentVal);
-        // if($form.find('input[type=file]').val()) {
-          // location.reload();
-        // }
+        $callout.show();
+        $progress.hide();
+        $callout.contents('p').html(responseText);
+        $callout.addClass('success');
+        $loading.hide();
+        $form.find('input[type=file]').each(function() {
+          if($(this).val()) {
+            $loading.show();
+            location.reload();
+            return false;
+          }
+        });
     },
-    complete: function(xhr) {
-      status.html(xhr.responseText);
+    error: function(xhr) {
+      $loading.hide();
+      $callout.show();
+      $callout.contents('p').html(xhr.responseText);
+      $callout.addClass('alert');
     }
   });
 });

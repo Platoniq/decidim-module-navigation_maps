@@ -64,7 +64,6 @@ MapEditor.prototype.createAreas = function() {
 
     new L.GeoJSON(geoarea, {
       onEachFeature: function(feature, layer) {
-        console.log('add feature', feature, layer);
         layer._leaflet_id = area;
         self.renderRow(layer, feature);
       }
@@ -126,7 +125,11 @@ MapEditor.prototype.getBlueprint = function () {
   Object.keys(self.blueprint).forEach(function(key) {
     var link = document.getElementById(self.rowId(key) + "-link");
     self.blueprint[key].properties = self.blueprint[key] && self.blueprint[key].properties || {link: '#'}
-    self.blueprint[key].properties.link = link.value;
+    if(link) self.blueprint[key].properties.link = link.value;
   });
   return self.blueprint;
 };
+
+MapEditor.prototype.reload = function () {
+  this.map.invalidateSize(true);
+}
