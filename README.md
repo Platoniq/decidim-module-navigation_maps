@@ -6,11 +6,13 @@
 
 Allows to map processes to image parts using maps.
 
-> NOTE: This is in Beta status. Use it at your own risk, expect breaking changes at any time.
+> NOTE: This is in Beta status. Use it at your own risk, expect breaking
+> changes at any time.
 
 ## Usage
 
-NavigationMaps is available as a Content Block widget (currently for the homepage only).
+NavigationMaps is available as a Content Block widget (currently for the
+homepage only).
 
 ## Installation
 
