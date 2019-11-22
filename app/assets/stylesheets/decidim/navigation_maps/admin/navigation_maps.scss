@@ -10,7 +10,19 @@
   --leaflet-background-color: 34,98,204;
 }
 
-.navigation_maps {
+.navigation_maps.admin {
+  .accordion-item {
+    .accordion-title {
+      border: 1px solid #ccc !important;
+    }
+    &.is-active {
+      .accordion-title {
+        background-color: #039be5;
+        border-color: rgba(var(--leaflet-background-color),1) !important;
+      }
+    }
+  }
+
   >.content {
     position: relative;
   }
@@ -52,11 +64,19 @@
 
   }
 
-  .tabs-content.admin {
+  .tabs-content {
     .map {
       height: 475px;
     }
-
+    .thumbnail {
+      img {
+        max-height: 100px;
+      }
+    }
+    .delete-tab {
+      border-top: 1px solid $dark-gray;
+      padding: 1em 1em 0;
+    }
     tbody > tr {
         &.selected {
           background-color: rgba(var(--leaflet-background-color), 0.5) !important;

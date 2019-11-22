@@ -9,7 +9,7 @@ module Decidim
       end
 
       def query
-        Decidim::NavigationMaps::Blueprint.where(organization: @organization).order :created_at
+        Decidim::NavigationMaps::Blueprint.where(organization: @organization)
       end
 
       private

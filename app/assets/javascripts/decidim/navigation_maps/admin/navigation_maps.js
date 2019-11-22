@@ -8,24 +8,38 @@
 
 $(function() {
 
-  var $maps = $('.navigation_maps.map');
-  var $progress = $('.navigation_maps .progress');
-  var $bar = $('.navigation_maps .progress-meter');
-  var $loading = $('.navigation_maps .loading');
-  var $callout = $('.navigation_maps .callout');
+  var $maps = $('.navigation_maps.admin .map');
+  var $progress = $('.navigation_maps.admin .progress');
+  var $bar = $('.navigation_maps.admin .progress-meter');
+  var $loading = $('.navigation_maps.admin .loading');
+  var $callout = $('.navigation_maps.admin .callout');
   var $form = $('form');
   var $tabs = $('#navigation_maps-tabs');
   var editors = {};
 
   $maps.each(function() {
     var table = document.getElementById("navigation_maps-table-" + $(this).data('id'));
-    editors[$(this).data('id')] = new MapEditor(this, table);
+    editors[$(this).data('id')] = new NavigationMapEditor(this, table);
   });
 
   $tabs.on('change.zf.tabs', function(e, $tab, $content) {
     var id = $content.find('.map').data('id');
     editors[id].reload();
   });
+
+  var needsReload = function() {
+    var reload = false;
+    if($form.find('#map-new input:checked').length) return true;
+    if($form.find('.delete-tab input[type=checkbox]:checked').length) return true;
+
+    $form.find('input[type=file],input[tabs_id=blueprints___title]').each(function() {
+      if($(this).val()) {
+        reload = true;
+        return false;
+      }
+    });
+    return reload;
+  };
 
   $form.ajaxForm({
     url: $form.find('[name=action]').val(),
@@ -53,13 +67,10 @@ $(function() {
         $callout.contents('p').html(responseText);
         $callout.addClass('success');
         $loading.hide();
-        $form.find('input[type=file]').each(function() {
-          if($(this).val()) {
-            $loading.show();
-            location.reload();
-            return false;
-          }
-        });
+        if(needsReload()) {
+          $loading.show();
+          location.reload();
+        }
     },
     error: function(xhr) {
       $loading.hide();

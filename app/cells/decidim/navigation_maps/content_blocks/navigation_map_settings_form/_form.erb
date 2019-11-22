@@ -6,14 +6,16 @@
       <%= translated_field_tag :text_field_tag, "blueprints[#{form.ident}]", :title, form.title, { tabs_id: "blueprints_#{form.ident}_title", label: t('.title')} %>
 
       <%= label_tag t(".blueprint_image") %>
-      <%= image_tag form.image.thumbnail.url if form.image? %>
+      <div class="thumbnail">
+        <%= image_tag form.image.thumbnail.url if form.image? %>
+      </div>
       <%= file_field_tag "blueprints[#{form.ident}][image]", { id: "blueprints_#{form.ident}_image", label: t('.title')} %>
 
       <%= hidden_field_tag "blueprints[#{form.ident}][id]", form.id, { id: "blueprints_#{form.ident}_id" } %>
       <%= hidden_field_tag "blueprints[#{form.ident}][blueprint]", form.blueprint.to_json, { id: "blueprints_#{form.ident}_blueprint" } %>
 
       <% if form.id  %>
-        <label>
+        <label class="delete-tab">
           <%= check_box_tag("blueprints[#{form.ident}][remove]", form.id) %>
           <%= t(".remove_blueprint") %>
         </label>
@@ -26,7 +28,7 @@
     <a href="#" class="accordion-title"><%= t ".editor" %></a>
     <div class="accordion-content navigation_maps-content" data-tab-content>
 
-      <%= content_tag(:div, "", id: "navigation_maps-map-#{form.ident}", class: "navigation_maps map", data: { id: form.ident, image: form.image.url, blueprint: form.blueprint }) %>
+      <%= content_tag(:div, "", id: "navigation_maps-map-#{form.ident}", class: "map", data: { id: form.ident, image: form.image.url, blueprint: form.blueprint }) %>
 
       <table id="navigation_maps-table-<%= form.ident %>">
         <thead>

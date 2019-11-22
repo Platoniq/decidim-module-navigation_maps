@@ -9,7 +9,7 @@ module Decidim
         self.view_paths << "#{Decidim::NavigationMaps::Engine.root}/app/cells/decidim/navigation_maps/content_blocks/navigation_map"
 
         def show
-          render if map_image_url
+          render if valid_blueprints?
         end
       end
     end

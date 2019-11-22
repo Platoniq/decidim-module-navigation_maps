@@ -1,0 +1,8 @@
+
+<div class="tabs-content admin" data-tabs-content="navigation_maps-tabs">
+  <% tabs.each_with_index do |item, index| %>
+    <div class="tabs-panel<%= " is-active" if index.zero? %>" id="map<%= index %>">
+      <%= content_tag(:div, "", id: "navigation_maps-map-#{item.id}", class: "map", data: { id: item.id, image: item.image.url, blueprint: item.blueprint }) %>
+    </div>
+  <% end %>
+</div>
