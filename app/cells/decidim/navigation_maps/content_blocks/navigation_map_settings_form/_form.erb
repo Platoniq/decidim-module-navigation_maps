@@ -3,18 +3,18 @@
     <a href="#" class="accordion-title"><%= t ".info" %></a>
 
     <div class="accordion-content" data-tab-content>
-      <%= translated_field_tag :text_field_tag, "blueprints[#{form.ident}]", :title, form.title, { tabs_id: "blueprints_#{form.ident}_title", label: t('.title')} %>
+      <%= translated_field_tag :text_field_tag, "blueprints[#{form.ident}]", :title, form.title, { tabs_id: "blueprints_#{form.ident}_title", label: t(".title") } %>
 
       <%= label_tag t(".blueprint_image") %>
       <div class="thumbnail">
         <%= image_tag form.image.thumbnail.url if form.image? %>
       </div>
-      <%= file_field_tag "blueprints[#{form.ident}][image]", { id: "blueprints_#{form.ident}_image", label: t('.title')} %>
+      <%= file_field_tag "blueprints[#{form.ident}][image]", { id: "blueprints_#{form.ident}_image", label: t(".title") } %>
 
       <%= hidden_field_tag "blueprints[#{form.ident}][id]", form.id, { id: "blueprints_#{form.ident}_id" } %>
       <%= hidden_field_tag "blueprints[#{form.ident}][blueprint]", form.blueprint.to_json, { id: "blueprints_#{form.ident}_blueprint" } %>
 
-      <% if form.id  %>
+      <% if form.id %>
         <label class="delete-tab">
           <%= check_box_tag("blueprints[#{form.ident}][remove]", form.id) %>
           <%= t(".remove_blueprint") %>
@@ -33,8 +33,8 @@
       <table id="navigation_maps-table-<%= form.ident %>">
         <thead>
           <tr>
-            <th> <%= t('.id') %> </th>
-            <th> <%= t('.link') %></th>
+            <th> <%= t(".id") %> </th>
+            <th> <%= t(".link") %></th>
           </tr>
         </thead>
         <tbody id="navigation_maps-table-<%= form.ident %>-tbody">
@@ -45,5 +45,3 @@
   </li>
   <% end %>
 </ul>
-
-
