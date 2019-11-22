@@ -9,8 +9,8 @@
       <%= image_tag form.image.thumbnail.url if form.image? %>
       <%= file_field_tag "blueprints[#{form.ident}][image]", { id: "blueprints_#{form.ident}_image", label: t('.title')} %>
 
-      <%= hidden_field_tag "blueprints[#{form.ident}][id]", form.id %>
-      <%= hidden_field_tag "blueprints[#{form.ident}][blueprint]", form.blueprint.to_json %>
+      <%= hidden_field_tag "blueprints[#{form.ident}][id]", form.id, { id: "blueprints_#{form.ident}_id" } %>
+      <%= hidden_field_tag "blueprints[#{form.ident}][blueprint]", form.blueprint.to_json, { id: "blueprints_#{form.ident}_blueprint" } %>
 
       <% if form.id  %>
         <label>
@@ -24,20 +24,18 @@
   <% if form.image? %>
   <li class="accordion-item is-active" data-accordion-item>
     <a href="#" class="accordion-title"><%= t ".editor" %></a>
-    <div class="accordion-content" data-tab-content>
-
+    <div class="accordion-content navigation_maps-content" data-tab-content>
 
       <%= content_tag(:div, "", id: "navigation_maps-map-#{form.ident}", class: "navigation_maps map", data: { id: form.ident, image: form.image.url, blueprint: form.blueprint }) %>
 
-      <table>
+      <table id="navigation_maps-table-<%= form.ident %>">
         <thead>
           <tr>
             <th> <%= t('.id') %> </th>
-            <th> <%= t('.type') %> </th>
             <th> <%= t('.link') %></th>
           </tr>
         </thead>
-        <tbody id="leaflet-body">
+        <tbody id="navigation_maps-table-<%= form.ident %>-tbody">
         </tbody>
       </table>
 

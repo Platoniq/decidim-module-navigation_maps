@@ -2,21 +2,37 @@
 //= require leaflet-geoman
 //= require_self
 
-.map { 
-    height: 475px; 
+:root {
+  --leaflet-background-color: 34,98,204;
 }
 
-tbody > tr {
-    &.selected {
-        background-color: #2262CC !important;
-    }
-    &:hover {
-        background-color: #2262CC !important;
+.navigation_maps-content {
+  .map {
+    height: 475px;
   }
-}
 
-.progress-meter {
+  tbody > tr {
+      &.selected {
+        background-color: rgba(var(--leaflet-background-color), 0.5) !important;
+      }
+      &:hover {
+        background-color: rgba(var(--leaflet-background-color), 0.5) !important;
+    }
+  }
+  .leaflet-interactive {
+    fill: rgba(var(--leaflet-background-color), 1);
+    color: rgba(var(--leaflet-background-color), 1);
+    weight: 3;
+    opacity: 0.6;
+    fill-opacity: 0.5;
+    &.selected {
+      opacity: 1;
+    }
+  }
+
+  .progress-meter {
     color:white;
     font-size: 0.7em;
     font-weight: bold;
+  }
 }
