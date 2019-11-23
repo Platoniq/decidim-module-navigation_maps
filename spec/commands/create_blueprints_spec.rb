@@ -19,7 +19,7 @@ module Decidim::NavigationMaps
       double(
         BlueprintForm,
         blueprint: data,
-        id: 1,
+        id: id,
         title: title,
         description: title,
         remove: remove,
@@ -41,6 +41,7 @@ module Decidim::NavigationMaps
       { x: 0.5, y: 0.6 }
     end
     let(:title) { Decidim::Faker::Localized.sentence(2) }
+    let(:id) { 1 }
     let(:remove) { false }
     let(:uploaded_image) do
       Rack::Test::UploadedFile.new(
@@ -75,6 +76,21 @@ module Decidim::NavigationMaps
 
       it "creates one blueprint" do
         expect { subject.call }.to change(Blueprint, :count).by(1)
+      end
+    end
+
+    context "when one form is removed" do
+      let!(:blueprint) { create(:blueprint, organization: organization) }
+      let(:remove) { true }
+      let(:id) { blueprint.id }
+      let(:blueprints) { [form1] }
+
+      it "still broadcasts ok" do
+        expect { subject.call }.to broadcast(:ok)
+      end
+
+      it "creates one blueprint" do
+        expect { subject.call }.to change(Blueprint, :count).by(-1)
       end
     end
   end
