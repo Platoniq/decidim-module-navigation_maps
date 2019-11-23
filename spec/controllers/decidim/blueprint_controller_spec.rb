@@ -10,6 +10,16 @@ module Decidim::NavigationMaps::Admin
     let(:organization) do
       create(:organization)
     end
+    let(:params) do
+      {
+        blueprints: {
+          "1" => {
+            blueprint: json
+          }
+        }
+      }
+    end
+    let(:json) { "{\"x\":0.1,\"y\":0.2}" }
 
     before do
       request.env["decidim.current_organization"] = user.organization
@@ -26,12 +36,27 @@ module Decidim::NavigationMaps::Admin
 
     describe "GET #create" do
       it "returns http success" do
-        get :create
+        post :create
         expect(response).to have_http_status(:success)
         # context: when no blueprint paramater
         # context: when blueprint is not valid json
         # context: when blueprint is is valid json
       end
+
+      context "when blueprint is present" do
+        it "is parsed correctly" do
+          post :create, params: params
+          expect(response).to have_http_status(:success)
+          expect(controller.params[:blueprints]["1"][:blueprint]).to eq("x" => 0.1, "y" => 0.2)
+        end
+      end
+      # context "when blueprint is incorrect" do
+      #   let(:json) { "asdf" }
+      #   it "returns erro" do
+      #     post :create, params: params
+      #     expect(response).to have_http_status(:error)
+      #   end
+      # end
     end
   end
 end

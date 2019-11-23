@@ -23,7 +23,7 @@ module Decidim
           next if form.invalid?
 
           create_blueprint(form)
-          if form.remove?
+          if form.remove
             destroy_blueprint!(form)
           else
             update_blueprint!(form)
