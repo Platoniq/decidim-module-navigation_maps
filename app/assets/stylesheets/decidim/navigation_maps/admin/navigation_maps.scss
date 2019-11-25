@@ -5,10 +5,7 @@
 @import "decidim/variables";
 @import "decidim/utils/settings";
 @import "decidim/utils/mixins";
-
-:root {
-  --leaflet-background-color: 34,98,204;
-}
+@import "decidim/navigation_maps/variables";
 
 .navigation_maps.admin {
   .accordion-item {
@@ -18,7 +15,7 @@
     &.is-active {
       .accordion-title {
         background-color: #039be5;
-        border-color: rgba(var(--leaflet-background-color),1) !important;
+        border-color: "rgba(#{$leaflet-background-color}, 1)" !important;
       }
     }
   }
@@ -79,15 +76,15 @@
     }
     tbody > tr {
         &.selected {
-          background-color: rgba(var(--leaflet-background-color), 0.5) !important;
+          background-color: "rgba(#{$leaflet-background-color}, 0.5)" !important;
         }
         &:hover {
-          background-color: rgba(var(--leaflet-background-color), 0.5) !important;
+          background-color: "rgba(#{$leaflet-background-color}, 0.5)" !important;
       }
     }
     .leaflet-interactive {
-      fill: rgba(var(--leaflet-background-color), 1);
-      color: rgba(var(--leaflet-background-color), 1);
+      fill: "rgba(#{$leaflet-background-color}, 1)";
+      color: "rgba(#{$leaflet-background-color}, 1)";
       weight: 3;
       opacity: 0.6;
       fill-opacity: 0.5;

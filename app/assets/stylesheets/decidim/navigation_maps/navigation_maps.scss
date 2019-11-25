@@ -2,11 +2,19 @@
 //= require leaflet-geoman
 //= require_self
 
+@import "decidim/navigation_maps/variables";
+
 .home-section {
   .navigation_maps {
     margin: 1em 0;
     .tabs {
       background-color: #f4f4f4;
+    }
+    .tabs-title {
+      a {
+        font-size: 1.2em;
+        color: var(--secondary);
+      }
     }
     .tabs-content {
       border-color: #f4f4f4;
@@ -17,6 +25,16 @@
     .leaflet-container {
       background-color: #fafafa;
       border-color:#f4f4f4;
+    }
+    .leaflet-interactive {
+      fill: "rgba(#{$leaflet-background-color}, 1)";
+      color: "rgba(#{$leaflet-background-color}, 1)";
+      weight: 3;
+      opacity: 0.6;
+      fill-opacity: 0.5;
+      &.selected {
+        opacity: 1;
+      }
     }
   }
 }

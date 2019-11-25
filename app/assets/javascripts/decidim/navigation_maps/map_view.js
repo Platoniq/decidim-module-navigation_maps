@@ -59,6 +59,15 @@ NavigationMapView.prototype.createAreas = function() {
     new L.GeoJSON(geoarea, {
       onEachFeature: function(feature, layer) {
         layer._leaflet_id = id;
+
+        layer.on('mouseover', function(e) {
+          e.target.getElement().classList.add('selected')
+        });
+
+        layer.on('mouseout', function(e) {
+          e.target.getElement().classList.remove('selected')
+        });
+
         layer.on('click', function(e) {
           if(feature.properties && feature.properties.link) location = feature.properties.link;
         });
@@ -77,6 +86,8 @@ NavigationMapView.prototype.forEachBlueprint = function (callback) {
 };
 
 NavigationMapView.prototype.reload = function () {
-  this.map.invalidateSize(true);
-  this.fitBounds();
+  if(this.map) {
+    this.map.invalidateSize(true);
+    this.fitBounds();
+  }
 };
