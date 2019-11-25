@@ -26,6 +26,8 @@ module Decidim
           if form.remove
             destroy_blueprint!(form)
           else
+            delete_areas
+            create_areas(form.blueprint) if form.blueprint
             update_blueprint!(form)
           end
         end
@@ -45,7 +47,6 @@ module Decidim
 
       def update_blueprint!(form)
         @blueprint.image = form.image if form.image.present?
-        @blueprint.blueprint = form.blueprint
         @blueprint.title = form.title
         @blueprint.description = form.description
         @blueprint.save!
@@ -53,6 +54,21 @@ module Decidim
 
       def destroy_blueprint!(form)
         @blueprint.destroy! if form.id
+      end
+
+      def delete_areas
+        @blueprint.areas.destroy_all
+      end
+
+      def create_areas(blueprint)
+        blueprint.each do |_key, area|
+          BlueprintArea.create!(
+            blueprint: @blueprint,
+            area: area[:geometry],
+            area_type: area[:type],
+            url: area[:properties][:link]
+          )
+        end
       end
     end
   end

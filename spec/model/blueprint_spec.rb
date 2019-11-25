@@ -43,8 +43,20 @@ module Decidim
 
         let(:blueprint_object) do
           {
-            area1.id.to_s => data1,
-            area2.id.to_s => data2
+            area1.id.to_s => {
+              type: "Feature",
+              geometry: data1,
+              properties: {
+                link: "#"
+              }
+            },
+            area2.id.to_s => {
+              type: "Feature",
+              geometry: data2,
+              properties: {
+                link: "#"
+              }
+            }
           }
         end
         let(:area3) { create(:blueprint_area, area: data2) }

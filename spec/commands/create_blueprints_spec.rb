@@ -18,7 +18,7 @@ module Decidim::NavigationMaps
     let(:form1) do
       double(
         BlueprintForm,
-        blueprint: data,
+        blueprint: blueprint_object,
         id: id,
         title: title,
         description: title,
@@ -29,13 +29,24 @@ module Decidim::NavigationMaps
     let(:form2) do
       double(
         BlueprintForm,
-        blueprint: data,
+        blueprint: blueprint_object,
         id: 2,
         title: title,
         description: nil,
         remove: false,
         image: nil
       )
+    end
+    let(:blueprint_object) do
+      {
+        "1" => {
+          type: "Feature",
+          geometry: data,
+          properties: {
+            link: "#"
+          }
+        }
+      }
     end
     let(:data) do
       { x: 0.5, y: 0.6 }

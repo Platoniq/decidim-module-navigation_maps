@@ -21,7 +21,11 @@ module Decidim
 
       def blueprint
         areas.map do |area|
-          [area.id.to_s, area.area]
+          [area.id.to_s, {
+            type: area.area_type,
+            geometry: area.area,
+            properties: { link: area.url }
+          }]
         end.to_h
       end
     end

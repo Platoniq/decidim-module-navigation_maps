@@ -27,9 +27,9 @@ class CreateDecidimNavigationMapsBlueprintAreas < ActiveRecord::Migration[5.2]
 
       blueprint.blueprint.each do |_key, area|
         Area.create!(
-          area: area,
+          area: area["geometry"],
           decidim_navigation_maps_blueprint_id: blueprint.id,
-          area_type: "link",
+          area_type: area["type"],
           url: area["properties"]["link"]
         )
       end
