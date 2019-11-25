@@ -37,24 +37,36 @@ module Decidim
       end
 
       context "when areas are defined" do
-        let(:blueprint) { build(:blueprint, organization: organization) }
+        let!(:blueprint) { create(:blueprint, organization: organization) }
+        let!(:area1) { create(:blueprint_area, area: data1, blueprint: blueprint) }
+        let!(:area2) { create(:blueprint_area, area: data2, blueprint: blueprint) }
 
-        let(:areas) { [area1, area2] }
-        let(:area1) { create(:blueprint_area, area: data1, blueprint: blueprint) }
-        let(:area2) { create(:blueprint_area, area: data2, blueprint: blueprint) }
-        let(:data1) { { x: "coord x", y: "coord y" } }
-        let(:data2) { { x: "coord x", y: "coord y" } }
+        let(:blueprint_object) do
+          {
+            area1.id.to_s => data1,
+            area2.id.to_s => data2
+          }
+        end
+        let(:area3) { create(:blueprint_area, area: data2) }
+        let(:data1) { { "x" => "coord x", "y" => "coord y" } }
+        let(:data2) { { "x" => "coord x", "y" => "coord y" } }
 
         it { is_expected.to be_valid }
 
         it "areas belong to blueprint" do
           expect(area1.blueprint).to eq(blueprint)
           expect(area2.blueprint).to eq(blueprint)
+          expect(area3.blueprint).not_to eq(blueprint)
         end
 
         it "blueprint contains areas" do
           expect(blueprint.areas).to include(area1)
           expect(blueprint.areas).to include(area2)
+          expect(blueprint.areas).not_to include(area3)
+        end
+
+        it "compacts json areas in a single object" do
+          expect(blueprint.blueprint).to eq(blueprint_object)
         end
       end
     end

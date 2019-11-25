@@ -18,6 +18,12 @@ module Decidim
                 file_content_type: { allow: ["image/jpeg", "image/png", "image/svg+xml"] }
 
       mount_uploader :image, Decidim::NavigationMaps::BlueprintUploader
+
+      def blueprint
+        areas.map do |area|
+          [area.id.to_s, area.area]
+        end.to_h
+      end
     end
   end
 end

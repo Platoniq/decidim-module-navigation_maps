@@ -23,6 +23,8 @@ class CreateDecidimNavigationMapsBlueprintAreas < ActiveRecord::Migration[5.2]
 
     # Search areas and create distributed entries
     Blueprint.find_each do |blueprint|
+      next unless blueprint.blueprint
+
       blueprint.blueprint.each do |_key, area|
         Area.create!(
           area: area,
@@ -32,5 +34,7 @@ class CreateDecidimNavigationMapsBlueprintAreas < ActiveRecord::Migration[5.2]
         )
       end
     end
+
+    remove_column :decidim_navigation_maps_blueprints, :blueprint, :jsonb
   end
 end
