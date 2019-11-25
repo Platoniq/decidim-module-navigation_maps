@@ -8,8 +8,7 @@ module Decidim
       subject { blueprint }
 
       let(:organization) { create(:organization) }
-      let(:data) { [x: "coord x", y: "coord y"] }
-      let(:blueprint) { build(:blueprint, blueprint: data, organization: organization) }
+      let(:blueprint) { create(:blueprint, organization: organization) }
 
       it { is_expected.to be_valid }
 
@@ -37,14 +36,27 @@ module Decidim
         it { is_expected.not_to be_valid }
       end
 
-      # TODO: validate json blueprint
+      context "when areas are defined" do
+        let(:blueprint) { build(:blueprint, organization: organization) }
 
-      # context "when no data" do
-      #   let(:data) { [] }
-      #   it "is not valid" do
-      #     expect(subject).not_to be_valid
-      #   end
-      # end
+        let(:areas) { [area1, area2] }
+        let(:area1) { create(:blueprint_area, area: data1, blueprint: blueprint) }
+        let(:area2) { create(:blueprint_area, area: data2, blueprint: blueprint) }
+        let(:data1) { { x: "coord x", y: "coord y" } }
+        let(:data2) { { x: "coord x", y: "coord y" } }
+
+        it { is_expected.to be_valid }
+
+        it "areas belong to blueprint" do
+          expect(area1.blueprint).to eq(blueprint)
+          expect(area2.blueprint).to eq(blueprint)
+        end
+
+        it "blueprint contains areas" do
+          expect(blueprint.areas).to include(area1)
+          expect(blueprint.areas).to include(area2)
+        end
+      end
     end
   end
 end
