@@ -15,6 +15,7 @@ $(function() {
   var $callout = $('.navigation_maps.admin .callout');
   var $form = $('form');
   var $tabs = $('#navigation_maps-tabs');
+  var $accordion = $('.navigation_maps.admin .accordion');
   var editors = {};
 
   $maps.each(function() {
@@ -24,9 +25,19 @@ $(function() {
 
   $tabs.on('change.zf.tabs', function(e, $tab, $content) {
     var id = $content.find('.map').data('id');
-    editors[id].reload();
+    if(id) {
+      editors[id].reload();
+    }
   });
 
+  $accordion.on('down.zf.accordion', function(e, $accordion) {
+    var id = $accordion.find('.map').data('id');
+    if(id) {
+      editors[id].reload();
+    }
+  });
+
+  // If a new item si going to be created o the image is changed a reload is needed
   var needsReload = function() {
     var reload = false;
     if($form.find('#map-new input:checked').length) return true;
