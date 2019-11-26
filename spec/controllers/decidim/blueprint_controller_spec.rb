@@ -34,7 +34,7 @@ module Decidim::NavigationMaps::Admin
       end
     end
 
-    describe "GET #create" do
+    describe "POST #create" do
       it "returns http success" do
         post :create
         expect(response).to have_http_status(:success)

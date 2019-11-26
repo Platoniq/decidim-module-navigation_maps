@@ -9,6 +9,16 @@ module Decidim
       belongs_to :blueprint, foreign_key: :decidim_navigation_maps_blueprint_id, class_name: "Decidim::NavigationMaps::Blueprint"
 
       validates :blueprint, presence: true
+
+      def to_geoson
+        {
+          type: area_type,
+          geometry: area,
+          properties: {
+            link: link
+          }
+        }
+      end
     end
   end
 end

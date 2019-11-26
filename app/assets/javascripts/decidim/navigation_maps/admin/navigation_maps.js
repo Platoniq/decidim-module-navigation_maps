@@ -1,7 +1,5 @@
 // Place all the behaviors and hooks related to the matching controller here.
 // All this logic will automatically be available in application.js.
-//= require leaflet
-//= require leaflet-geoman.min
 //= require jquery.form
 //= require decidim/navigation_maps/admin/map_editor
 //= require_self
@@ -18,18 +16,32 @@ $(function() {
   var $tabs = $('#navigation_maps-tabs');
   var $accordion = $('.navigation_maps.admin .accordion');
   var editors = {};
+  var new_areas = {};
 
   $maps.each(function() {
     var id = $(this).data('id');
     var table = document.getElementById("navigation_maps-table-" + id);
     editors[id] = new NavigationMapEditor(this, table);
+    editors[id].onCreateArea(function(area_id, area, obj) {
+      new_areas[area_id] = true;
+    });
+
     editors[id].onClickArea(function(area_id, area, obj) {
       $modal.find('.modal-content').html('');
       $modal.addClass('loading').foundation('open');
       $callout.hide();
       $callout.removeClass('alert success');
-      $modal.find('.modal-content').load(`/admin/navigation_maps/blueprints/${id}/areas/${area_id}`, function() {
+      // "new" form insted of editing
+      var rel = new_areas[area_id] ? 'new' : area_id;
+      $modal.find('.modal-content').load(`/admin/navigation_maps/blueprints/${id}/areas/${rel}`, function() {
+        var $input1 = $modal.find('input[name="blueprint_area[area_id]"]');
+        var $input2 = $modal.find('input[name="blueprint_area[area_type]"]');
+        var $input3 = $modal.find('input[name="blueprint_area[area]"]');
+        var a = area.toGeoJSON();
         $modal.removeClass('loading');
+        if($input1.length) $input1.val(area_id);
+        if($input2.length) $input2.val(a.type);
+        if($input3.length) $input3.val(JSON.stringify(a));
       });
     });
   });
@@ -41,13 +53,14 @@ $(function() {
   });
 
   document.body.addEventListener('ajax:success', function(responseText) {
-    console.log(responseText);
+    if(new_areas[responseText.detail[0].area]) {
+      delete new_areas[responseText.detail[0].area]
+    }
     $callout.contents('p').html(responseText.detail[0].message);
     $callout.addClass('success');
   });
 
   document.body.addEventListener('ajax:complete', function(xhr, event) {
-    console.log(event, xhr)
     $callout.show();
     $modal.foundation('close');
   })

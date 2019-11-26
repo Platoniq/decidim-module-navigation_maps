@@ -61,11 +61,12 @@ module Decidim
       end
 
       def create_areas(blueprint)
-        blueprint.each do |_key, area|
+        blueprint.each do |key, area|
           BlueprintArea.create!(
             blueprint: @blueprint,
             area: area[:geometry],
-            area_type: area[:type]
+            area_type: area[:type],
+            area_id: key
           )
         end
       end

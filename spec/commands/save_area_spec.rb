@@ -41,8 +41,8 @@ module Decidim::NavigationMaps
     end
 
     context "when id exists" do
-      let!(:area) { create(:blueprint_area, blueprint: blueprint) }
-      let(:id) { area.id }
+      let!(:blueprint_area) { create(:blueprint_area, blueprint: blueprint) }
+      let(:id) { blueprint_area.id }
 
       it "broadcasts ok" do
         expect { subject.call }.to broadcast(:ok)
@@ -50,6 +50,19 @@ module Decidim::NavigationMaps
 
       it "creates the area" do
         expect { subject.call }.to change(BlueprintArea, :count).by(0)
+      end
+    end
+
+    context "when id does not exist" do
+      let(:blueprint_area) { build(:blueprint_area, id: id, blueprint: blueprint) }
+      let(:id) { 11101 }
+
+      it "broadcasts ok" do
+        expect { subject.call }.to broadcast(:ok)
+      end
+
+      it "creates the area" do
+        expect { subject.call }.to change(BlueprintArea, :count).by(1)
       end
     end
   end

@@ -24,21 +24,22 @@ module Decidim
         update_area
         save_area!
 
-        broadcast(:ok)
+        broadcast(:ok, @area)
       end
 
       private
 
-      attr_reader :form
+      attr_reader :form, :current_blueprint
 
       def initialize_area
-        @area = BlueprintArea.find_or_initialize_by(id: form.id) do |area|
-          area.blueprint = form.current_blueprint
-        end
+        @area = BlueprintArea.find_or_initialize_by(area_id: form.area_id, blueprint: @form.context.current_blueprint);
       end
 
       def update_area
         @area.link = form.link
+        @area.area_id = form.area_id if form.area_id
+        @area.area = form.area if form.area
+        @area.area_type = form.area_type if form.area_type
       end
 
       def save_area!

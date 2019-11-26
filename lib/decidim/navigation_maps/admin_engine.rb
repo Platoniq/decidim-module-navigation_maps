@@ -12,7 +12,7 @@ module Decidim
       routes do
         # Add admin engine routes here
         resources :blueprints, only: [:index, :show, :create] do
-          resources :areas
+          resources :areas, param: :area_id
         end
       end
 

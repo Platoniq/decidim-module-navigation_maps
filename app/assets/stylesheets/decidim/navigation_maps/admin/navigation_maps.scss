@@ -74,14 +74,6 @@
       border-top: 1px solid $dark-gray;
       padding: 1em 1em 0;
     }
-    tbody > tr {
-        &.selected {
-          background-color: "rgba(#{$leaflet-background-color}, 0.5)" !important;
-        }
-        &:hover {
-          background-color: "rgba(#{$leaflet-background-color}, 0.5)" !important;
-      }
-    }
     .leaflet-interactive {
       fill: "rgba(#{$leaflet-background-color}, 1)";
       color: "rgba(#{$leaflet-background-color}, 1)";

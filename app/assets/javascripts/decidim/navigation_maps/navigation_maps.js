@@ -1,7 +1,5 @@
 // Place all the behaviors and hooks related to the matching controller here.
 // All this logic will automatically be available in application.js.
-//= require leaflet
-//= require leaflet-geoman.min
 //= require decidim/navigation_maps/map_view
 //= require_self
 

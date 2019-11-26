@@ -10,6 +10,8 @@ module Decidim
       mimic :blueprint_area
 
       attribute :area, Object
+      attribute :area_type, String
+      attribute :area_id, String
       attribute :link, String
       translatable_attribute :title, String
       translatable_attribute :description, String

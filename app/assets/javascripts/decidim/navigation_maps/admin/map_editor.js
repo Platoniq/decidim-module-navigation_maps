@@ -11,7 +11,9 @@ function NavigationMapEditor(map_object, table_object) {
     };
   });
   self.table_object = table_object;
-  this.onAreaCallback = function () {};
+  this.createAreaCallback = function () {};
+  this.editAreaCallback = function () {};
+  this.removeAreaCallback = function () {};
 }
 
 // NavigationMapEditor derives from NavigationMapView
@@ -32,13 +34,19 @@ NavigationMapEditor.prototype.createControls = function() {
   self.map.on('pm:create', function(e) {
     var geojson = e.layer.toGeoJSON();
     self.blueprint[e.layer._leaflet_id] = geojson;
-    self.renderRow(e.layer, geojson);
+    self.attachEditorEvents(e.layer);
+    self.createAreaCallback(e.layer._leaflet_id, e.layer, self);
   });
 
   self.map.on('pm:remove', function(e) {
     delete self.blueprint[e.layer._leaflet_id];
-    document.getElementById(self.rowId(e.layer._leaflet_id)).remove();
+    self.removeAreaCallback(e.layer._leaflet_id, e.layer, self);
   });
+};
+
+NavigationMapEditor.prototype.editing = function() {
+  var pm = this.map.pm;
+  return pm.globalRemovalEnabled() || pm.globalDragModeEnabled() || pm.globalEditEnabled();
 };
 
 NavigationMapView.prototype.createAreas = function() {
@@ -47,65 +55,46 @@ NavigationMapView.prototype.createAreas = function() {
     new L.GeoJSON(geoarea, {
       onEachFeature: function(feature, layer) {
         layer._leaflet_id = id;
-        layer.on('mouseover', function(e) {
-          e.target.getElement().classList.add('selected')
-          document.getElementById(self.rowId(e.target._leaflet_id)).classList.add('selected');
-        });
-
-        layer.on('mouseout', function(e) {
-          e.target.getElement().classList.remove('selected')
-          document.getElementById(self.rowId(e.target._leaflet_id)).classList.remove('selected');
-        });
-
-        layer.on('pm:edit', function(e) {
-          self.blueprint[e.target._leaflet_id] = e.target.toGeoJSON();
-        });
-
-        layer.on('click', function(e) {
-          self.clickAreaCallback(e.target._leaflet_id, e.target, self);
-        });
-
-        self.renderRow(layer, feature);
+        self.attachEditorEvents(layer);
       }
     }).addTo(self.map);
   });
 };
 
-NavigationMapEditor.prototype.renderRow = function (layer, feature) {
+// register callback to handle area edits,removals and creations
+NavigationMapView.prototype.onCreateArea = function(callback) {
+  this.createAreaCallback = callback;
+};
+NavigationMapView.prototype.onEditArea = function(callback) {
+  this.editAreaCallback = callback;
+};
+NavigationMapView.prototype.onRemoveArea = function(callback) {
+  this.removeCreateCallback = callback;
+};
+
+NavigationMapEditor.prototype.attachEditorEvents = function (layer) {
   var self = this;
-  var tbody = self.table_object.getElementsByTagName('tbody')[0];
-  var tr = this.rowTemplate(layer._leaflet_id, feature);
 
-  tr.addEventListener("mouseover", function() {
-    layer.getElement().classList.add('selected')
+  layer.on('mouseover', function(e) {
+    e.target.getElement().classList.add('selected')
   });
 
-  tr.addEventListener("mouseout", function() {
-    layer.getElement().classList.remove('selected')
+  layer.on('mouseout', function(e) {
+    e.target.getElement().classList.remove('selected')
   });
 
-  tbody.appendChild(tr);
-};
+  layer.on('pm:edit', function(e) {
+    self.blueprint[e.target._leaflet_id] = e.target.toGeoJSON();
+    self.editAreaCallback(e.target._leaflet_id, e.target, self);
+  });
 
-NavigationMapEditor.prototype.rowTemplate = function (area, feature) {
-  var link = feature.properties && feature.properties.link || '#';
-  var tr = document.createElement('tr');
-  tr.id = this.rowId(area);
-  tr.innerHTML = ' <td>' + area +'</td>'
-               + ' <td><input type="text" id="' + tr.id + '-link" value="' + link + '"></td>';
-  return tr;
-};
-
-NavigationMapEditor.prototype.rowId = function (id) {
-  return `map-editor-${this.id}-tr-${id}`;
+  layer.on('click', function(e) {
+    if(!self.editing()) {
+      self.clickAreaCallback(e.target._leaflet_id, e.target, self);
+    }
+  });
 };
 
 NavigationMapEditor.prototype.getBlueprint = function () {
-  var self = this;
-  self.forEachBlueprint(function(id, geoarea) {
-    var link = document.getElementById(self.rowId(id) + "-link");
-    geoarea.properties = geoarea && geoarea.properties || {link: '#'}
-    if(link) geoarea.properties.link = link.value;
-  });
-  return self.blueprint;
+  return this.blueprint;
 };

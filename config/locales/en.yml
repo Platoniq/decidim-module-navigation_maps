@@ -7,6 +7,10 @@ en:
     navigation_maps:
       admin:
         areas:
+          new:
+            area: New area details
+            save: Save
+            cancel: Cancel
           show:
             area: Area details
             save: Save
@@ -14,6 +18,9 @@ en:
           update:
             success: Area saved successfully
             error: An error ocurred while saving the area
+          create:
+            success: Area created successfully
+            error: An error ocurred while creating the area
       content_blocks:
         name: Navigation Maps
         navigation_map_settings_form:

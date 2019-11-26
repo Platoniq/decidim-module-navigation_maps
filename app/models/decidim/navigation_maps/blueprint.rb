@@ -20,12 +20,7 @@ module Decidim
       mount_uploader :image, Decidim::NavigationMaps::BlueprintUploader
 
       def blueprint
-        areas.map do |area|
-          [area.id.to_s, {
-            type: area.area_type,
-            geometry: area.area
-          }]
-        end.to_h
+        areas.map { |area| [area.area_id.to_s, area.to_geoson] }.to_h
       end
     end
   end
