@@ -3,7 +3,7 @@
 require "spec_helper"
 
 module Decidim::NavigationMaps
-  describe CreateBlueprints do
+  describe SaveBlueprints do
     subject { described_class.new(forms) }
 
     let(:organization) { create :organization }
@@ -41,10 +41,7 @@ module Decidim::NavigationMaps
       {
         "1" => {
           type: "Feature",
-          geometry: data,
-          properties: {
-            link: "#"
-          }
+          geometry: data
         }
       }
     end

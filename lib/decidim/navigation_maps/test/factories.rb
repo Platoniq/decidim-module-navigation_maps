@@ -14,7 +14,7 @@ FactoryBot.define do
     blueprint { create(:blueprint) }
     area { { x: 1, y: 1 } }
     area_type { "Feature" }
-    url { "#" }
+    link { "#" }
     title { Decidim::Faker::Localized.word }
     description { generate_localized_title }
   end

@@ -13,15 +13,44 @@ $(function() {
   var $bar = $('.navigation_maps.admin .progress-meter');
   var $loading = $('.navigation_maps.admin .loading');
   var $callout = $('.navigation_maps.admin .callout');
+  var $modal = $('#mapEditModal');
   var $form = $('form');
   var $tabs = $('#navigation_maps-tabs');
   var $accordion = $('.navigation_maps.admin .accordion');
   var editors = {};
 
   $maps.each(function() {
-    var table = document.getElementById("navigation_maps-table-" + $(this).data('id'));
-    editors[$(this).data('id')] = new NavigationMapEditor(this, table);
+    var id = $(this).data('id');
+    var table = document.getElementById("navigation_maps-table-" + id);
+    editors[id] = new NavigationMapEditor(this, table);
+    editors[id].onClickArea(function(area_id, area, obj) {
+      $modal.find('.modal-content').html('');
+      $modal.addClass('loading').foundation('open');
+      $callout.hide();
+      $callout.removeClass('alert success');
+      $modal.find('.modal-content').load(`/admin/navigation_maps/blueprints/${id}/areas/${area_id}`, function() {
+        $modal.removeClass('loading');
+      });
+    });
   });
+
+  // Rails AJAX events
+  document.body.addEventListener('ajax:error', function(responseText) {
+    $callout.contents('p').html(responseText.detail[0].message + ": <strong>" + responseText.detail[0].error + "</strong>");
+    $callout.addClass('alert');
+  });
+
+  document.body.addEventListener('ajax:success', function(responseText) {
+    console.log(responseText);
+    $callout.contents('p').html(responseText.detail[0].message);
+    $callout.addClass('success');
+  });
+
+  document.body.addEventListener('ajax:complete', function(xhr, event) {
+    console.log(event, xhr)
+    $callout.show();
+    $modal.foundation('close');
+  })
 
   $tabs.on('change.zf.tabs', function(e, $tab, $content) {
     var id = $content.find('.map').data('id');

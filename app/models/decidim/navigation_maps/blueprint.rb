@@ -23,8 +23,7 @@ module Decidim
         areas.map do |area|
           [area.id.to_s, {
             type: area.area_type,
-            geometry: area.area,
-            properties: { link: area.url }
+            geometry: area.area
           }]
         end.to_h
       end

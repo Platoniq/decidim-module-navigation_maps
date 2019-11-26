@@ -4,15 +4,22 @@ module Decidim
   module NavigationMaps
     module Admin
       class BlueprintsController < ::Decidim::NavigationMaps::Admin::ApplicationController
+        before_action do
+          enforce_permission_to :update, :organization, organization: current_organization
+        end
+
         def index
           render json: organization_blueprints
         end
 
+        def show
+          render json: organization_blueprints.find(params[:id])
+        end
+
         def create
-          enforce_permission_to :update, :organization, organization: current_organization
           parse_blueprints
           @form = form(BlueprintForms).from_params(params).with_context(current_organization: current_organization)
-          CreateBlueprints.call(@form) do
+          SaveBlueprints.call(@form) do
             on(:ok) do
               render plain: I18n.t("navigation_maps.create.success", scope: "decidim")
             end

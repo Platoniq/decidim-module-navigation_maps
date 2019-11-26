@@ -9,8 +9,16 @@ module Decidim
 
       let(:organization) { create(:organization) }
       let(:blueprint) { create(:blueprint, organization: organization) }
-      let(:blueprint_area) { build(:blueprint_area, blueprint: blueprint) }
-      let(:data) { { x: "coord x", y: "coord y" } }
+      let(:blueprint_area) { build(:blueprint_area, title: title, description: description, link: link, area: area, blueprint: blueprint) }
+      let(:area) do
+        {
+          "x" => "coord x",
+          "y" => "coord y"
+        }
+      end
+      let(:title) { Decidim::Faker::Localized.sentence(2) }
+      let(:description) { Decidim::Faker::Localized.paragraph }
+      let(:link) { "#link" }
 
       it { is_expected.to be_valid }
 
@@ -20,13 +28,33 @@ module Decidim
       end
 
       # TODO: validate json area
+      context "when all fields are specified" do
+        it "saves data correctly" do
+          subject.save
+          subject.reload
+          expect(subject.title).to eq(title)
+          expect(subject.description).to eq(description)
+          expect(subject.link).to eq(link)
+          expect(subject.area).to eq(area)
+        end
+      end
 
-      # context "when no data" do
-      #   let(:data) { [] }
-      #   it "is not valid" do
-      #     expect(subject).not_to be_valid
-      #   end
-      # end
+      context "when no area" do
+        let!(:blueprint_area) { create(:blueprint_area, title: title, description: description, link: link, area: area, blueprint: blueprint) }
+
+        it "save data without area" do
+          a = BlueprintArea.find(blueprint_area.id)
+          a.title = title
+          a.description = description
+          a.link = link
+          a.save
+          # a.reload
+          expect(a.title).to eq(title)
+          expect(a.description).to eq(description)
+          expect(a.link).to eq(link)
+          expect(a.area).to eq(area)
+        end
+      end
     end
   end
 end

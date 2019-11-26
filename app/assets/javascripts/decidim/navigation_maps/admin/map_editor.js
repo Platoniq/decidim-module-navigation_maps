@@ -11,6 +11,7 @@ function NavigationMapEditor(map_object, table_object) {
     };
   });
   self.table_object = table_object;
+  this.onAreaCallback = function () {};
 }
 
 // NavigationMapEditor derives from NavigationMapView
@@ -58,6 +59,10 @@ NavigationMapView.prototype.createAreas = function() {
 
         layer.on('pm:edit', function(e) {
           self.blueprint[e.target._leaflet_id] = e.target.toGeoJSON();
+        });
+
+        layer.on('click', function(e) {
+          self.clickAreaCallback(e.target._leaflet_id, e.target, self);
         });
 
         self.renderRow(layer, feature);

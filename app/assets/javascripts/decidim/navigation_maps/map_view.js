@@ -19,6 +19,7 @@ function NavigationMapView(map_object, callback) {
     }
   };
   self.image.src = self.image_path;
+  this.clickAreaCallback = function () {};
 }
 
 NavigationMapView.prototype.createMap = function() {
@@ -69,11 +70,16 @@ NavigationMapView.prototype.createAreas = function() {
         });
 
         layer.on('click', function(e) {
-          if(feature.properties && feature.properties.link) location = feature.properties.link;
+          self.clickAreaCallback(e.target, self);
         });
       }
     }).addTo(self.map);
   });
+};
+
+// register callback to handle area clicks
+NavigationMapView.prototype.onClickArea = function(callback) {
+  this.clickAreaCallback = callback;
 };
 
 NavigationMapView.prototype.forEachBlueprint = function (callback) {

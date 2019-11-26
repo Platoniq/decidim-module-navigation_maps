@@ -13,7 +13,11 @@ $(function() {
   var maps = {};
 
   $maps.each(function() {
-    maps[$(this).data('id')] = new NavigationMapView(this);
+    var id = $(this).data('id');
+    maps[id] = new NavigationMapView(this);
+    maps[id].onClickArea(function(area) {
+      if(area.feature.properties && area.feature.properties.link) location = area.feature.properties.link;
+    });
   });
 
   $tabs.on('change.zf.tabs', function(e, $tab, $content) {

@@ -41,7 +41,7 @@
 
     }
     .spinner {
-      @include spinner(25px, #aaa, var(--primary), 800ms);
+      @include spinner(25px, #aaa, var(--secondary), 800ms);
       vertical-align: middle;
     }
     .progress {
@@ -52,7 +52,7 @@
     }
     .progress-meter {
       color: #fff;
-      background-color: var(--primary);
+      background-color: var(--secondary);
       width: 30%;
       padding:0 0.5em;
       font-size: 0.7em;
@@ -91,6 +91,20 @@
       &.selected {
         opacity: 1;
       }
+    }
+  }
+
+}
+
+.navigation_maps.modal {
+  .spinner {
+    @include spinner(25px, #aaa, var(--secondary), 800ms);
+    vertical-align: middle;
+    display: none;
+  }
+  &.loading {
+    .spinner {
+      display: inline-block;
     }
   }
 }

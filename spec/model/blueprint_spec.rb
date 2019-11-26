@@ -45,17 +45,11 @@ module Decidim
           {
             area1.id.to_s => {
               type: "Feature",
-              geometry: data1,
-              properties: {
-                link: "#"
-              }
+              geometry: data1
             },
             area2.id.to_s => {
               type: "Feature",
-              geometry: data2,
-              properties: {
-                link: "#"
-              }
+              geometry: data2
             }
           }
         end

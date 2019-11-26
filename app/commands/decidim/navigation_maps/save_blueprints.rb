@@ -3,7 +3,7 @@
 module Decidim
   module NavigationMaps
     # This command creates or updates the blueprints for the organization.
-    class CreateBlueprints < Rectify::Command
+    class SaveBlueprints < Rectify::Command
       # Creates a blueprint.
       #
       # forms - The form with the data.
@@ -22,7 +22,7 @@ module Decidim
         @blueprints.each do |form|
           next if form.invalid?
 
-          create_blueprint(form)
+          initialize_blueprint(form)
           if form.remove
             destroy_blueprint!(form)
           else
@@ -39,7 +39,7 @@ module Decidim
 
       attr_reader :forms
 
-      def create_blueprint(form)
+      def initialize_blueprint(form)
         @blueprint = Blueprint.find_or_initialize_by(id: form.id) do |blueprint|
           blueprint.organization = @forms.current_organization
         end
@@ -65,8 +65,7 @@ module Decidim
           BlueprintArea.create!(
             blueprint: @blueprint,
             area: area[:geometry],
-            area_type: area[:type],
-            url: area[:properties][:link]
+            area_type: area[:type]
           )
         end
       end

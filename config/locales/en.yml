@@ -5,6 +5,15 @@ en:
       navigation_maps:
         name: NavigationMaps
     navigation_maps:
+      admin:
+        areas:
+          show:
+            area: Area details
+            save: Save
+            cancel: Cancel
+          update:
+            success: Area saved successfully
+            error: An error ocurred while saving the area
       content_blocks:
         name: Navigation Maps
         navigation_map_settings_form:

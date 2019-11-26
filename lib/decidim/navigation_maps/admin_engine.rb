@@ -11,8 +11,9 @@ module Decidim
 
       routes do
         # Add admin engine routes here
-        resources :blueprints, only: [:index, :create, :destroy]
-        # root to: "navigation_maps#index"
+        resources :blueprints, only: [:index, :show, :create] do
+          resources :areas
+        end
       end
 
       initializer "decidim_navigation_maps.admin_mount_routes" do
