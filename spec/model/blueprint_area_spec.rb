@@ -30,9 +30,11 @@ module Decidim
 
       # TODO: validate json area
       context "when all fields are specified" do
-        let!(:blueprint_area) { create(:blueprint_area, title: title, description: description, link: link, area: area, area_id: area_id, blueprint: blueprint) }
+        let(:blueprint_area) { create(:blueprint_area, title: title, description: description, link: link, blueprint: blueprint) }
 
         it "saves data correctly" do
+          subject.area = area
+          subject.area_id = area_id
           subject.save
           subject.reload
           expect(subject.title).to eq(title)
@@ -44,9 +46,12 @@ module Decidim
       end
 
       context "when no area" do
-        let!(:blueprint_area) { create(:blueprint_area, area: area, area_id: area_id, blueprint: blueprint) }
+        let!(:blueprint_area) { create(:blueprint_area, blueprint: blueprint) }
 
         it "save data without area" do
+          subject.area = area
+          subject.area_id = area_id
+          subject.save
           a = BlueprintArea.find(blueprint_area.id)
           a.title = title
           a.description = description

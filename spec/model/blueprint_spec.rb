@@ -38,34 +38,32 @@ module Decidim
 
       context "when areas are defined" do
         let!(:blueprint) { create(:blueprint, organization: organization) }
-        let!(:area1) { create(:blueprint_area, area: data, area_id: "101", link: "#link1", blueprint: blueprint) }
-        let!(:area2) { create(:blueprint_area, area: data, area_id: "102", link: "#link1", blueprint: blueprint) }
+        let!(:area1) { create(:blueprint_area, link: "#link", blueprint: blueprint) }
+        let!(:area2) { create(:blueprint_area, link: "#another_link", blueprint: blueprint) }
+        let!(:area3) { create(:blueprint_area, area: data) }
 
         let(:blueprint_object) do
           {
             "101" => {
               type: "Feature",
               geometry: data,
-              properties: properties
+              properties: {
+                link: "#link"
+              }
             },
             "102" => {
               type: "Feature",
               geometry: data,
-              properties: properties
+              properties: {
+                link: "#another_link"
+              }
             }
           }
         end
-        let(:area3) { create(:blueprint_area, area: data) }
         let(:data) do
           {
             "x" => "coord x",
             "y" => "coord y"
-          }
-        end
-        let(:properties) do
-          {
-            link: "#link1",
-            color: "#f00"
           }
         end
 
@@ -84,6 +82,12 @@ module Decidim
         end
 
         it "compacts json areas in a single object" do
+          area1.area = data
+          area1.area_id = "101"
+          area1.save
+          area2.area = data
+          area2.area_id = "102"
+          area2.save
           expect(blueprint.blueprint).to eq(blueprint_object)
         end
       end
