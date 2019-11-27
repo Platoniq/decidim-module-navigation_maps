@@ -7,9 +7,7 @@ module Decidim::NavigationMaps::Admin
     routes { Decidim::NavigationMaps::AdminEngine.routes }
 
     let(:user) { create(:user, :confirmed, :admin, organization: organization) }
-    let(:organization) do
-      create(:organization)
-    end
+    let(:organization) { create(:organization) }
     let(:params) do
       {
         blueprints: {

@@ -1,14 +1,6 @@
 # frozen_string_literal: true
 
 class CreateDecidimNavigationMapsBlueprintAreas < ActiveRecord::Migration[5.2]
-  class Blueprint < ApplicationRecord
-    self.table_name = "decidim_navigation_maps_blueprints"
-  end
-
-  class Area < ApplicationRecord
-    self.table_name = "decidim_navigation_maps_blueprint_areas"
-  end
-
   def change
     create_table :decidim_navigation_maps_blueprint_areas do |t|
       t.jsonb :area
@@ -19,20 +11,6 @@ class CreateDecidimNavigationMapsBlueprintAreas < ActiveRecord::Migration[5.2]
       t.string :url
 
       t.timestamps
-    end
-
-    # Search areas and create distributed entries
-    Blueprint.find_each do |blueprint|
-      next unless blueprint.blueprint
-
-      blueprint.blueprint.each do |_key, area|
-        Area.create!(
-          area: area["geometry"],
-          decidim_navigation_maps_blueprint_id: blueprint.id,
-          area_type: area["type"],
-          url: area["properties"]["link"]
-        )
-      end
     end
 
     remove_column :decidim_navigation_maps_blueprints, :blueprint, :jsonb

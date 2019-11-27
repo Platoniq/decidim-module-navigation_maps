@@ -10,7 +10,7 @@ module Decidim::NavigationMaps::Admin
     let(:user) { create(:user, :confirmed, :admin, organization: organization) }
     let(:blueprint) { create(:blueprint, organization: organization) }
 
-    let(:params) do
+    let(:attributes) do
       {
         blueprint_area: {
           area: data,
@@ -48,13 +48,14 @@ module Decidim::NavigationMaps::Admin
         let!(:area) { create(:blueprint_area, blueprint: blueprint) }
 
         it "returns http success" do
-          get :show, params: { blueprint_id: blueprint.id, id: area.id }
+          get :show, params: { blueprint_id: blueprint.id, area_id: area.area_id }
           expect(response).to have_http_status(:success)
         end
       end
+
       context "when area does not exist" do
         it "redirects to new" do
-          get :show, params: { blueprint_id: blueprint.id, id: 1111 }
+          get :show, params: { blueprint_id: blueprint.id, area_id: 1111 }
           expect(response).to have_http_status(:success)
         end
       end
@@ -64,7 +65,7 @@ module Decidim::NavigationMaps::Admin
       let!(:area) { create(:blueprint_area, blueprint: blueprint) }
 
       it "returns http success" do
-        post :update, params: { blueprint_id: blueprint.id, id: area.id }
+        post :update, params: { blueprint_id: blueprint.id, area_id: area.area_id }
         expect(response).to have_http_status(:success)
       end
     end

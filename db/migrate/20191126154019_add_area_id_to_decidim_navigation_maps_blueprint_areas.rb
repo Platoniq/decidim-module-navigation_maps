@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class AddAreaIdToDecidimNavigationMapsBlueprintAreas < ActiveRecord::Migration[5.2]
   class Area < ApplicationRecord
     self.table_name = "decidim_navigation_maps_blueprint_areas"

@@ -8,22 +8,26 @@ module Decidim::NavigationMaps
 
     let(:blueprint) { create :blueprint }
     let(:form) do
-      double(
-        AreaForm,
+      AreaForm
+        .from_params(attributes)
+        .with_context(current_blueprint: blueprint)
+    end
+    let(:attributes) do
+      {
         area: data,
-        id: id,
+        area_id: area_id,
         title: title,
         description: title,
         link: link,
         current_blueprint: blueprint
-      )
+      }
     end
     let(:data) do
       { x: 0.5, y: 0.6 }
     end
     let(:title) { Decidim::Faker::Localized.sentence(2) }
     let(:description) { Decidim::Faker::Localized.paragraph }
-    let(:id) { nil }
+    let(:area_id) { nil }
     let(:link) { "#link" }
 
     before do
@@ -42,20 +46,20 @@ module Decidim::NavigationMaps
 
     context "when id exists" do
       let!(:blueprint_area) { create(:blueprint_area, blueprint: blueprint) }
-      let(:id) { blueprint_area.id }
+      let(:area_id) { blueprint_area.area_id }
 
       it "broadcasts ok" do
         expect { subject.call }.to broadcast(:ok)
       end
 
-      it "creates the area" do
+      it "updates the area" do
         expect { subject.call }.to change(BlueprintArea, :count).by(0)
       end
     end
 
     context "when id does not exist" do
       let(:blueprint_area) { build(:blueprint_area, id: id, blueprint: blueprint) }
-      let(:id) { 11101 }
+      let(:id) { 11_101 }
 
       it "broadcasts ok" do
         expect { subject.call }.to broadcast(:ok)

@@ -38,24 +38,35 @@ module Decidim
 
       context "when areas are defined" do
         let!(:blueprint) { create(:blueprint, organization: organization) }
-        let!(:area1) { create(:blueprint_area, area: data1, blueprint: blueprint) }
-        let!(:area2) { create(:blueprint_area, area: data2, blueprint: blueprint) }
+        let!(:area1) { create(:blueprint_area, area: data, area_id: "101", link: "#link1", blueprint: blueprint) }
+        let!(:area2) { create(:blueprint_area, area: data, area_id: "102", link: "#link1", blueprint: blueprint) }
 
         let(:blueprint_object) do
           {
-            area1.id.to_s => {
+            "101" => {
               type: "Feature",
-              geometry: data1
+              geometry: data,
+              properties: properties
             },
-            area2.id.to_s => {
+            "102" => {
               type: "Feature",
-              geometry: data2
+              geometry: data,
+              properties: properties
             }
           }
         end
-        let(:area3) { create(:blueprint_area, area: data2) }
-        let(:data1) { { "x" => "coord x", "y" => "coord y" } }
-        let(:data2) { { "x" => "coord x", "y" => "coord y" } }
+        let(:area3) { create(:blueprint_area, area: data) }
+        let(:data) do
+          {
+            "x" => "coord x",
+            "y" => "coord y"
+          }
+        end
+        let(:properties) do
+          {
+            link: "#link1"
+          }
+        end
 
         it { is_expected.to be_valid }
 

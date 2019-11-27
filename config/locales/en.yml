@@ -7,35 +7,35 @@ en:
     navigation_maps:
       admin:
         areas:
+          create:
+            error: An error ocurred while creating the area
+            success: Area created successfully
           new:
             area: New area details
-            save: Save
             cancel: Cancel
+            save: Save
           show:
             area: Area details
-            save: Save
             cancel: Cancel
+            save: Save
           update:
-            success: Area saved successfully
             error: An error ocurred while saving the area
-          create:
-            success: Area created successfully
-            error: An error ocurred while creating the area
+            success: Area saved successfully
       content_blocks:
         name: Navigation Maps
         navigation_map_settings_form:
-          blueprint_image: Blueprint image
-          image_missing: Please add a blueprint image to start
-          upload_image: Upload image
-          id: Id
-          type: Type
-          link: Link
-          title: Title
-          description: Description
           add: Add
-          info: General info
+          blueprint_image: Blueprint image
+          description: Description
           editor: Map Editor
+          id: Id
+          image_missing: Please add a blueprint image to start
+          info: General info
+          link: Link
           remove_blueprint: Delete this blueprint
+          title: Title
+          type: Type
+          upload_image: Upload image
       create:
         error: Error creating blueprint
         success: Blueprint created successfully

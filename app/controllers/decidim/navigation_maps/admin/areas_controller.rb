@@ -55,7 +55,7 @@ module Decidim
 
         def parse_areas
           return unless params[:blueprint_area]
-          return unless params[:blueprint_area][:area].present?
+          return if params[:blueprint_area][:area].blank?
 
           feature = JSON.parse params[:blueprint_area][:area]
           params[:blueprint_area][:area] = feature["geometry"] if feature["geometry"]

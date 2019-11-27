@@ -32,7 +32,7 @@ module Decidim
       attr_reader :form, :current_blueprint
 
       def initialize_area
-        @area = BlueprintArea.find_or_initialize_by(area_id: form.area_id, blueprint: @form.context.current_blueprint);
+        @area = BlueprintArea.find_or_initialize_by(area_id: form.area_id, blueprint: @form.context.current_blueprint)
       end
 
       def update_area

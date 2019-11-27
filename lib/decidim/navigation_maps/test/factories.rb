@@ -12,9 +12,16 @@ FactoryBot.define do
 
   factory :blueprint_area, class: Decidim::NavigationMaps::BlueprintArea do
     blueprint { create(:blueprint) }
-    area { { x: 1, y: 1 } }
+    area do
+      {
+        "x" => 1,
+        "y" => 1
+      }
+    end
     area_type { "Feature" }
-    link { "#" }
+    area_id { "1" }
+    link { "#link" }
+    link_type { "link" }
     title { Decidim::Faker::Localized.word }
     description { generate_localized_title }
   end
