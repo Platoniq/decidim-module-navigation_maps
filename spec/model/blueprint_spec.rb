@@ -8,8 +8,7 @@ module Decidim
       subject { blueprint }
 
       let(:organization) { create(:organization) }
-      let(:data) { [x: "coord x", y: "coord y"] }
-      let(:blueprint) { build(:blueprint, blueprint: data, organization: organization) }
+      let(:blueprint) { create(:blueprint, organization: organization) }
 
       it { is_expected.to be_valid }
 
@@ -37,14 +36,61 @@ module Decidim
         it { is_expected.not_to be_valid }
       end
 
-      # TODO: validate json blueprint
+      context "when areas are defined" do
+        let!(:blueprint) { create(:blueprint, organization: organization) }
+        let!(:area1) { create(:blueprint_area, link: "#link", blueprint: blueprint) }
+        let!(:area2) { create(:blueprint_area, link: "#another_link", blueprint: blueprint) }
+        let!(:area3) { create(:blueprint_area, area: data) }
 
-      # context "when no data" do
-      #   let(:data) { [] }
-      #   it "is not valid" do
-      #     expect(subject).not_to be_valid
-      #   end
-      # end
+        let(:blueprint_object) do
+          {
+            "101" => {
+              type: "Feature",
+              geometry: data,
+              properties: {
+                link: "#link"
+              }
+            },
+            "102" => {
+              type: "Feature",
+              geometry: data,
+              properties: {
+                link: "#another_link"
+              }
+            }
+          }
+        end
+        let(:data) do
+          {
+            "x" => "coord x",
+            "y" => "coord y"
+          }
+        end
+
+        it { is_expected.to be_valid }
+
+        it "areas belong to blueprint" do
+          expect(area1.blueprint).to eq(blueprint)
+          expect(area2.blueprint).to eq(blueprint)
+          expect(area3.blueprint).not_to eq(blueprint)
+        end
+
+        it "blueprint contains areas" do
+          expect(blueprint.areas).to include(area1)
+          expect(blueprint.areas).to include(area2)
+          expect(blueprint.areas).not_to include(area3)
+        end
+
+        it "compacts json areas in a single object" do
+          area1.area = data
+          area1.area_id = "101"
+          area1.save
+          area2.area = data
+          area2.area_id = "102"
+          area2.save
+          expect(blueprint.blueprint).to eq(blueprint_object)
+        end
+      end
     end
   end
 end

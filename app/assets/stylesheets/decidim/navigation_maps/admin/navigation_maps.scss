@@ -5,10 +5,7 @@
 @import "decidim/variables";
 @import "decidim/utils/settings";
 @import "decidim/utils/mixins";
-
-:root {
-  --leaflet-background-color: 34,98,204;
-}
+@import "decidim/navigation_maps/variables";
 
 .navigation_maps.admin {
   .accordion-item {
@@ -18,7 +15,7 @@
     &.is-active {
       .accordion-title {
         background-color: #039be5;
-        border-color: rgba(var(--leaflet-background-color),1) !important;
+        border-color: "rgba(#{$leaflet-background-color}, 1)" !important;
       }
     }
   }
@@ -44,7 +41,7 @@
 
     }
     .spinner {
-      @include spinner(25px, #aaa, var(--primary), 800ms);
+      @include spinner(25px, #aaa, var(--secondary), 800ms);
       vertical-align: middle;
     }
     .progress {
@@ -55,7 +52,7 @@
     }
     .progress-meter {
       color: #fff;
-      background-color: var(--primary);
+      background-color: var(--secondary);
       width: 30%;
       padding:0 0.5em;
       font-size: 0.7em;
@@ -77,23 +74,29 @@
       border-top: 1px solid $dark-gray;
       padding: 1em 1em 0;
     }
-    tbody > tr {
-        &.selected {
-          background-color: rgba(var(--leaflet-background-color), 0.5) !important;
-        }
-        &:hover {
-          background-color: rgba(var(--leaflet-background-color), 0.5) !important;
-      }
-    }
     .leaflet-interactive {
-      fill: rgba(var(--leaflet-background-color), 1);
-      color: rgba(var(--leaflet-background-color), 1);
+      fill: "rgba(#{$leaflet-background-color}, 1)";
+      color: "rgba(#{$leaflet-background-color}, 1)";
       weight: 3;
       opacity: 0.6;
       fill-opacity: 0.5;
       &.selected {
         opacity: 1;
       }
+    }
+  }
+
+}
+
+.navigation_maps.modal {
+  .spinner {
+    @include spinner(25px, #aaa, var(--secondary), 800ms);
+    vertical-align: middle;
+    display: none;
+  }
+  &.loading {
+    .spinner {
+      display: inline-block;
     }
   }
 }
