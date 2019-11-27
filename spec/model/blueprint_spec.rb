@@ -38,8 +38,8 @@ module Decidim
 
       context "when areas are defined" do
         let!(:blueprint) { create(:blueprint, organization: organization) }
-        let!(:area1) { create(:blueprint_area, link: "#link", blueprint: blueprint) }
-        let!(:area2) { create(:blueprint_area, link: "#another_link", blueprint: blueprint) }
+        let!(:area1) { create(:blueprint_area, link: "#link", color: "#f00", title: title, description: description, blueprint: blueprint) }
+        let!(:area2) { create(:blueprint_area, link: "#another_link", color: "#f0f", title: title, description: description, blueprint: blueprint) }
         let!(:area3) { create(:blueprint_area, area: data) }
 
         let(:blueprint_object) do
@@ -48,17 +48,29 @@ module Decidim
               type: "Feature",
               geometry: data,
               properties: {
-                link: "#link"
+                link: "#link",
+                color: "#f00",
+                title: title[:en],
+                description: description[:en]
               }
             },
             "102" => {
               type: "Feature",
               geometry: data,
               properties: {
-                link: "#another_link"
+                link: "#another_link",
+                color: "#f0f",
+                title: title[:en],
+                description: description[:en]
               }
             }
           }
+        end
+        let(:title) do
+          { en: "Eng title" }
+        end
+        let(:description) do
+          { en: "Eng description" }
         end
         let(:data) do
           {

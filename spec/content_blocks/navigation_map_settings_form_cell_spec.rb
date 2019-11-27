@@ -9,12 +9,21 @@ module Decidim::NavigationMaps::ContentBlocks
     let(:organization) { create(:organization) }
     let(:content_block) { create :content_block, organization: organization, manifest_name: :navigation_map, scope: :homepage }
     let!(:blueprint) { create(:blueprint, organization: organization) }
+    let(:settings) { NavigationMapSettingsFormCell.new }
 
     controller Decidim::Admin::ApplicationController
+
+    before do
+      allow(settings).to receive(:current_organization).and_return(organization)
+    end
 
     context "when there are blueprints in the organization" do
       it "contains the map" do
         expect(subject.to_s).to include(blueprint.image.url)
+      end
+
+      it "Cell returns a form" do
+        expect(settings.blueprint_form(blueprint).ident).to eq(blueprint.id)
       end
     end
   end

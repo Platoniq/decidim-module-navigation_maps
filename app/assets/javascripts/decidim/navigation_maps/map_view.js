@@ -22,6 +22,7 @@ function NavigationMapView(map_object, callback) {
   };
   self.image.src = self.image_path;
   this.clickAreaCallback = function () {};
+  this.setLayerPropertiesCallback = function () {};
 }
 
 NavigationMapView.prototype.createMap = function() {
@@ -75,6 +76,7 @@ NavigationMapView.prototype.setLayerProperties = function (layer, area) {
     if(props.color) {
       layer.setStyle({fillColor: props.color, color: props.color});
     }
+    this.setLayerPropertiesCallback(layer, props);
   }
 };
 
@@ -97,6 +99,10 @@ NavigationMapView.prototype.attachEditorEvents = function (layer) {
 // register callback to handle area clicks
 NavigationMapView.prototype.onClickArea = function(callback) {
   this.clickAreaCallback = callback;
+};
+
+NavigationMapView.prototype.onSetLayerProperties = function(callback) {
+  this.setLayerPropertiesCallback = callback;
 };
 
 NavigationMapView.prototype.forEachBlueprint = function (callback) {

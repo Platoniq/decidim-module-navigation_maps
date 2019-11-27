@@ -1,3 +1,6 @@
+<%= stylesheet_link_tag "decidim/navigation_maps/navigation_maps" %>
+<%= render partial: "styles", locals: { blueprints: valid_blueprints } %>
+
 <section class="extended home-section">
   <div class="row">
     <div class="columns small-centered large-10">
@@ -9,5 +12,5 @@
   </div>
 </section>
 
+<%= render partial: "template" %>
 <%= javascript_include_tag "decidim/navigation_maps/navigation_maps" %>
-<%= stylesheet_link_tag "decidim/navigation_maps/navigation_maps" %>

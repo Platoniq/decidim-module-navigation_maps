@@ -12,23 +12,24 @@ module Decidim::NavigationMaps::Admin
 
     let(:attributes) do
       {
+        blueprint_id: blueprint.id,
+        area_id: area.area_id,
         blueprint_area: {
-          area: data,
+          area: json,
           id: id,
           title: title,
           description: title,
           link: link,
-          current_blueprint: blueprint
+          color: color
         }
       }
     end
-    let(:data) do
-      { x: 0.5, y: 0.6 }
-    end
+    let(:json) { "{\"geometry\":\"{}\",\"type\":\"Feature\"}" }
     let(:title) { Decidim::Faker::Localized.sentence(2) }
     let(:description) { Decidim::Faker::Localized.paragraph }
     let(:id) { nil }
     let(:link) { "#link" }
+    let(:color) { "#f0f" }
 
     before do
       request.env["decidim.current_organization"] = user.organization
@@ -48,16 +49,25 @@ module Decidim::NavigationMaps::Admin
         let!(:area) { create(:blueprint_area, blueprint: blueprint) }
 
         it "returns http success" do
-          get :show, params: { blueprint_id: blueprint.id, area_id: area.area_id }
+          get :show, params: attributes
           expect(response).to have_http_status(:success)
         end
       end
 
       context "when area does not exist" do
-        it "redirects to new" do
+        it "returns http success" do
           get :show, params: { blueprint_id: blueprint.id, area_id: 1111 }
           expect(response).to have_http_status(:success)
         end
+      end
+    end
+
+    describe "POST #create" do
+      let!(:area) { create(:blueprint_area, blueprint: blueprint) }
+
+      it "returns http success" do
+        post :create, params: attributes
+        expect(response).to have_http_status(:success)
       end
     end
 
@@ -65,7 +75,7 @@ module Decidim::NavigationMaps::Admin
       let!(:area) { create(:blueprint_area, blueprint: blueprint) }
 
       it "returns http success" do
-        post :update, params: { blueprint_id: blueprint.id, area_id: area.area_id }
+        post :update, params: attributes
         expect(response).to have_http_status(:success)
       end
     end

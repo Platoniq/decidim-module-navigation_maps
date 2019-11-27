@@ -23,6 +23,8 @@ en:
             success: Area saved successfully
       content_blocks:
         name: Navigation Maps
+        navigation_map:
+          view: Take part
         navigation_map_settings_form:
           add: Add
           blueprint_image: Blueprint image
