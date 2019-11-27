@@ -25,6 +25,17 @@
     .leaflet-container {
       background-color: #fafafa;
       border-color:#f4f4f4;
+      .navigation_map-info {
+        border-style: solid;
+        border-width: 3px;
+        border-radius: 10px;
+        .leaflet-popup-content-wrapper {
+          border-radius: 10px;
+        }
+        .leaflet-popup-tip {
+          border-width: 3px;
+        }
+      }
     }
     .leaflet-interactive {
       fill: "rgba(#{$leaflet-background-color}, 1)";

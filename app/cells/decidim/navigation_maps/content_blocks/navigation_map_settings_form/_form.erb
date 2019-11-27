@@ -30,17 +30,6 @@
 
       <%= content_tag(:div, "", id: "navigation_maps-map-#{form.ident}", class: "map", data: { id: form.ident, image: form.image.url, blueprint: form.blueprint }) %>
 
-      <table id="navigation_maps-table-<%= form.ident %>">
-        <thead>
-          <tr>
-            <th> <%= t(".id") %> </th>
-            <th> <%= t(".link") %></th>
-          </tr>
-        </thead>
-        <tbody id="navigation_maps-table-<%= form.ident %>-tbody">
-        </tbody>
-      </table>
-
     </div>
   </li>
   <% end %>

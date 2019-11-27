@@ -33,7 +33,6 @@ module Decidim
         private
 
         def parse_blueprints
-          # return if params[:image]
           return unless params[:blueprints]
 
           params[:blueprints].each do |_key, data|

@@ -22,6 +22,7 @@ function NavigationMapView(map_object, callback) {
   };
   self.image.src = self.image_path;
   this.clickAreaCallback = function () {};
+  this.setLayerPropertiesCallback = function () {};
 }
 
 NavigationMapView.prototype.createMap = function() {
@@ -62,26 +63,46 @@ NavigationMapView.prototype.createAreas = function() {
     new L.GeoJSON(geoarea, {
       onEachFeature: function(feature, layer) {
         layer._leaflet_id = id;
-
-        layer.on('mouseover', function(e) {
-          e.target.getElement().classList.add('selected')
-        });
-
-        layer.on('mouseout', function(e) {
-          e.target.getElement().classList.remove('selected')
-        });
-
-        layer.on('click', function(e) {
-          self.clickAreaCallback(e.target, self);
-        });
+        self.setLayerProperties(layer, geoarea);
+        self.attachEditorEvents(layer);
       }
     }).addTo(self.map);
+  });
+};
+
+NavigationMapView.prototype.setLayerProperties = function (layer, area) {
+  var props = area.properties;
+  if(props) {
+    if(props.color) {
+      layer.setStyle({fillColor: props.color, color: props.color});
+    }
+    this.setLayerPropertiesCallback(layer, props);
+  }
+};
+
+NavigationMapView.prototype.attachEditorEvents = function (layer) {
+  var self = this;
+
+  layer.on('mouseover', function(e) {
+    e.target.getElement().classList.add('selected')
+  });
+
+  layer.on('mouseout', function(e) {
+    e.target.getElement().classList.remove('selected')
+  });
+
+  layer.on('click', function(e) {
+    self.clickAreaCallback(e.target, self);
   });
 };
 
 // register callback to handle area clicks
 NavigationMapView.prototype.onClickArea = function(callback) {
   this.clickAreaCallback = callback;
+};
+
+NavigationMapView.prototype.onSetLayerProperties = function(callback) {
+  this.setLayerPropertiesCallback = callback;
 };
 
 NavigationMapView.prototype.forEachBlueprint = function (callback) {

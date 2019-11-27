@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    decidim-navigation_maps (0.19.0alpha)
+    decidim-navigation_maps (1.0)
       decidim-admin (>= 0.18.0)
       decidim-core (>= 0.18.0)
 

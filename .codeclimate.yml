@@ -60,7 +60,7 @@ plugins:
           categories: Style
 
         no-tabs:
-          pattern: "  "
+          pattern: "	"
           annotation: "Don't use hard tabs"
           severity: minor
           categories: Style

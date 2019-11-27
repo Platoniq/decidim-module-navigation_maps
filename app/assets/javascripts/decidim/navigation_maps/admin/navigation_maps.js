@@ -42,6 +42,9 @@ $(function() {
         if($input1.length) $input1.val(area_id);
         if($input2.length) $input2.val(a.type);
         if($input3.length) $input3.val(JSON.stringify(a));
+        $modal.find('ul[data-tabs=true]').each(function() {
+          new Foundation.Tabs($(this));
+        });
       });
     });
   });
@@ -56,6 +59,11 @@ $(function() {
     if(new_areas[responseText.detail[0].area]) {
       delete new_areas[responseText.detail[0].area]
     }
+    var blueprint_id = responseText.detail[0].blueprint_id;
+    var area_id = responseText.detail[0].area_id;
+    var area = responseText.detail[0].area;
+    editors[blueprint_id].setLayerProperties(editors[blueprint_id].map._layers[area_id], area);
+    editors[blueprint_id].blueprint[area_id] = area;
     $callout.contents('p').html(responseText.detail[0].message);
     $callout.addClass('success');
   });

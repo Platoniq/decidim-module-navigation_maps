@@ -16,6 +16,7 @@ module Decidim
           "y" => "coord y"
         }
       end
+      let(:area_type) { "Feature" }
       let(:area_id) { "101" }
       let(:title) { Decidim::Faker::Localized.sentence(2) }
       let(:description) { Decidim::Faker::Localized.paragraph }
@@ -34,6 +35,7 @@ module Decidim
 
         it "saves data correctly" do
           subject.area = area
+          subject.area_type = area_type
           subject.area_id = area_id
           subject.save
           subject.reload
@@ -41,6 +43,7 @@ module Decidim
           expect(subject.description).to eq(description)
           expect(subject.link).to eq(link)
           expect(subject.area_id).to eq(area_id)
+          expect(subject.area_type).to eq(area_type)
           expect(subject.area).to eq(area)
         end
       end
@@ -50,6 +53,7 @@ module Decidim
 
         it "save data without area" do
           subject.area = area
+          subject.area_type = area_type
           subject.area_id = area_id
           subject.save
           a = BlueprintArea.find(blueprint_area.id)
@@ -62,6 +66,7 @@ module Decidim
           expect(a.description).to eq(description)
           expect(a.link).to eq(link)
           expect(a.area_id).to eq(area_id)
+          expect(a.area_type).to eq(area_type)
           expect(a.area).to eq(area)
         end
       end

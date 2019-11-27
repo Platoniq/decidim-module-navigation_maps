@@ -1,0 +1,14 @@
+<style type="text/css">
+  <% blueprints.each do |blueprint| %>
+    <% next unless blueprint.areas %>
+    <% blueprint.areas.each do |area| %>
+    .map-info-<%= blueprint.id %>-<%= area.area_id %> {
+      border-color: <%= area.color %> !important;
+    }
+    .map-info-<%= blueprint.id %>-<%= area.area_id %> .leaflet-popup-tip {
+      border-color: <%= area.color %> !important;
+    }
+
+    <% end %>
+  <% end %>
+</style>
