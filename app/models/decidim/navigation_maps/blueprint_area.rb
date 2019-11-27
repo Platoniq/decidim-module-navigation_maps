@@ -15,7 +15,8 @@ module Decidim
           type: area_type,
           geometry: area,
           properties: {
-            link: link
+            link: link,
+            color: color
           }
         }
       end

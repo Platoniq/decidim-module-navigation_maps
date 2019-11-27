@@ -56,6 +56,11 @@ $(function() {
     if(new_areas[responseText.detail[0].area]) {
       delete new_areas[responseText.detail[0].area]
     }
+    var blueprint_id = responseText.detail[0].blueprint_id;
+    var area_id = responseText.detail[0].area_id;
+    var area = responseText.detail[0].area;
+    editors[blueprint_id].setLayerProperties(editors[blueprint_id].map._layers[area_id], area);
+    editors[blueprint_id].blueprint[area_id] = area;
     $callout.contents('p').html(responseText.detail[0].message);
     $callout.addClass('success');
   });

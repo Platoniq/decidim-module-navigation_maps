@@ -49,18 +49,6 @@ NavigationMapEditor.prototype.editing = function() {
   return pm.globalRemovalEnabled() || pm.globalDragModeEnabled() || pm.globalEditEnabled();
 };
 
-NavigationMapView.prototype.createAreas = function() {
-  var self = this;
-  self.forEachBlueprint(function(id, geoarea) {
-    new L.GeoJSON(geoarea, {
-      onEachFeature: function(feature, layer) {
-        layer._leaflet_id = id;
-        self.attachEditorEvents(layer);
-      }
-    }).addTo(self.map);
-  });
-};
-
 // register callback to handle area edits,removals and creations
 NavigationMapView.prototype.onCreateArea = function(callback) {
   this.createAreaCallback = callback;

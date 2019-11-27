@@ -26,8 +26,8 @@ module Decidim
           if form.remove
             destroy_blueprint!(form)
           else
-            delete_areas
             create_areas(form.blueprint) if form.blueprint
+            destroy_areas_except(form.blueprint.keys) if form.blueprint
             update_blueprint!(form)
           end
         end
@@ -56,18 +56,15 @@ module Decidim
         @blueprint.destroy! if form.id
       end
 
-      def delete_areas
-        @blueprint.areas.destroy_all
+      def destroy_areas_except(except)
+        @blueprint.areas.where.not(area_id: except).destroy_all
       end
 
       def create_areas(blueprint)
         blueprint.each do |key, area|
-          BlueprintArea.create!(
-            blueprint: @blueprint,
-            area: area[:geometry],
-            area_type: area[:type],
-            area_id: key
-          )
+          a = BlueprintArea.find_or_initialize_by(area_id: key, blueprint: @blueprint)
+          a.area = area[:geometry]
+          a.area_type = area[:type]
         end
       end
     end

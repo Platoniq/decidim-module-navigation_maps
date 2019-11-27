@@ -64,7 +64,8 @@ module Decidim
         end
         let(:properties) do
           {
-            link: "#link1"
+            link: "#link1",
+            color: "#f00"
           }
         end
 

@@ -22,6 +22,7 @@ FactoryBot.define do
     area_id { "1" }
     link { "#link" }
     link_type { "link" }
+    color { "#f00" }
     title { Decidim::Faker::Localized.word }
     description { generate_localized_title }
   end

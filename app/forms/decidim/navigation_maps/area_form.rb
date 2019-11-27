@@ -13,8 +13,17 @@ module Decidim
       attribute :area_type, String
       attribute :area_id, String
       attribute :link, String
+      attribute :color, String
       translatable_attribute :title, String
       translatable_attribute :description, String
+
+      def color
+        return "#2262cc" if super.blank?
+
+        return "#" + super unless super.match?(/^#/)
+
+        super
+      end
     end
   end
 end

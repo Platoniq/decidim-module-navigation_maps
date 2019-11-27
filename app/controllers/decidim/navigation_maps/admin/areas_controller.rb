@@ -24,7 +24,10 @@ module Decidim
 
           SaveArea.call(@form) do
             on(:ok) do |area|
-              render json: { message: I18n.t("navigation_maps.admin.areas.create.success", scope: "decidim"), area: area.area_id, blueprint: area.blueprint.id }
+              render json: { message: I18n.t("navigation_maps.admin.areas.create.success", scope: "decidim"),
+                             area_id: area.area_id,
+                             blueprint_id: area.blueprint.id,
+                             area: area.to_geoson }
             end
 
             on(:invalid) do |message|
@@ -42,7 +45,10 @@ module Decidim
 
           SaveArea.call(@form) do
             on(:ok) do |area|
-              render json: { message: I18n.t("navigation_maps.admin.areas.update.success", scope: "decidim"), area: area.area_id, blueprint: area.blueprint.id }
+              render json: { message: I18n.t("navigation_maps.admin.areas.update.success", scope: "decidim"),
+                             area_id: area.area_id,
+                             blueprint_id: area.blueprint.id,
+                             area: area.to_geoson }
             end
 
             on(:invalid) do |message|

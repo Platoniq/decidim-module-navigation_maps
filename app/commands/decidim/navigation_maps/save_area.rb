@@ -37,6 +37,7 @@ module Decidim
 
       def update_area
         @area.link = form.link
+        @area.color = form.color if form.color
         @area.area_id = form.area_id if form.area_id
         @area.area = form.area if form.area
         @area.area_type = form.area_type if form.area_type
