@@ -42,6 +42,9 @@ $(function() {
         if($input1.length) $input1.val(area_id);
         if($input2.length) $input2.val(a.type);
         if($input3.length) $input3.val(JSON.stringify(a));
+        $modal.find('ul[data-tabs=true]').each(function() {
+          new Foundation.Tabs($(this));
+        });
       });
     });
   });
