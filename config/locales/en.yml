@@ -17,6 +17,7 @@ en:
           show:
             area: Area details
             cancel: Cancel
+            link_suggestions: 'Tip: use %{map} to link other tabs'
             save: Save
           update:
             error: An error ocurred while saving the area

@@ -5,6 +5,7 @@ module Decidim
     module Admin
       class AreasController < ::Decidim::NavigationMaps::Admin::ApplicationController
         layout false
+        helper_method :link_suggestions
 
         before_action do
           enforce_permission_to :update, :organization, organization: current_organization
@@ -59,6 +60,15 @@ module Decidim
 
         private
 
+        def link_suggestions
+          return if blueprints_count.zero?
+
+          maps = blueprints_count.times.collect do |n|
+            "<a href=\"#{n}\" onclick=\"document.getElementById('blueprint_area_link').value='#map#{n}';return false;\">#map#{n}</a>"
+          end
+          t("link_suggestions", scope: "decidim.navigation_maps.admin.areas.show", map: maps.join(",")).html_safe
+        end
+
         def parse_areas
           return unless params[:blueprint_area]
           return if params[:blueprint_area][:area].blank?
@@ -74,6 +84,10 @@ module Decidim
 
         def area
           @area ||= BlueprintArea.find_by(area_id: params[:area_id], blueprint: blueprint)
+        end
+
+        def blueprints_count
+          @blueprints_count ||= Blueprint.where(organization: current_organization).count
         end
       end
     end
