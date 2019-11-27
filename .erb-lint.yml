@@ -15,6 +15,7 @@ linters:
     allowed_types:
       - text/javascript
       - text/template
+      - text/x-jsrender
 
   Rubocop:
     enabled: true
