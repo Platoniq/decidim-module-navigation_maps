@@ -36,10 +36,11 @@ module Decidim
       end
 
       def update_area
+        @area.link_type = link_type
         @area.link = form.link
-        @area.title = form.title if form.title
-        @area.description = form.description if form.description
-        @area.color = form.color if form.color
+        @area.title = form.title unless form.no_popup
+        @area.description = form.description unless form.no_popup
+        @area.color = form.color
         @area.area_id = form.area_id if form.area_id
         @area.area = form.area if form.area
         @area.area_type = form.area_type if form.area_type
@@ -47,6 +48,10 @@ module Decidim
 
       def save_area!
         @area.save!
+      end
+
+      def link_type
+        form.no_popup ? "direct" : "link"
       end
     end
   end

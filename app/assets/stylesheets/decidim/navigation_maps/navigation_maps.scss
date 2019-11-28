@@ -21,6 +21,9 @@
     }
     .map {
       height: 475px;
+      @media (max-width: 480px) {
+        height: 240px;
+      }
     }
     .leaflet-container {
       background-color: #fafafa;

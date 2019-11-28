@@ -13,9 +13,17 @@ module Decidim
       attribute :area_type, String
       attribute :area_id, String
       attribute :link, String
+      attribute :link_type, String
+      attribute :no_popup, String
       attribute :color, String
       translatable_attribute :title, String
       translatable_attribute :description, String
+
+      def no_popup
+        return link_type == "direct" unless super
+
+        super.to_i.nonzero?
+      end
 
       def color
         return "#2262cc" if super.blank?

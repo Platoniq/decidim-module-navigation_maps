@@ -7,6 +7,8 @@ en:
     navigation_maps:
       admin:
         areas:
+          form:
+            no_popup: Do not use a popup, link the area directly.
           create:
             error: An error ocurred while creating the area
             success: Area created successfully

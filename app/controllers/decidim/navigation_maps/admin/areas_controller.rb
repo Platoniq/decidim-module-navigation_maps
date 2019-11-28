@@ -43,7 +43,6 @@ module Decidim
 
         def update
           @form = form(AreaForm).from_params(params, current_blueprint: blueprint)
-
           SaveArea.call(@form) do
             on(:ok) do |area|
               render json: { message: I18n.t("navigation_maps.admin.areas.update.success", scope: "decidim"),
@@ -64,7 +63,7 @@ module Decidim
           return if blueprints_count.zero?
 
           maps = blueprints_count.times.collect do |n|
-            "<a href=\"#{n}\" onclick=\"document.getElementById('blueprint_area_link').value='#map#{n}';return false;\">#map#{n}</a>"
+            "<a href=\"#map#{n}\">#map#{n}</a>"
           end
           t("link_suggestions", scope: "decidim.navigation_maps.admin.areas.show", map: maps.join(",")).html_safe
         end

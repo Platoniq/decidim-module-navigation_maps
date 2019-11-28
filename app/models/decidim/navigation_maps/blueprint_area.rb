@@ -10,6 +10,8 @@ module Decidim
 
       belongs_to :blueprint, foreign_key: :decidim_navigation_maps_blueprint_id, class_name: "Decidim::NavigationMaps::Blueprint"
 
+      attribute :link_type, :string, default: "link"
+
       validates :blueprint, presence: true
 
       def to_geoson
@@ -18,6 +20,7 @@ module Decidim
           geometry: area,
           properties: {
             link: link,
+            popup: link_type == "direct",
             color: color,
             title: translated_attribute(title),
             description: translated_attribute(description)

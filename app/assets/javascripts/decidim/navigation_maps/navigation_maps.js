@@ -16,7 +16,7 @@ $(function() {
     var id = $(this).data('id');
     maps[id] = new NavigationMapView(this);
     maps[id].onSetLayerProperties(function(layer, props) {
-      if(props.title) {
+      if(!props.popup) {
         var node = document.createElement("div");
         var html = tmpl.render(props);
         $(node).html(html);
@@ -30,11 +30,11 @@ $(function() {
           className: `navigation_map-info map-info-${id}-${layer._leaflet_id}`
         });
       }
-
     });
-    // maps[id].onClickArea(function(area) {
-      // if(area.feature.properties && area.feature.properties.link) location = area.feature.properties.link;
-    // });
+    maps[id].onClickArea(function(area) {
+      var popup = area.feature.properties && area.feature.properties.link && area.feature.properties.popup;
+      if(popup) location = area.feature.properties.link;
+    });
   });
 
   $tabs.on('change.zf.tabs', function(e, $tab, $content) {

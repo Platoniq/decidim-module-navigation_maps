@@ -1,9 +1,39 @@
 <div class="field">
-  <%= form.translated :text_field, :title, autofocus: true %>
-  <%= form.translated :text_area, :description %>
-  <%= form.text_field :link %>
+  <%= form.translated :text_field, :title, autofocus: true, class: "navigation_maps-area-direct" %>
+  <%= form.translated :text_area, :description, class: "navigation_maps-area-direct" %>
 
-  <p class="help-text"><%= link_suggestions %></p>
+  <%= form.text_field :link %>
+  <p class="help-text" id="blueprint_area_link-help"><%= link_suggestions %></p>
 
   <%= form.color_field :color %>
+
+  <%= form.check_box :no_popup, label: t(".no_popup") %>
 </div>
+
+<script type="text/javascript">
+
+(function() {
+  var area_link = document.getElementById('blueprint_area_link');
+  var help = document.getElementById('blueprint_area_link-help');
+  var direct = document.getElementById('blueprint_area_no_popup');
+  var direct_elements = document.getElementsByClassName('navigation_maps-area-direct');
+
+  for(var a of help.getElementsByTagName('a')) {
+    a.addEventListener("click", function(e) {
+      area_link.value = e.target.hash;
+      e.preventDefault();
+    });
+  }
+
+  function changeDirects(checked) {
+    for(var input of direct_elements) {
+      input.disabled = checked;
+    }
+  }
+  changeDirects(direct.checked);
+  direct.addEventListener('change', function(e) {
+    changeDirects(e.target.checked);
+  });
+})();
+
+</script>
