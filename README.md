@@ -130,5 +130,7 @@ This engine is distributed under the GNU AFFERO GENERAL PUBLIC LICENSE.
 ## Credits
 
 This plugin has been developed by ![Platoniq](examples/platoniq-logo.png)
-thanks to the project [Open Heritage](https://openheritage.eu/)
-and the Barcelona City Council ([Innovació Democràtica 2019](https://ajuntament.barcelona.cat/sites/default/files/bopb_17.07.2019-_anunci_ajuntament_de_barcelona_de_resolucio_definitiva_de_convocatoria_gral._subvencions_2019.pdf))
+
+> Amb el suport de l'Ajuntament de Barcelona - Direcció de Serveis d'Innovació Democràtica
+>
+> ![Logo Barcelona](examples/bcn-logo.png)
