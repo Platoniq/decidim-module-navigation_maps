@@ -32,6 +32,16 @@ module Decidim::NavigationMaps::Admin
       end
     end
 
+    describe "GET #show" do
+      let!(:blueprint) { create(:blueprint, organization: organization) }
+
+      it "returns http success" do
+        get :show, params: { id: blueprint.id }
+        expect(response).to have_http_status(:success)
+        expect(JSON.parse(response.body)["id"]).to eq(blueprint.id)
+      end
+    end
+
     describe "POST #create" do
       it "returns http success" do
         post :create

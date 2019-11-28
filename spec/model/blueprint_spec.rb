@@ -49,6 +49,7 @@ module Decidim
               geometry: data,
               properties: {
                 link: "#link",
+                popup: false,
                 color: "#f00",
                 title: title[:en],
                 description: description[:en]
@@ -59,6 +60,7 @@ module Decidim
               geometry: data,
               properties: {
                 link: "#another_link",
+                popup: false,
                 color: "#f0f",
                 title: title[:en],
                 description: description[:en]
@@ -88,9 +90,9 @@ module Decidim
         end
 
         it "blueprint contains areas" do
-          expect(blueprint.areas).to include(area1)
-          expect(blueprint.areas).to include(area2)
-          expect(blueprint.areas).not_to include(area3)
+          expect(subject.areas).to include(area1)
+          expect(subject.areas).to include(area2)
+          expect(subject.areas).not_to include(area3)
         end
 
         it "compacts json areas in a single object" do
@@ -100,7 +102,7 @@ module Decidim
           area2.area = data
           area2.area_id = "102"
           area2.save
-          expect(blueprint.blueprint).to eq(blueprint_object)
+          expect(subject.blueprint).to eq(blueprint_object)
         end
       end
     end

@@ -16,6 +16,7 @@ module Decidim::NavigationMaps
       {
         area: data,
         area_id: area_id,
+        no_popup: no_popup,
         title: title,
         description: title,
         link: link,
@@ -28,6 +29,7 @@ module Decidim::NavigationMaps
     let(:title) { Decidim::Faker::Localized.sentence(2) }
     let(:description) { Decidim::Faker::Localized.paragraph }
     let(:area_id) { nil }
+    let(:no_popup) { "0" }
     let(:link) { "#link" }
 
     before do
@@ -60,6 +62,18 @@ module Decidim::NavigationMaps
     context "when id does not exist" do
       let(:blueprint_area) { build(:blueprint_area, id: id, blueprint: blueprint) }
       let(:id) { 11_101 }
+
+      it "broadcasts ok" do
+        expect { subject.call }.to broadcast(:ok)
+      end
+
+      it "creates the area" do
+        expect { subject.call }.to change(BlueprintArea, :count).by(1)
+      end
+    end
+
+    context "when no popup wanted" do
+      let(:no_popup) { "1" }
 
       it "broadcasts ok" do
         expect { subject.call }.to broadcast(:ok)
