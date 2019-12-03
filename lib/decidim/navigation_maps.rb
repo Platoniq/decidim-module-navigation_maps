@@ -3,7 +3,6 @@
 require "decidim/navigation_maps/admin"
 require "decidim/navigation_maps/engine"
 require "decidim/navigation_maps/admin_engine"
-require "decidim/navigation_maps/component"
 
 module Decidim
   # This namespace holds the logic of the `NavigationMaps` component. This component
