@@ -9,12 +9,6 @@ module Decidim
     class Engine < ::Rails::Engine
       isolate_namespace Decidim::NavigationMaps
 
-      routes do
-        # Add engine routes here
-        # resources :navigation_maps
-        # root to: "navigation_maps#index"
-      end
-
       initializer "decidim_navigation_maps.assets" do |app|
         app.config.assets.precompile += %w(decidim_navigation_maps_manifest.js decidim_navigation_maps_manifest.css)
       end
@@ -24,10 +18,9 @@ module Decidim
           content_block.cell = "decidim/navigation_maps/content_blocks/navigation_map"
           content_block.public_name_key = "decidim.navigation_maps.content_blocks.name"
           content_block.settings_form_cell = "decidim/navigation_maps/content_blocks/navigation_map_settings_form"
-          # Todo find a way to show settings
+
           content_block.settings do |settings|
-            settings.attribute :dummy_variable,
-                               type: :integer
+            settings.attribute :title, type: :text, translated: true
           end
         end
       end

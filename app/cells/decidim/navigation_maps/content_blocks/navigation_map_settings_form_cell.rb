@@ -5,6 +5,7 @@ module Decidim
     module ContentBlocks
       class NavigationMapSettingsFormCell < Decidim::ViewModel
         include NavigationMaps::NavigationMapCellHelpers
+        alias form model
 
         view_paths << "#{Decidim::NavigationMaps::Engine.root}/app/cells/decidim/navigation_maps/content_blocks/navigation_map_settings_form"
 
@@ -16,6 +17,14 @@ module Decidim
         # it should come from the Engine Routes
         def blueprints_path
           "/admin/navigation_maps/blueprints"
+        end
+
+        def content_block
+          options[:content_block]
+        end
+
+        def label
+          I18n.t("decidim.content_blocks.html.html_content")
         end
       end
     end

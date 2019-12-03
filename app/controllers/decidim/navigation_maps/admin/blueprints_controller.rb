@@ -17,6 +17,7 @@ module Decidim
         end
 
         def create
+          save_settings
           parse_blueprints
           @form = form(BlueprintForms).from_params(params).with_context(current_organization: current_organization)
           SaveBlueprints.call(@form) do
@@ -32,6 +33,20 @@ module Decidim
 
         private
 
+        # Manually save original settings if the settings array is present
+        def save_settings
+          return unless params[:content_block]
+          return unless params[:content_block][:settings]
+
+          @form = form(Decidim::Admin::ContentBlockForm).from_params(params)
+          Decidim::Admin::UpdateContentBlock.call(@form, content_block, :homepage)
+        end
+
+        def content_block
+          @content_block ||= Decidim::ContentBlock.for_scope(:homepage, organization: current_organization).find_by(manifest_name: :navigation_map)
+        end
+
+        # Convert blueprint data to an object
         def parse_blueprints
           return unless params[:blueprints]
 

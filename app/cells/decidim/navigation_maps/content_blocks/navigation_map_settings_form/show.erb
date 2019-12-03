@@ -1,3 +1,7 @@
+<!-- Original settings -->
+<% form.fields_for :settings, form.object.settings do |settings_fields| %>
+  <%= settings_fields.translated :text_field, :title %>
+<% end %>
 
 <!-- Override rails default patch (using post via ajax) -->
 <%= hidden_field_tag :_method, "post" %>
