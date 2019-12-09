@@ -25,7 +25,7 @@ $(function() {
           maxHeight: 400,
           // autoPan: false,
           maxWidth: 640,
-          minWidth: 500,
+          minWidth: 200,
           keepInView: true,
           className: `navigation_map-info map-info-${id}-${layer._leaflet_id}`
         });

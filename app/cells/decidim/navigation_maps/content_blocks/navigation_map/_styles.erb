@@ -8,6 +8,10 @@
     .map-info-<%= blueprint.id %>-<%= area.area_id %> .leaflet-popup-tip {
       border-color: <%= area.color %> !important;
     }
+    .map-info-<%= blueprint.id %>-<%= area.area_id %> .button {
+      background-color: <%= area.color %>;
+      color: #fff;
+    }
 
     <% end %>
   <% end %>
