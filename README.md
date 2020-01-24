@@ -13,6 +13,8 @@ Allows to map processes to image parts using maps.
 NavigationMaps is available as a Content Block widget (currently for the
 homepage only).
 
+👉 [Check the usage guide here!](USAGE.md)
+
 ![Admin editor](examples/admin.gif)
 
 ## Installation
