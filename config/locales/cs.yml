@@ -2,44 +2,44 @@ cs:
   decidim:
     components:
       navigation_maps:
-        name: NavigationMaps
+        name: Navigační Mapy
     navigation_maps:
       admin:
         areas:
           create:
-            error: An error ocurred while creating the area
-            success: Area created successfully
+            error: Došlo k chybě při vytváření oblasti
+            success: Oblast byla úspěšně vytvořena
           form:
-            no_popup: Do not use a popup, link the area directly.
+            no_popup: Nepoužívejte vyskakovací okno, odkazujte přímo na oblast.
           new:
-            area: New area details
-            cancel: Cancel
-            save: Save
+            area: Detaily nové oblasti
+            cancel: Zrušit
+            save: Uložit
           show:
-            area: Area details
-            cancel: Cancel
-            link_suggestions: 'Tip: use %{map} to link other tabs'
-            save: Save
+            area: Detaily oblasti
+            cancel: Zrušit
+            link_suggestions: 'Tip: použijte %{map} pro propojení dalších karet'
+            save: Uložit
           update:
-            error: An error ocurred while saving the area
-            success: Area saved successfully
+            error: Došlo k chybě při ukládání oblasti
+            success: Oblast úspěšně uložena
       content_blocks:
-        name: Navigation Maps
+        name: Navigační Mapy
         navigation_map:
-          view: Take part
+          view: Zapojte se
         navigation_map_settings_form:
-          add: Add
-          blueprint_image: Blueprint image
-          description: Description
-          editor: Map Editor
+          add: Přidat
+          blueprint_image: Obrázek plánu
+          description: Popis
+          editor: Editor mapy
           id: Id
-          image_missing: Please add a blueprint image to start
-          info: General info
-          link: Link
-          remove_blueprint: Delete this blueprint
-          title: Title
-          type: Type
-          upload_image: Upload image
+          image_missing: Pro začátek přidejte obrázek plánu
+          info: Obecné informace
+          link: Odkaz
+          remove_blueprint: Smazat tento plán
+          title: Název
+          type: Typ
+          upload_image: Nahrát obrázek
       create:
-        error: Error creating blueprint
-        success: Blueprint created successfully
+        error: Chyba při vytváření plánu
+        success: Plán byl úspěšně vytvořen
