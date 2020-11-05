@@ -14,7 +14,7 @@ module Decidim
 
       validates :organization, presence: true
       validates :image,
-                file_size: { less_than_or_equal_to: ->(_record) { Decidim.maximum_attachment_size } },
+                file_size: { less_than_or_equal_to: ->(record) { Decidim.organization_settings(record.organization).upload_maximum_file_size } },
                 file_content_type: { allow: ["image/jpeg", "image/png", "image/svg+xml"] }
 
       mount_uploader :image, Decidim::NavigationMaps::BlueprintUploader
