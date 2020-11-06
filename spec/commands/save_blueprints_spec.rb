@@ -74,6 +74,10 @@ module Decidim::NavigationMaps
       it "creates all the blueprints" do
         expect { subject.call }.to change(Blueprint, :count).by(2)
       end
+
+      it "creates all blueprints belonging to content block" do
+        expect { subject.call }.to change(Blueprint.where(content_block: content_block), :count).by(2)
+      end
     end
 
     context "when one form is invalid" do
