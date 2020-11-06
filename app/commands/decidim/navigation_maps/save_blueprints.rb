@@ -2,7 +2,8 @@
 
 module Decidim
   module NavigationMaps
-    # This command creates or updates the blueprints for the organization.
+    # This command creates or updates the blueprints for the organization and
+    # content block.
     class SaveBlueprints < Rectify::Command
       # Creates a blueprint.
       #
@@ -42,6 +43,7 @@ module Decidim
       def initialize_blueprint(form)
         @blueprint = Blueprint.find_or_initialize_by(id: form.id) do |blueprint|
           blueprint.organization = @forms.current_organization
+          blueprint.content_block = content_block
         end
       end
 
@@ -58,6 +60,10 @@ module Decidim
 
       def destroy_areas_except(except)
         @blueprint.areas.where.not(area_id: except).destroy_all
+      end
+
+      def content_block
+        Decidim::ContentBlock.where(organization: @forms.current_organization, manifest_name: :navigation_map).find_by(id: @forms.content_block_id)
       end
 
       def create_areas(blueprint)
