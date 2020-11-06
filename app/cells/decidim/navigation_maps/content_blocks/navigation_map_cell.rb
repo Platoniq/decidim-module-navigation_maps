@@ -7,6 +7,8 @@ module Decidim
         include NavigationMaps::NavigationMapCellHelpers
         include Decidim::SanitizeHelper
 
+        alias content_block model
+
         view_paths << "#{Decidim::NavigationMaps::Engine.root}/app/cells/decidim/navigation_maps/content_blocks/navigation_map"
 
         def show

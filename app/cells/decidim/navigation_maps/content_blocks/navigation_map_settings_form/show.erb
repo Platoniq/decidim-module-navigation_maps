@@ -6,6 +6,7 @@
 <!-- Override rails default patch (using post via ajax) -->
 <%= hidden_field_tag :_method, "post" %>
 <%= hidden_field_tag :action, blueprints_path %>
+<%= hidden_field_tag :content_block_id, content_block.id %>
 
 <div class="navigation_maps admin">
   <div class="callout" style="display:none" data-closable>
