@@ -7,11 +7,14 @@ module Decidim::NavigationMaps
     subject { described_class.new(forms) }
 
     let(:organization) { create :organization }
+    let(:content_block) { create :content_block, organization: organization, manifest_name: :navigation_map, scope_name: :homepage }
+
     let(:forms) do
       instance_double(
         BlueprintForms,
         blueprints: blueprints,
-        current_organization: organization
+        current_organization: organization,
+        content_block_id: content_block.id
       )
     end
     let(:blueprints) { [form1, form2] }

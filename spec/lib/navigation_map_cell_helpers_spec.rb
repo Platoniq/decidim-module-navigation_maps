@@ -8,18 +8,20 @@ module Decidim::NavigationMaps
       Class.new do
         include NavigationMapCellHelpers
 
-        def initialize(organization)
+        def initialize(organization, content_block)
           @current_organization = organization
+          @content_block = content_block
         end
 
-        attr_accessor :current_organization
+        attr_accessor :current_organization, :content_block
       end
     end
 
-    let(:instance) { klass.new(organization) }
+    let(:instance) { klass.new(organization, content_block) }
     let(:organization) { create :organization }
-    let!(:blueprint1) { create(:blueprint, organization: organization, created_at: Time.current.beginning_of_day + 1.minute) }
-    let!(:blueprint2) { create(:blueprint, image: nil, organization: organization, created_at: Time.current.beginning_of_day) }
+    let(:content_block) { create :content_block, organization: organization, manifest_name: :navigation_map, scope_name: :homepage }
+    let!(:blueprint1) { create(:blueprint, organization: organization, created_at: Time.current.beginning_of_day + 1.minute, content_block: content_block) }
+    let!(:blueprint2) { create(:blueprint, image: nil, organization: organization, created_at: Time.current.beginning_of_day, content_block: content_block) }
 
     describe "#valid_blueprints" do
       it "returns one blueprint" do
