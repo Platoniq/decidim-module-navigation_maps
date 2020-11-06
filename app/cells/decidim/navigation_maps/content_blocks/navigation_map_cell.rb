@@ -18,6 +18,24 @@ module Decidim
         def translated_title
           translated_attribute(model.settings.title)
         end
+
+        def section_classes
+          "extended home-section"
+        end
+
+        def wrapper_classes
+          "wrapper-home"
+        end
+
+        def row_classes
+          "row column text-center"
+        end
+
+        def class_tag(class_string)
+          return if class_string.blank?
+
+          " class=\"#{class_string}\""
+        end
       end
     end
   end

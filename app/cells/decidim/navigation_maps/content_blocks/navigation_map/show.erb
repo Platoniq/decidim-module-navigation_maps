@@ -1,14 +1,11 @@
 <%= stylesheet_link_tag "decidim/navigation_maps/navigation_maps" %>
 <%= render partial: "styles", locals: { blueprints: valid_blueprints } %>
 
-<section class="extended home-section">
-  <div class="wrapper-home">
-    <div class="row column text-center">
+<section<%= class_tag(section_classes) %>>
+  <div<%= class_tag(wrapper_classes) %>>
+    <div<%= class_tag(row_classes) %>>
 
-      <% if translated_title.present? %>
-        <h3 class="heading3"><%= decidim_sanitize translated_title %></h3>
-      <% end %>
-
+      <%= render :title %>
       <div class="navigation_maps">
         <%= render partial: "tabs", locals: { tabs: valid_blueprints } %>
         <%= render partial: "tabs_content", locals: { tabs: valid_blueprints } %>
