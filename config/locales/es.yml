@@ -7,22 +7,22 @@ es:
       admin:
         areas:
           create:
-            error: An error ocurred while creating the area
-            success: Area created successfully
+            error: Se ha producido un error al crear el área
+            success: Área creada correctamente
           form:
-            no_popup: Do not use a popup, link the area directly.
+            no_popup: No utilizar un popup, enlazar el área directamente.
           new:
-            area: New area details
-            cancel: Cancel
-            save: Save
+            area: Detalles de la nueva área
+            cancel: Cancelar
+            save: Guardar
           show:
-            area: Area details
-            cancel: Cancel
-            link_suggestions: 'Tip: use %{map} to link other tabs'
-            save: Save
+            area: Detalles del área
+            cancel: Cancelar
+            link_suggestions: 'Truco: usa %{map} para enlazar otras pestañas'
+            save: Guardar
           update:
-            error: An error ocurred while saving the area
-            success: Area saved successfully
+            error: Se ha producido un error al guardar el área
+            success: Área guardada correctamente
       content_blocks:
         name: Navigation Maps
         navigation_map:
