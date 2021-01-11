@@ -13,8 +13,10 @@
     "globals": {
         "$": false,
         "jQuery": false,
-        "TimerApi": false,
-        "ActivityUI": false
+        "NavigationMapView": false,
+        "NavigationMapEditor": false,
+        "L": false,
+        "Foundation": false
     },
     "rules": {
     }
