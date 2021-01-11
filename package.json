@@ -1,6 +1,6 @@
 {
   "name": "decidim-module-navigation_maps",
-  "version": "1.0",
+  "version": "1.0.0",
   "description": "A Blueprint/Map navigation for Decidim",
   "scripts": {
     "lint": "eslint -c .eslintrc.json --ext .js,.js.es6 app/assets"
