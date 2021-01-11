@@ -24,22 +24,22 @@ es:
             error: Se ha producido un error al guardar el área
             success: Área guardada correctamente
       content_blocks:
-        name: Navigation Maps
+        name: Mapas interactivos
         navigation_map:
-          view: Take part
+          view: Participar
         navigation_map_settings_form:
-          add: Add
-          blueprint_image: Blueprint image
-          description: Description
-          editor: Map Editor
+          add: Añadir
+          blueprint_image: Imagen del plano
+          description: Descripción
+          editor: Editor de Mapa
           id: Id
-          image_missing: Please add a blueprint image to start
-          info: General info
-          link: Link
-          remove_blueprint: Delete this blueprint
-          title: Title
-          type: Type
-          upload_image: Upload image
+          image_missing: Por favor, añade una imagen del plano para empezar
+          info: Información general
+          link: Enlace
+          remove_blueprint: Eliminar este plano
+          title: Título
+          type: Tipo
+          upload_image: Subir imagen
       create:
-        error: Error creating blueprint
-        success: Blueprint created successfully
+        error: Error al crear el plano
+        success: Plano creado correctamente
