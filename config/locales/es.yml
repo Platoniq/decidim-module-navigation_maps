@@ -1,0 +1,45 @@
+es:
+  decidim:
+    components:
+      navigation_maps:
+        name: NavigationMaps
+    navigation_maps:
+      admin:
+        areas:
+          create:
+            error: Se ha producido un error al crear el área
+            success: Área creada correctamente
+          form:
+            no_popup: No utilizar un popup, enlazar el área directamente.
+          new:
+            area: Detalles de la nueva área
+            cancel: Cancelar
+            save: Guardar
+          show:
+            area: Detalles del área
+            cancel: Cancelar
+            link_suggestions: 'Truco: usa %{map} para enlazar otras pestañas'
+            save: Guardar
+          update:
+            error: Se ha producido un error al guardar el área
+            success: Área guardada correctamente
+      content_blocks:
+        name: Navigation Maps
+        navigation_map:
+          view: Take part
+        navigation_map_settings_form:
+          add: Add
+          blueprint_image: Blueprint image
+          description: Description
+          editor: Map Editor
+          id: Id
+          image_missing: Please add a blueprint image to start
+          info: General info
+          link: Link
+          remove_blueprint: Delete this blueprint
+          title: Title
+          type: Type
+          upload_image: Upload image
+      create:
+        error: Error creating blueprint
+        success: Blueprint created successfully

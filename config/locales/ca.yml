@@ -1,0 +1,45 @@
+ca:
+  decidim:
+    components:
+      navigation_maps:
+        name: NavigationMaps
+    navigation_maps:
+      admin:
+        areas:
+          create:
+            error: Ha ocorregut un error creant l'àrea
+            success: Àrea creada correctament
+          form:
+            no_popup: Sense pop-up, enllaça l'àrea directament.
+          new:
+            area: Detalls de la nova àrea
+            cancel: Cancel·la
+            save: Desa
+          show:
+            area: Detalls de l'àrea
+            cancel: Cancel·la
+            link_suggestions: 'Truc: usa %{map} per enllaçar altres pestanyes'
+            save: Desa
+          update:
+            error: Ha ocorregut un error desant l'àrea
+            success: Àrea desada correctament
+      content_blocks:
+        name: Mapa interactiu
+        navigation_map:
+          view: Participa
+        navigation_map_settings_form:
+          add: Afegeix
+          blueprint_image: Imatge del plànol
+          description: Descripció
+          editor: Editor del mapa
+          id: Id
+          image_missing: Si us plau, afegeix una imatge del plànol per començar
+          info: Informació general
+          link: Enllaç
+          remove_blueprint: Elimina el plànol
+          title: Títol
+          type: Tipus
+          upload_image: Puja una imatge
+      create:
+        error: S'ha produït un error en crear el plànol
+        success: Plànol creat correctament
