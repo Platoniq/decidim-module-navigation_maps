@@ -2,7 +2,7 @@
 
 ![Test](https://github.com/Platoniq/decidim-module-navigation_maps/workflows/Test/badge.svg)
 [![Maintainability](https://api.codeclimate.com/v1/badges/f69b2b0ab0ffcd26f002/maintainability)](https://codeclimate.com/github/Platoniq/decidim-module-navigation_maps/maintainability)
-[![Test Coverage](https://api.codeclimate.com/v1/badges/f69b2b0ab0ffcd26f002/test_coverage)](https://codeclimate.com/github/Platoniq/decidim-module-navigation_maps/test_coverage)
+[![Codecov](https://codecov.io/gh/Platoniq/decidim-module-navigation_maps/branch/master/graph/badge.svg?token=XhzWO0IiWt)](https://codecov.io/gh/Platoniq/decidim-module-navigation_maps)
 
 Allows to map processes to image parts using maps.
 
