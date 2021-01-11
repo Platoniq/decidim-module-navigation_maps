@@ -1,0 +1,45 @@
+cs:
+  decidim:
+    components:
+      navigation_maps:
+        name: Navigační Mapy
+    navigation_maps:
+      admin:
+        areas:
+          create:
+            error: Došlo k chybě při vytváření oblasti
+            success: Oblast byla úspěšně vytvořena
+          form:
+            no_popup: Nepoužívejte vyskakovací okno, odkazujte přímo na oblast.
+          new:
+            area: Detaily nové oblasti
+            cancel: Zrušit
+            save: Uložit
+          show:
+            area: Detaily oblasti
+            cancel: Zrušit
+            link_suggestions: 'Tip: použijte %{map} pro propojení dalších karet'
+            save: Uložit
+          update:
+            error: Došlo k chybě při ukládání oblasti
+            success: Oblast úspěšně uložena
+      content_blocks:
+        name: Navigační Mapy
+        navigation_map:
+          view: Zapojte se
+        navigation_map_settings_form:
+          add: Přidat
+          blueprint_image: Obrázek plánu
+          description: Popis
+          editor: Editor mapy
+          id: Id
+          image_missing: Pro začátek přidejte obrázek plánu
+          info: Obecné informace
+          link: Odkaz
+          remove_blueprint: Smazat tento plán
+          title: Název
+          type: Typ
+          upload_image: Nahrát obrázek
+      create:
+        error: Chyba při vytváření plánu
+        success: Plán byl úspěšně vytvořen
