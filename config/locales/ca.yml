@@ -7,39 +7,39 @@ ca:
       admin:
         areas:
           create:
-            error: An error ocurred while creating the area
-            success: Area created successfully
+            error: Ha ocorregut un error creant l'àrea
+            success: Àrea creada correctament
           form:
-            no_popup: Do not use a popup, link the area directly.
+            no_popup: Sense pop-up, enllaça l'àrea directament.
           new:
-            area: New area details
-            cancel: Cancel
-            save: Save
+            area: Detalls de la nova àrea
+            cancel: Cancel·la
+            save: Desa
           show:
-            area: Area details
-            cancel: Cancel
-            link_suggestions: 'Tip: use %{map} to link other tabs'
-            save: Save
+            area: Detalls de l'àrea
+            cancel: Cancel·la
+            link_suggestions: 'Truc: usa %{map} per enllaçar altres pestanyes'
+            save: Desa
           update:
-            error: An error ocurred while saving the area
-            success: Area saved successfully
+            error: Ha ocorregut un error desant l'àrea
+            success: Àrea desada correctament
       content_blocks:
-        name: Navigation Maps
+        name: Mapa interactiu
         navigation_map:
-          view: Take part
+          view: Participa
         navigation_map_settings_form:
-          add: Add
-          blueprint_image: Blueprint image
-          description: Description
-          editor: Map Editor
+          add: Afegeix
+          blueprint_image: Imatge del plànol
+          description: Descripció
+          editor: Editor del mapa
           id: Id
-          image_missing: Please add a blueprint image to start
-          info: General info
-          link: Link
-          remove_blueprint: Delete this blueprint
-          title: Title
-          type: Type
-          upload_image: Upload image
+          image_missing: Si us plau, afegeix una imatge del plànol per començar
+          info: Informació general
+          link: Enllaç
+          remove_blueprint: Elimina el plànol
+          title: Títol
+          type: Tipus
+          upload_image: Puja una imatge
       create:
-        error: Error creating blueprint
-        success: Blueprint created successfully
+        error: S'ha produït un error en crear el plànol
+        success: Plànol creat correctament
