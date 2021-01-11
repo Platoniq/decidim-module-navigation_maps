@@ -4,7 +4,6 @@
 //= require jsrender.min
 //= require_self
 
-
 $(function() {
 
   var $maps = $('.navigation_maps .map');

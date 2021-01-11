@@ -8,7 +8,7 @@ function NavigationMapEditor(map_object, table_object) {
     self.createControls();
     if(self.blueprint) {
       self.createAreas();
-    };
+    }
   });
   self.table_object = table_object;
   this.createAreaCallback = function () {};

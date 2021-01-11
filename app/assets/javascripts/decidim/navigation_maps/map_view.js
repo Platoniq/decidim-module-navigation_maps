@@ -1,6 +1,6 @@
+// Creates a map view
 //= require leaflet
 //= require leaflet-geoman.min
-// Creates a map view
 
 function NavigationMapView(map_object, callback) {
   var self = this;

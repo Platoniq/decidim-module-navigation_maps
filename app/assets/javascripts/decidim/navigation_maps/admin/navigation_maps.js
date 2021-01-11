@@ -22,11 +22,11 @@ $(function() {
     var id = $(this).data('id');
     var table = document.getElementById("navigation_maps-table-" + id);
     editors[id] = new NavigationMapEditor(this, table);
-    editors[id].onCreateArea(function(area_id, area, obj) {
+    editors[id].onCreateArea(function(area_id) {
       new_areas[area_id] = true;
     });
 
-    editors[id].onClickArea(function(area_id, area, obj) {
+    editors[id].onClickArea(function(area_id, area) {
       $modal.find('.modal-content').html('');
       $modal.addClass('loading').foundation('open');
       $callout.hide();
@@ -68,7 +68,7 @@ $(function() {
     $callout.addClass('success');
   });
 
-  document.body.addEventListener('ajax:complete', function(xhr, event) {
+  document.body.addEventListener('ajax:complete', function() {
     $callout.show();
     $modal.foundation('close');
   })
@@ -122,7 +122,7 @@ $(function() {
         var percentVal = percentComplete + '%';
         $bar.width(percentVal).html(percentVal);
     },
-    success: function(responseText, statusText, xhr, $form) {
+    success: function(responseText) {
         $callout.show();
         $progress.hide();
         $callout.contents('p').html(responseText);

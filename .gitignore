@@ -20,3 +20,4 @@ spec/decidim_dummy_app
 development_app
 
 .rbenv-vars
+*.gem

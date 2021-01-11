@@ -1,8 +1,8 @@
 # Decidim::NavigationMaps
 
-[![Build Status](https://travis-ci.org/Platoniq/decidim-module-navigation_maps.svg?branch=master)](https://travis-ci.org/Platoniq/decidim-module-navigation_maps)
+![Test](https://github.com/Platoniq/decidim-module-navigation_maps/workflows/Test/badge.svg)
 [![Maintainability](https://api.codeclimate.com/v1/badges/f69b2b0ab0ffcd26f002/maintainability)](https://codeclimate.com/github/Platoniq/decidim-module-navigation_maps/maintainability)
-[![Test Coverage](https://api.codeclimate.com/v1/badges/f69b2b0ab0ffcd26f002/test_coverage)](https://codeclimate.com/github/Platoniq/decidim-module-navigation_maps/test_coverage)
+[![Codecov](https://codecov.io/gh/Platoniq/decidim-module-navigation_maps/branch/master/graph/badge.svg?token=XhzWO0IiWt)](https://codecov.io/gh/Platoniq/decidim-module-navigation_maps)
 
 Allows to map processes to image parts using maps.
 
@@ -22,7 +22,7 @@ homepage only).
 Add this line to your application's Gemfile:
 
 ```ruby
-gem "decidim-navigation_maps", git: "https://github.com/Platoniq/decidim-module-navigation_maps"
+gem "decidim-navigation_maps", "~> 1.0.0"
 ```
 
 And then execute:
@@ -32,6 +32,12 @@ bundle
 bundle exec rails decidim_navigation_maps:install:migrations
 bundle exec rails db:migrate
 ```
+
+Depending on your Decidim version, choose the corresponding Plugin version to ensure compatibility:
+
+| Navigation Maps version | Compatible Decidim versions |
+|---|---|
+| 1.0.x | 0.18.x, 0.21.x |
 
 ## Contributing
 
