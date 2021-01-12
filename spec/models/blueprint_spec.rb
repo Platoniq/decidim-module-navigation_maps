@@ -16,12 +16,8 @@ module Decidim
         expect(subject.organization).to eq(organization)
       end
 
-      context "when the file is too big" do
-        before do
-          expect(subject.image).to receive(:size).and_return(11.megabytes)
-        end
-
-        it { is_expected.not_to be_valid }
+      it "has a default height" do
+        expect(subject.height).to eq(475)
       end
 
       context "when the file is a malicious image" do

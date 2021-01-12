@@ -7,7 +7,7 @@ module Decidim::NavigationMaps::ContentBlocks
     subject { cell(content_block.cell, content_block).call }
 
     let(:organization) { create(:organization) }
-    let(:content_block) { create :content_block, organization: organization, manifest_name: :navigation_map, scope: :homepage }
+    let(:content_block) { create :content_block, organization: organization, manifest_name: :navigation_map, scope_name: :homepage }
     let!(:blueprint) { create(:blueprint, organization: organization) }
 
     controller Decidim::PagesController

@@ -2,5 +2,5 @@
   <% tabs.each_with_index do |item, index| %>
     <li class="tabs-title<%= " is-active" if index.zero? %>"><a data-tabs-target="map<%= index %>" href="#map<%= index %>"><%= translated_attribute(item.title).presence || "Tab #{index + 1}" %></a></li>
   <% end %>
-  <li class="tabs-title"><a href="#map-new">+ <%= t ".add" %></a></li>
+  <li class="tabs-title"><a href="#map-new">+ <%= t("navigation_map_settings_form.add", scope: "decidim.navigation_maps.content_blocks") %></a></li>
 </ul>
