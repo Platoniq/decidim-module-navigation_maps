@@ -27,34 +27,36 @@ module Decidim::NavigationMaps
       }
     end
 
-    before do
-      allow(subject.image).to receive(:url).and_return(true)
-      allow(subject.image).to receive(:content_type).and_return("image/jpeg")
-    end
-
-    context "when everything is OK" do
-      it { is_expected.to be_valid }
-
-      it "ident matches id" do
-        expect(subject.ident).to eq(id)
+    context "when there is image" do
+      before do
+        allow(subject.image).to receive(:url).and_return(true)
+        allow(subject.image).to receive(:content_type).and_return("image/jpeg")
       end
 
-      it "image? responds true" do
-        expect(subject.image?).to eq(true)
+      context "when everything is OK" do
+        it { is_expected.to be_valid }
+
+        it "ident matches id" do
+          expect(subject.ident).to eq(id)
+        end
+
+        it "image? responds true" do
+          expect(subject.image?).to eq(true)
+        end
       end
-    end
 
-    context "when there is no title" do
-      let(:title) { nil }
+      context "when there is no title" do
+        let(:title) { nil }
 
-      it { is_expected.not_to be_valid }
-    end
+        it { is_expected.not_to be_valid }
+      end
 
-    context "when there is no id" do
-      let(:id) { nil }
+      context "when there is no id" do
+        let(:id) { nil }
 
-      it "ident is an underscore" do
-        expect(subject.ident).to eq("_")
+        it "ident is an underscore" do
+          expect(subject.ident).to eq("_")
+        end
       end
     end
 
