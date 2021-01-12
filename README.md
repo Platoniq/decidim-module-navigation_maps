@@ -15,6 +15,8 @@ homepage only).
 
 👉 [Check the usage guide here!](USAGE.md)
 
+![Homepage](examples/homepage.png)
+
 ![Admin editor](examples/admin.gif)
 
 ## Installation
