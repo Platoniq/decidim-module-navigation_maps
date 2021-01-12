@@ -32,6 +32,7 @@ cs:
           blueprint_image: Obrázek plánu
           description: Popis
           editor: Editor mapy
+          height: Height (px)
           id: Id
           image_missing: Pro začátek přidejte obrázek plánu
           info: Obecné informace
