@@ -32,6 +32,7 @@ es:
           blueprint_image: Imagen del plano
           description: Descripción
           editor: Editor de Mapa
+          height: Height (px)
           id: Id
           image_missing: Por favor, añade una imagen del plano para empezar
           info: Información general
