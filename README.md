@@ -22,7 +22,7 @@ homepage only).
 Add this line to your application's Gemfile:
 
 ```ruby
-gem "decidim-navigation_maps", "~> 1.0.0"
+gem "decidim-navigation_maps", "~> 1.1.0"
 ```
 
 And then execute:
@@ -37,7 +37,8 @@ Depending on your Decidim version, choose the corresponding Plugin version to en
 
 | Navigation Maps version | Compatible Decidim versions |
 |---|---|
-| 1.0.x | 0.18.x, 0.21.x |
+| 1.0.x | 0.18.x - 0.21.x |
+| 1.1.x | 0.22.x, 0.23.x |
 
 ## Contributing
 

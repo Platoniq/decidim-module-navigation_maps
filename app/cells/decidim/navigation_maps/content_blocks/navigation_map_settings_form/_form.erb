@@ -1,15 +1,15 @@
 <ul class="accordion" data-accordion>
   <li class="accordion-item<%= " is-active" unless form.image? %>" data-accordion-item>
-    <a href="#" class="accordion-title"><%= t ".info" %></a>
+    <a href="#" class="accordion-title"><%= t("navigation_map_settings_form.info", scope: "decidim.navigation_maps.content_blocks") %></a>
 
     <div class="accordion-content" data-tab-content>
-      <%= translated_field_tag :text_field_tag, "blueprints[#{form.ident}]", :title, form.title, { tabs_id: "blueprints_#{form.ident}_title", label: t(".title") } %>
+      <%= translated_field_tag :text_field_tag, "blueprints[#{form.ident}]", :title, form.title, { tabs_id: "blueprints_#{form.ident}_title", label: t("navigation_map_settings_form.title", scope: "decidim.navigation_maps.content_blocks") } %>
 
-      <%= label_tag t(".blueprint_image") %>
+      <%= label_tag t("navigation_map_settings_form.blueprint_image", scope: "decidim.navigation_maps.content_blocks") %>
       <div class="thumbnail">
         <%= image_tag form.image.thumbnail.url if form.image? %>
       </div>
-      <%= file_field_tag "blueprints[#{form.ident}][image]", { id: "blueprints_#{form.ident}_image", label: t(".title") } %>
+      <%= file_field_tag "blueprints[#{form.ident}][image]", { id: "blueprints_#{form.ident}_image", label: t("navigation_map_settings_form.title", scope: "decidim.navigation_maps.content_blocks") } %>
 
       <%= hidden_field_tag "blueprints[#{form.ident}][id]", form.id, { id: "blueprints_#{form.ident}_id" } %>
       <%= hidden_field_tag "blueprints[#{form.ident}][blueprint]", form.blueprint.to_json, { id: "blueprints_#{form.ident}_blueprint" } %>
@@ -17,7 +17,7 @@
       <% if form.id %>
         <label class="delete-tab">
           <%= check_box_tag("blueprints[#{form.ident}][remove]", form.id) %>
-          <%= t(".remove_blueprint") %>
+          <%= t("navigation_map_settings_form.remove_blueprint", scope: "decidim.navigation_maps.content_blocks") %>
         </label>
       <% end %>
   </div>
@@ -25,7 +25,7 @@
 
   <% if form.image? %>
   <li class="accordion-item is-active" data-accordion-item>
-    <a href="#" class="accordion-title"><%= t ".editor" %></a>
+    <a href="#" class="accordion-title"><%= t("navigation_map_settings_form.editor", scope: "decidim.navigation_maps.content_blocks") %></a>
     <div class="accordion-content navigation_maps-content" data-tab-content>
 
       <%= content_tag(:div, "", id: "navigation_maps-map-#{form.ident}", class: "map", data: { id: form.ident, image: form.image.url, blueprint: form.blueprint }) %>
