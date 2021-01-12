@@ -32,6 +32,7 @@ ca:
           blueprint_image: Imatge del plànol
           description: Descripció
           editor: Editor del mapa
+          height: Height (px)
           id: Id
           image_missing: Si us plau, afegeix una imatge del plànol per començar
           info: Informació general
