@@ -4,6 +4,8 @@
 
     <div class="accordion-content" data-tab-content>
       <%= translated_field_tag :text_field_tag, "blueprints[#{form.ident}]", :title, form.title, { tabs_id: "blueprints_#{form.ident}_title", label: t("navigation_map_settings_form.title", scope: "decidim.navigation_maps.content_blocks") } %>
+      <%= label_tag t("navigation_map_settings_form.height", scope: "decidim.navigation_maps.content_blocks") %>
+      <%= text_field_tag "blueprints[#{form.ident}][height]", form.height, { id: "blueprints_#{form.ident}_height" } %>
 
       <%= label_tag t("navigation_map_settings_form.blueprint_image", scope: "decidim.navigation_maps.content_blocks") %>
       <div class="thumbnail">

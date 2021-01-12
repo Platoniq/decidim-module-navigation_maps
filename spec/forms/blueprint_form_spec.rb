@@ -10,6 +10,7 @@ module Decidim::NavigationMaps
     let(:attributes) do
       {
         title: title,
+        height: height,
         id: id,
         image: image,
         blueprint: {
@@ -19,6 +20,7 @@ module Decidim::NavigationMaps
       }
     end
     let(:title) { Decidim::Faker::Localized.sentence(2) }
+    let(:height) { 500 }
     let(:id) { 101 }
     let(:image) { {} }
     let(:context) do
@@ -47,6 +49,24 @@ module Decidim::NavigationMaps
 
       context "when there is no title" do
         let(:title) { nil }
+
+        it { is_expected.not_to be_valid }
+      end
+
+      context "when there is no height" do
+        let(:height) { nil }
+
+        it { is_expected.not_to be_valid }
+      end
+
+      context "when height is not a number" do
+        let(:height) { "abracadabra" }
+
+        it { is_expected.not_to be_valid }
+      end
+
+      context "when height is not positive" do
+        let(:height) { -100 }
 
         it { is_expected.not_to be_valid }
       end

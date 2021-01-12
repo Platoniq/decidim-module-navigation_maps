@@ -16,6 +16,10 @@ module Decidim
         expect(subject.organization).to eq(organization)
       end
 
+      it "has a default height" do
+        expect(subject.height).to eq(475)
+      end
+
       context "when the file is a malicious image" do
         let(:image_path) { Decidim::Dev.asset("malicious.jpg") }
         let(:blueprint) do
