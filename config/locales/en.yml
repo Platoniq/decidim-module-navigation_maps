@@ -33,6 +33,7 @@ en:
           blueprint_image: Blueprint image
           description: Description
           editor: Map Editor
+          height: Height (px)
           id: Id
           image_missing: Please add a blueprint image to start
           info: General info

@@ -16,9 +16,11 @@ module Decidim
       attribute :image
       translatable_attribute :title, String
       translatable_attribute :description, String
+      attribute :height, Integer
 
       # validate :check_image_or_blueprint
       validates :title, translatable_presence: true
+      validates :height, numericality: { greater_than: 0 }
 
       # def check_image_or_blueprint
       #   return if image.present? || blueprint.present?

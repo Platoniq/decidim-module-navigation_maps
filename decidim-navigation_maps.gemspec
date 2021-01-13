@@ -10,13 +10,13 @@ Gem::Specification.new do |s|
   s.email = ["ivan@platoniq.net"]
   s.license = "AGPL-3.0"
   s.homepage = "https://github.com/Platoniq/decidim-module-navigation_maps"
-  s.required_ruby_version = ">= 2.5"
+  s.required_ruby_version = ">= 2.6"
 
   s.name = "decidim-navigation_maps"
   s.summary = "A decidim navigation_maps module"
   s.description = "Allows to map processes to image parts using maps."
 
-  s.files = Dir["{app,config,lib,vendor}/**/*", "LICENSE-AGPLv3.txt", "Rakefile", "README.md"]
+  s.files = Dir["{app,config,lib,vendor,db}/**/*", "LICENSE-AGPLv3.txt", "Rakefile", "README.md"]
 
   s.add_dependency "decidim-admin", Decidim::NavigationMaps::DECIDIM_VERSION
   s.add_dependency "decidim-core", Decidim::NavigationMaps::DECIDIM_VERSION

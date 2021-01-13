@@ -24,6 +24,7 @@ module Decidim::NavigationMaps
         blueprint: blueprint_object,
         id: id,
         title: title,
+        height: height,
         description: title,
         remove: remove,
         image: uploaded_image
@@ -35,6 +36,7 @@ module Decidim::NavigationMaps
         blueprint: blueprint_object,
         id: 2,
         title: title,
+        height: height,
         description: nil,
         remove: false,
         image: nil
@@ -52,6 +54,7 @@ module Decidim::NavigationMaps
       { x: 0.5, y: 0.6 }
     end
     let(:title) { Decidim::Faker::Localized.sentence(2) }
+    let(:height) { 500 }
     let(:id) { 1 }
     let(:remove) { false }
     let(:uploaded_image) do

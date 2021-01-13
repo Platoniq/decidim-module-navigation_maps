@@ -50,6 +50,7 @@ module Decidim
       def update_blueprint!(form)
         @blueprint.image = form.image if form.image.present?
         @blueprint.title = form.title
+        @blueprint.height = form.height
         @blueprint.description = form.description
         @blueprint.save!
       end

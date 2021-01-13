@@ -3,8 +3,19 @@
 base_locale: en
 locales: [en]
 
-ignore_unused:
-  - "decidim.components.navigation_maps.name"
+# Read and write translations.
+data:
+  yaml:
+    write:
+      # do not wrap lines at 80 characters
+      line_width: -1
 
+ignore_unused:
+  - decidim.components.navigation_maps.name
+  - decidim.navigation_maps.content_blocks.name
+  - decidim.navigation_maps.content_blocks.navigation_map_settings_form.*
+
+  # these keys are reused from decidim core
 ignore_missing:
   - decidim.participatory_processes.scopes.global
+  - decidim.content_blocks.html.html_content

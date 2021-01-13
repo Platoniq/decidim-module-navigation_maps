@@ -6,6 +6,8 @@ module Decidim
     class Blueprint < ApplicationRecord
       self.table_name = "decidim_navigation_maps_blueprints"
 
+      attribute :height, :integer, default: 475
+
       belongs_to :organization, foreign_key: :decidim_organization_id, class_name: "Decidim::Organization"
       belongs_to :content_block, foreign_key: :decidim_content_block_id, class_name: "Decidim::ContentBlock"
       has_many :areas,
@@ -15,8 +17,8 @@ module Decidim
 
       validates :organization, presence: true
       validates :image,
-                file_size: { less_than_or_equal_to: ->(record) { Decidim.organization_settings(record.organization).upload_maximum_file_size } },
                 file_content_type: { allow: ["image/jpeg", "image/png", "image/svg+xml"] }
+      validates :height, numericality: { greater_than: 0 }
 
       mount_uploader :image, Decidim::NavigationMaps::BlueprintUploader
 

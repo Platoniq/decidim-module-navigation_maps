@@ -1,0 +1,46 @@
+es:
+  decidim:
+    components:
+      navigation_maps:
+        name: NavigationMaps
+    navigation_maps:
+      admin:
+        areas:
+          create:
+            error: Se ha producido un error al crear el área
+            success: Área creada correctamente
+          form:
+            no_popup: No utilizar un popup, enlazar el área directamente.
+          new:
+            area: Detalles de la nueva área
+            cancel: Cancelar
+            save: Guardar
+          show:
+            area: Detalles del área
+            cancel: Cancelar
+            link_suggestions: 'Truco: usa %{map} para enlazar otras pestañas'
+            save: Guardar
+          update:
+            error: Se ha producido un error al guardar el área
+            success: Área guardada correctamente
+      content_blocks:
+        name: Mapas interactivos
+        navigation_map:
+          view: Participar
+        navigation_map_settings_form:
+          add: Añadir
+          blueprint_image: Imagen del plano
+          description: Descripción
+          editor: Editor de Mapa
+          height: Altura (px)
+          id: Id
+          image_missing: Por favor, añade una imagen del plano para empezar
+          info: Información general
+          link: Enlace
+          remove_blueprint: Eliminar este plano
+          title: Título
+          type: Tipo
+          upload_image: Subir imagen
+      create:
+        error: Error al crear el plano
+        success: Plano creado correctamente
