@@ -24,7 +24,7 @@ homepage only).
 Add this line to your application's Gemfile:
 
 ```ruby
-gem "decidim-navigation_maps", "~> 1.1.0"
+gem "decidim-navigation_maps", "~> 1.1.1"
 ```
 
 And then execute:
