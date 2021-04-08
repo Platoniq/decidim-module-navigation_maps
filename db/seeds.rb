@@ -1,6 +1,9 @@
 # frozen_string_literal: true
 
-if !Rails.env.production? || ENV["SEED"]
+print "Skipping seeds for decidim_navigation maps as required by SKIP_MODULE_SEEDS\n" if ENV["SKIP_MODULE_SEEDS"]
+
+if !ENV["SKIP_MODULE_SEEDS"] && (!Rails.env.production? || ENV["SEED"])
+
   print "Creating seeds for decidim_navigation maps...\n" unless Rails.env.test?
 
   require "decidim/faker/localized"
@@ -8,28 +11,29 @@ if !Rails.env.production? || ENV["SEED"]
 
   organization = Decidim::Organization.first
 
+  # homepage blueprint
   content_block = Decidim::ContentBlock.create(
     decidim_organization_id: organization.id,
     weight: 1,
     scope_name: :homepage,
     manifest_name: :navigation_map,
     published_at: Time.current,
-    settings: { title: Decidim::Faker::Localized.sentence(5) }
+    settings: { title: Decidim::Faker::Localized.sentence(word_count: 5) }
   )
 
   blueprint1 = Decidim::NavigationMaps::Blueprint.create(
     organization: organization,
     content_block: content_block,
     image: File.new(File.join(seeds_root, "antarctica.png")),
-    title: Decidim::Faker::Localized.sentence(2),
-    description: Decidim::Faker::Localized.sentence(10)
+    title: Decidim::Faker::Localized.sentence(word_count: 2),
+    description: Decidim::Faker::Localized.sentence(word_count: 10)
   )
 
   Decidim::NavigationMaps::Blueprint.create(
     organization: organization,
     image: File.new(File.join(seeds_root, "penguins.jpg")),
-    title: Decidim::Faker::Localized.sentence(2),
-    description: Decidim::Faker::Localized.sentence(10)
+    title: Decidim::Faker::Localized.sentence(word_count: 2),
+    description: Decidim::Faker::Localized.sentence(word_count: 10)
   )
 
   Decidim::NavigationMaps::BlueprintArea.create(
@@ -101,4 +105,49 @@ if !Rails.env.production? || ENV["SEED"]
     link: "#map1",
     link_type: "direct"
   )
+
+  # participatory process groups blueprint
+  Decidim::ParticipatoryProcessGroup.find_each do |group|
+    content_block = Decidim::ContentBlock.create(
+      decidim_organization_id: organization.id,
+      weight: 1,
+      scope_name: :participatory_process_group_homepage,
+      scoped_resource_id: group.id,
+      manifest_name: :navigation_map,
+      published_at: Time.current,
+      settings: { title: Decidim::Faker::Localized.sentence(word_count: 5), autohide_tabs: true }
+    )
+
+    blueprint = Decidim::NavigationMaps::Blueprint.create(
+      organization: organization,
+      content_block: content_block,
+      image: File.new(File.join(seeds_root, "pla-cerda.jpg")),
+      title: Decidim::Faker::Localized.sentence(word_count: 2),
+      description: Decidim::Faker::Localized.sentence(word_count: 10)
+    )
+
+    Decidim::NavigationMaps::BlueprintArea.create(
+      blueprint: blueprint,
+      area_id: "10",
+      area_type: "Feature",
+      area: {
+        type: "Polygon",
+        coordinates: [[
+          [286.211699, 216.817532],
+          [342.618384, 252.332852],
+          [449.164345, 210.550122],
+          [447.075209, 191.747894],
+          [429.665738, 147.179649],
+          [323.816156, 126.288284],
+          [285.51532, 170.856529],
+          [286.211699, 216.817532]
+        ]]
+      },
+      link: "https://en.wikipedia.org/wiki/Centelles",
+      link_type: "link",
+      color: "#ff4700",
+      title: { en: "Pla Cerdà" },
+      description: { en: "Cerdà was from the town of Centelles" }
+    )
+  end
 end

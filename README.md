@@ -4,9 +4,9 @@
 [![Maintainability](https://api.codeclimate.com/v1/badges/f69b2b0ab0ffcd26f002/maintainability)](https://codeclimate.com/github/Platoniq/decidim-module-navigation_maps/maintainability)
 [![Codecov](https://codecov.io/gh/Platoniq/decidim-module-navigation_maps/branch/master/graph/badge.svg?token=XhzWO0IiWt)](https://codecov.io/gh/Platoniq/decidim-module-navigation_maps)
 
-Allows to map processes to image parts using maps.
+This module allows admins to upload any arbitrary image and draw sensible zones over it with direct links to other places (ie: a specific participatory process) or display a popup explaining something.
 
-> NOTE: This module is ready to use but in Beta status. Feel free to report any bug!
+Maps can be displayed in the homepage or as part of a process group landing.
 
 ## Usage
 
@@ -24,10 +24,10 @@ homepage only).
 Add this line to your application's Gemfile:
 
 ```ruby
-gem "decidim-navigation_maps", "~> 1.1.1"
+gem "decidim-navigation_maps", "~> 1.2.0"
 ```
 
-And then execute:
+And then execute (remember to repeat this if you are upgrading from version 1.1):
 
 ```bash
 bundle
@@ -41,6 +41,7 @@ Depending on your Decidim version, choose the corresponding Plugin version to en
 |---|---|
 | 1.0.x | 0.18.x - 0.21.x |
 | 1.1.x | 0.22.x, 0.23.x |
+| 1.2.x | 0.24.x |
 
 ## Contributing
 

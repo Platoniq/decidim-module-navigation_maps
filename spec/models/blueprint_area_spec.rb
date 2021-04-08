@@ -18,7 +18,7 @@ module Decidim
       end
       let(:area_type) { "Feature" }
       let(:area_id) { "101" }
-      let(:title) { Decidim::Faker::Localized.sentence(2) }
+      let(:title) { Decidim::Faker::Localized.sentence(word_count: 2) }
       let(:description) { Decidim::Faker::Localized.paragraph }
       let(:link) { "#link" }
 

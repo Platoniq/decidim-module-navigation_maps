@@ -7,7 +7,7 @@ module Decidim::NavigationMaps
     subject { described_class.from_params(attributes).with_context(context) }
 
     let(:blueprint) { create :blueprint }
-    let(:title) { Decidim::Faker::Localized.sentence(2) }
+    let(:title) { Decidim::Faker::Localized.sentence(word_count: 2) }
     let(:description) { Decidim::Faker::Localized.paragraph }
     let(:area) do
       {

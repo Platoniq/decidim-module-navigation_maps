@@ -53,7 +53,7 @@ module Decidim::NavigationMaps
     let(:data) do
       { x: 0.5, y: 0.6 }
     end
-    let(:title) { Decidim::Faker::Localized.sentence(2) }
+    let(:title) { Decidim::Faker::Localized.sentence(word_count: 2) }
     let(:height) { 500 }
     let(:id) { 1 }
     let(:remove) { false }
