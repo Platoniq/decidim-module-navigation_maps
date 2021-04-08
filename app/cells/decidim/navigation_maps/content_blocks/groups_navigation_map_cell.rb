@@ -5,7 +5,7 @@ module Decidim
     module ContentBlocks
       class GroupsNavigationMapCell < NavigationMapCell
         def section_classes
-          "section home-section"
+          "section"
         end
 
         def wrapper_classes

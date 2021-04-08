@@ -7,6 +7,7 @@ ruby RUBY_VERSION
 DECIDIM_VERSION = "0.24"
 
 gem "decidim", DECIDIM_VERSION
+
 gem "decidim-navigation_maps", path: "."
 
 gem "bootsnap", "~> 1.4"

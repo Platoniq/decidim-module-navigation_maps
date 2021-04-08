@@ -14,7 +14,7 @@ Gem::Specification.new do |s|
 
   s.name = "decidim-navigation_maps"
   s.summary = "A decidim navigation_maps module"
-  s.description = "Allows to map processes to image parts using maps."
+  s.description = "Allows to create visual guiding maps in content blocks for Decidim."
 
   s.files = Dir["{app,config,lib,vendor,db}/**/*", "LICENSE-AGPLv3.txt", "Rakefile", "README.md"]
 

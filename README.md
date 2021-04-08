@@ -27,7 +27,7 @@ Add this line to your application's Gemfile:
 gem "decidim-navigation_maps", "~> 1.2.0"
 ```
 
-And then execute:
+And then execute (remember to repeat this if you are upgrading from version 1.1):
 
 ```bash
 bundle

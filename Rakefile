@@ -15,6 +15,12 @@ def seed_db(path)
   end
 end
 
+def seed_module_db(path)
+  Dir.chdir(path) do
+    system("bundle exec rake decidim_navigation_maps:seed")
+  end
+end
+
 desc "Generates a dummy app for testing"
 task test_app: "decidim:generate_external_test_app" do
   ENV["RAILS_ENV"] = "test"
@@ -36,5 +42,9 @@ task :development_app do
   end
 
   install_module("development_app")
+  ENV["SKIP_MODULE_SEEDS"] = "1"
   seed_db("development_app")
+  # manually seed navigation maps to ensure participatory process groups are created
+  ENV.delete "SKIP_MODULE_SEEDS"
+  seed_module_db("development_app")
 end
