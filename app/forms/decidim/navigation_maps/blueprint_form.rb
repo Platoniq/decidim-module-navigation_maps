@@ -11,6 +11,7 @@ module Decidim
 
       attribute :blueprint, Object
       attribute :id, Integer
+      attribute :decidim_content_block_id, Integer
       attribute :remove, Boolean
       attribute :image
       translatable_attribute :title, String

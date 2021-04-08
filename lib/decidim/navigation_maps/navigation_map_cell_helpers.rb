@@ -7,7 +7,7 @@ module Decidim
       delegate :available_locales, to: :current_organization
 
       def valid_blueprints
-        organization_blueprints.where.not(image: [nil, ""]).order(:created_at)
+        content_block_blueprints.where.not(image: [nil, ""]).order(:created_at)
       end
 
       def valid_blueprints?
@@ -15,13 +15,13 @@ module Decidim
       end
 
       def blueprints
-        organization_blueprints.order(:created_at)
+        content_block_blueprints.order(:created_at)
       end
 
       private
 
-      def organization_blueprints
-        @organization_blueprints ||= OrganizationBlueprints.new(current_organization).query
+      def content_block_blueprints
+        @content_block_blueprints ||= (OrganizationBlueprints.new(current_organization) | ContentBlockBlueprints.new(content_block)).query
       end
     end
   end

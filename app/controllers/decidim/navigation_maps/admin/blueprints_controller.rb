@@ -39,11 +39,11 @@ module Decidim
           return unless params[:content_block][:settings]
 
           @form = form(Decidim::Admin::ContentBlockForm).from_params(params)
-          Decidim::Admin::UpdateContentBlock.call(@form, content_block, :homepage)
+          Decidim::Admin::UpdateContentBlock.call(@form, content_block, content_block.scope_name&.to_sym)
         end
 
         def content_block
-          @content_block ||= Decidim::ContentBlock.for_scope(:homepage, organization: current_organization).find_by(manifest_name: :navigation_map)
+          @content_block ||= Decidim::ContentBlock.where(organization: current_organization, manifest_name: :navigation_map).find(params[:content_block_id])
         end
 
         # Convert blueprint data to an object

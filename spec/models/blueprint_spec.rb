@@ -8,9 +8,14 @@ module Decidim
       subject { blueprint }
 
       let(:organization) { create(:organization) }
-      let(:blueprint) { create(:blueprint, organization: organization) }
+      let(:content_block) { create(:content_block, organization: organization) }
+      let(:blueprint) { create(:blueprint, organization: organization, content_block: content_block) }
 
       it { is_expected.to be_valid }
+
+      it "is associated with content_block" do
+        expect(subject.content_block).to eq(content_block)
+      end
 
       it "is associated with organization" do
         expect(subject.organization).to eq(organization)

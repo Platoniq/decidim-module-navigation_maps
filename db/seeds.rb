@@ -8,7 +8,7 @@ if !Rails.env.production? || ENV["SEED"]
 
   organization = Decidim::Organization.first
 
-  Decidim::ContentBlock.create(
+  content_block = Decidim::ContentBlock.create(
     decidim_organization_id: organization.id,
     weight: 1,
     scope_name: :homepage,
@@ -19,6 +19,7 @@ if !Rails.env.production? || ENV["SEED"]
 
   blueprint1 = Decidim::NavigationMaps::Blueprint.create(
     organization: organization,
+    content_block: content_block,
     image: File.new(File.join(seeds_root, "antarctica.png")),
     title: Decidim::Faker::Localized.sentence(2),
     description: Decidim::Faker::Localized.sentence(10)

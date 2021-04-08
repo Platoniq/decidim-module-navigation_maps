@@ -7,6 +7,7 @@ module Decidim::NavigationMaps
     subject { described_class.from_params(attributes).with_context(context) }
 
     let(:organization) { create :organization }
+    let(:content_block) { create(:content_block, organization: organization) }
     let(:attributes) do
       {
         "blueprints" => []
@@ -14,7 +15,8 @@ module Decidim::NavigationMaps
     end
     let(:context) do
       {
-        "current_organization" => organization
+        "current_organization" => organization,
+        "content_block_id" => content_block.id
       }
     end
 

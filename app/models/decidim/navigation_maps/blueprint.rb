@@ -9,6 +9,7 @@ module Decidim
       attribute :height, :integer, default: 475
 
       belongs_to :organization, foreign_key: :decidim_organization_id, class_name: "Decidim::Organization"
+      belongs_to :content_block, foreign_key: :decidim_content_block_id, class_name: "Decidim::ContentBlock"
       has_many :areas,
                foreign_key: "decidim_navigation_maps_blueprint_id",
                class_name: "Decidim::NavigationMaps::BlueprintArea",
