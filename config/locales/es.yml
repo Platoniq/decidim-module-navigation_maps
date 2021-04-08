@@ -29,6 +29,7 @@ es:
           view: Participar
         navigation_map_settings_form:
           add: Añadir
+          autohide_tabs: Ocultar las pestañas de navegación si sólo hay un mapa
           blueprint_image: Imagen del plano
           description: Descripción
           editor: Editor de Mapa

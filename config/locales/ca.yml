@@ -29,6 +29,7 @@ ca:
           view: Participa
         navigation_map_settings_form:
           add: Afegeix
+          autohide_tabs: Amaga les pestanyes de navegació si només hi ha un mapa
           blueprint_image: Imatge del plànol
           description: Descripció
           editor: Editor del mapa

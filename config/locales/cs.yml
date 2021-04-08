@@ -29,6 +29,7 @@ cs:
           view: Zapojte se
         navigation_map_settings_form:
           add: Přidat
+          autohide_tabs: Hide tabs navigation if there's only one map
           blueprint_image: Obrázek plánu
           description: Popis
           editor: Editor mapy
