@@ -21,6 +21,7 @@ module Decidim
 
           content_block.settings do |settings|
             settings.attribute :title, type: :text, translated: true
+            settings.attribute :autohide_tabs, type: :boolean, default: false
           end
         end
 
@@ -31,6 +32,7 @@ module Decidim
 
           content_block.settings do |settings|
             settings.attribute :title, type: :text, translated: true
+            settings.attribute :autohide_tabs, type: :boolean, default: false
           end
         end
       end

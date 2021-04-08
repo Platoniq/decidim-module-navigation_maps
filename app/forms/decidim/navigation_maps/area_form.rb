@@ -28,7 +28,7 @@ module Decidim
       def color
         return "#2262cc" if super.blank?
 
-        return "#" + super unless super.match?(/^#/)
+        return "##{super}" unless super.match?(/^#/)
 
         super
       end

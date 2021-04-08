@@ -19,7 +19,7 @@ module Decidim::NavigationMaps
         }
       }
     end
-    let(:title) { Decidim::Faker::Localized.sentence(2) }
+    let(:title) { Decidim::Faker::Localized.sentence(word_count: 2) }
     let(:height) { 500 }
     let(:id) { 101 }
     let(:image) { {} }

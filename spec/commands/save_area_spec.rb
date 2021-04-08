@@ -26,7 +26,7 @@ module Decidim::NavigationMaps
     let(:data) do
       { x: 0.5, y: 0.6 }
     end
-    let(:title) { Decidim::Faker::Localized.sentence(2) }
+    let(:title) { Decidim::Faker::Localized.sentence(word_count: 2) }
     let(:description) { Decidim::Faker::Localized.paragraph }
     let(:area_id) { nil }
     let(:no_popup) { "0" }

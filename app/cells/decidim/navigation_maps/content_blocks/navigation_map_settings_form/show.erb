@@ -1,6 +1,7 @@
 <!-- Original settings -->
 <% form.fields_for :settings, form.object.settings do |settings_fields| %>
-  <%= settings_fields.translated :text_field, :title %>
+  <%= settings_fields.translated :text_field, :title, label: t("content_blocks.navigation_map_settings_form.title", scope: "decidim.navigation_maps") %>
+  <%= settings_fields.check_box :autohide_tabs, label: t("content_blocks.navigation_map_settings_form.autohide_tabs", scope: "decidim.navigation_maps") %>
 <% end %>
 
 <!-- Override rails default patch (using post via ajax) -->

@@ -40,6 +40,7 @@ en:
           link: Link
           remove_blueprint: Delete this blueprint
           title: Title
+          autohide_tabs: Hide tabs navigation if there's only one map
           type: Type
           upload_image: Upload image
       create:

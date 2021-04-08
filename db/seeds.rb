@@ -14,22 +14,22 @@ if !Rails.env.production? || ENV["SEED"]
     scope_name: :homepage,
     manifest_name: :navigation_map,
     published_at: Time.current,
-    settings: { title: Decidim::Faker::Localized.sentence(5) }
+    settings: { title: Decidim::Faker::Localized.sentence(word_count: 5) }
   )
 
   blueprint1 = Decidim::NavigationMaps::Blueprint.create(
     organization: organization,
     content_block: content_block,
     image: File.new(File.join(seeds_root, "antarctica.png")),
-    title: Decidim::Faker::Localized.sentence(2),
-    description: Decidim::Faker::Localized.sentence(10)
+    title: Decidim::Faker::Localized.sentence(word_count: 2),
+    description: Decidim::Faker::Localized.sentence(word_count: 10)
   )
 
   Decidim::NavigationMaps::Blueprint.create(
     organization: organization,
     image: File.new(File.join(seeds_root, "penguins.jpg")),
-    title: Decidim::Faker::Localized.sentence(2),
-    description: Decidim::Faker::Localized.sentence(10)
+    title: Decidim::Faker::Localized.sentence(word_count: 2),
+    description: Decidim::Faker::Localized.sentence(word_count: 10)
   )
 
   Decidim::NavigationMaps::BlueprintArea.create(

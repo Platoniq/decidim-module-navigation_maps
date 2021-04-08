@@ -15,6 +15,12 @@ module Decidim
           render if valid_blueprints?
         end
 
+        def tabs
+          return if model.settings.autohide_tabs? && valid_blueprints.count < 2
+
+          render partial: "tabs", locals: { tabs: valid_blueprints }
+        end
+
         def translated_title
           translated_attribute(model.settings.title)
         end

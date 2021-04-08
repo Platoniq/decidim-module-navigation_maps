@@ -25,7 +25,7 @@ module Decidim::NavigationMaps::Admin
       }
     end
     let(:json) { "{\"geometry\":\"{}\",\"type\":\"Feature\"}" }
-    let(:title) { Decidim::Faker::Localized.sentence(2) }
+    let(:title) { Decidim::Faker::Localized.sentence(word_count: 2) }
     let(:description) { Decidim::Faker::Localized.paragraph }
     let(:id) { nil }
     let(:link) { "#link" }
