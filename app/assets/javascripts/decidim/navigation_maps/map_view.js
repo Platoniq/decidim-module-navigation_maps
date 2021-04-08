@@ -27,18 +27,18 @@ function NavigationMapView(map_object, callback) {
 
 NavigationMapView.prototype.createMap = function() {
   var bounds = [[0,0], [this.image.height,this.image.width]];
-
   this.map = L.map(this.map_object, {
-      minZoom: -1,
-      maxZoom: 2,
-      crs: L.CRS.Simple,
-      noWrap: true,
-      zoomSnap: 0,
-      // zoomDelta: 0.1,
-      maxBounds: [[0,0], [this.image.height,this.image.width]],
-      center: [this.image.height/2, this.image.width/2],
-      zoom: -1,
-      scrollWheelZoom: false
+    minZoom: -1,
+    maxZoom: 2,
+    crs: L.CRS.Simple,
+    noWrap: true,
+    zoomSnap: 0,
+    // zoomDelta: 0.1,
+    maxBounds: [[0,0], [this.image.height,this.image.width]],
+    center: [this.image.height/2, this.image.width/2],
+    zoom: -1,
+    scrollWheelZoom: false,
+    attributionControl:  false
   });
 
   L.imageOverlay(this.image.src, bounds).addTo(this.map);
