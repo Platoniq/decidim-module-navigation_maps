@@ -7,7 +7,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Platoniq/decidim-module-navigation_maps.git"
+    "url": "git+https://github.com/AjuntamentdeBarcelona/decidim-module-navigation_maps.git"
   },
   "keywords": [
     "decidim"
@@ -15,9 +15,9 @@
   "author": "Ivan Verges <ivan@platoniq.net>",
   "license": "AGPL-3.0-or-later",
   "bugs": {
-    "url": "https://github.com/Platoniq/decidim-module-navigation_maps/issues"
+    "url": "https://github.com/AjuntamentdeBarcelona/decidim-module-navigation_maps/issues"
   },
-  "homepage": "https://github.com/Platoniq/decidim-module-navigation_maps#readme",
+  "homepage": "https://github.com/AjuntamentdeBarcelona/decidim-module-navigation_maps#readme",
   "stylelint": {
     "rules": {
       "at-rule-empty-line-before": [
