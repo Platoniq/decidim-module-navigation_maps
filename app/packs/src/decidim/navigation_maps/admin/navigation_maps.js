@@ -1,5 +1,5 @@
 import "jquery-form";
-import NavigationMapEditor from "decidim/navigation_maps/admin/map_editor";
+import NavigationMapEditor from "src/decidim/navigation_maps/admin/map_editor";
 
 $(function () {
   var $maps = $(".navigation_maps.admin .map");

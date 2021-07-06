@@ -1,5 +1,6 @@
 // Creates a map
-import NavigationMapView from "decidim/navigation_maps/map_view";
+import NavigationMapView from "src/decidim/navigation_maps/map_view";
+
 export default function NavigationMapEditor(map_object, table_object) {
   var self = this;
   // Call constructor of superclass to initialize superclass-derived members.

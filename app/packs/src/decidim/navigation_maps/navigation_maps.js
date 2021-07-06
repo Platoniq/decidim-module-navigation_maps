@@ -1,4 +1,4 @@
-import NavigationMapView from "decidim/navigation_maps/map_view";
+import NavigationMapView from "src/decidim/navigation_maps/map_view";
 import "jsrender";
 
 $(function () {
