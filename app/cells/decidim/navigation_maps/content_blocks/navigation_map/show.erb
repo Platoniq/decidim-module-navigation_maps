@@ -1,4 +1,4 @@
-<%= stylesheet_link_tag "decidim/navigation_maps/navigation_maps" %>
+<%= stylesheet_pack_tag "decidim_navigation_maps" %>
 <%= render partial: "styles", locals: { blueprints: valid_blueprints } %>
 
 <section<%= class_tag(section_classes) %>>
@@ -18,4 +18,4 @@
 </section>
 
 <%= render partial: "template" %>
-<%= javascript_include_tag "decidim/navigation_maps/navigation_maps" %>
+<%= javascript_pack_tag "decidim_navigation_maps" %>
