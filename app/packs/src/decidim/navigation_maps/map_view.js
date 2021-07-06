@@ -1,21 +1,23 @@
 // Creates a map view
-//= require leaflet
-//= require leaflet-geoman.min
+import L from "leaflet";
+import "@geoman-io/leaflet-geoman-free";
 
-function NavigationMapView(map_object, callback) {
+export default function NavigationMapView(map_object, callback) {
   var self = this;
   self.features = {};
   self.map_object = map_object;
   self.id = map_object.dataset.id;
   self.image_path = map_object.dataset.image;
-  self.blueprint = map_object.dataset.blueprint ? JSON.parse(map_object.dataset.blueprint) : {};
+  self.blueprint = map_object.dataset.blueprint
+    ? JSON.parse(map_object.dataset.blueprint)
+    : {};
   self.image = new Image();
-  self.image.onload = function() {
+  self.image.onload = function () {
     self.createMap();
-    if(typeof callback === "function") {
+    if (typeof callback === "function") {
       callback(self);
     } else {
-      if(self.blueprint) {
+      if (self.blueprint) {
         self.createAreas();
       }
     }
@@ -25,8 +27,11 @@ function NavigationMapView(map_object, callback) {
   this.setLayerPropertiesCallback = function () {};
 }
 
-NavigationMapView.prototype.createMap = function() {
-  var bounds = [[0,0], [this.image.height,this.image.width]];
+NavigationMapView.prototype.createMap = function () {
+  var bounds = [
+    [0, 0],
+    [this.image.height, this.image.width],
+  ];
   this.map = L.map(this.map_object, {
     minZoom: -1,
     maxZoom: 2,
@@ -34,48 +39,56 @@ NavigationMapView.prototype.createMap = function() {
     noWrap: true,
     zoomSnap: 0,
     // zoomDelta: 0.1,
-    maxBounds: [[0,0], [this.image.height,this.image.width]],
-    center: [this.image.height/2, this.image.width/2],
+    maxBounds: [
+      [0, 0],
+      [this.image.height, this.image.width],
+    ],
+    center: [this.image.height / 2, this.image.width / 2],
     zoom: -1,
     scrollWheelZoom: false,
-    attributionControl:  false
+    attributionControl: false,
   });
 
   L.imageOverlay(this.image.src, bounds).addTo(this.map);
   this.fitBounds();
 };
 
-NavigationMapView.prototype.fitBounds = function() {
+NavigationMapView.prototype.fitBounds = function () {
   var image_ratio = this.image.height / this.image.width;
   var map_ratio = this.map_object.offsetHeight / this.map_object.offsetWidth;
 
-  if(image_ratio > map_ratio) {
-    this.map.fitBounds([[0,0], [0,this.image.width]]);
+  if (image_ratio > map_ratio) {
+    this.map.fitBounds([
+      [0, 0],
+      [0, this.image.width],
+    ]);
+  } else {
+    this.map.fitBounds([
+      [0, 0],
+      [this.image.height, 0],
+    ]);
   }
-  else {
-    this.map.fitBounds([[0,0], [this.image.height,0]]);
-  }
-  this.map.setView([this.image.height/2, this.image.width/2]);
+  this.map.setView([this.image.height / 2, this.image.width / 2]);
 };
 
-NavigationMapView.prototype.createAreas = function() {
+NavigationMapView.prototype.createAreas = function () {
   var self = this;
-  self.forEachBlueprint(function(id, geoarea) {
+  self.forEachBlueprint(function (id, geoarea) {
     new L.GeoJSON(geoarea, {
-      onEachFeature: function(feature, layer) {
+      onEachFeature: function (feature, layer) {
         layer._leaflet_id = id;
         self.setLayerProperties(layer, geoarea);
         self.attachEditorEvents(layer);
-      }
+      },
     }).addTo(self.map);
   });
 };
 
 NavigationMapView.prototype.setLayerProperties = function (layer, area) {
   var props = area.properties;
-  if(props) {
-    if(props.color) {
-      layer.setStyle({fillColor: props.color, color: props.color});
+  if (props) {
+    if (props.color) {
+      layer.setStyle({ fillColor: props.color, color: props.color });
     }
     this.setLayerPropertiesCallback(layer, props);
   }
@@ -84,25 +97,25 @@ NavigationMapView.prototype.setLayerProperties = function (layer, area) {
 NavigationMapView.prototype.attachEditorEvents = function (layer) {
   var self = this;
 
-  layer.on('mouseover', function(e) {
-    e.target.getElement().classList.add('selected')
+  layer.on("mouseover", function (e) {
+    e.target.getElement().classList.add("selected");
   });
 
-  layer.on('mouseout', function(e) {
-    e.target.getElement().classList.remove('selected')
+  layer.on("mouseout", function (e) {
+    e.target.getElement().classList.remove("selected");
   });
 
-  layer.on('click', function(e) {
+  layer.on("click", function (e) {
     self.clickAreaCallback(e.target, self);
   });
 };
 
 // register callback to handle area clicks
-NavigationMapView.prototype.onClickArea = function(callback) {
+NavigationMapView.prototype.onClickArea = function (callback) {
   this.clickAreaCallback = callback;
 };
 
-NavigationMapView.prototype.onSetLayerProperties = function(callback) {
+NavigationMapView.prototype.onSetLayerProperties = function (callback) {
   this.setLayerPropertiesCallback = callback;
 };
 
@@ -110,13 +123,13 @@ NavigationMapView.prototype.forEachBlueprint = function (callback) {
   for (var id in this.blueprint) {
     var geoarea = this.blueprint[id];
     // avoid non-polygons for the moment
-    if(!geoarea.geometry || geoarea.geometry.type !== 'Polygon') continue;
+    if (!geoarea.geometry || geoarea.geometry.type !== "Polygon") continue;
     callback(id, geoarea);
   }
 };
 
 NavigationMapView.prototype.reload = function () {
-  if(this.map) {
+  if (this.map) {
     this.map.invalidateSize(true);
     this.fitBounds();
   }
