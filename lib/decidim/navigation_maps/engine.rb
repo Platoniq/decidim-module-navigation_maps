@@ -9,10 +9,6 @@ module Decidim
     class Engine < ::Rails::Engine
       isolate_namespace Decidim::NavigationMaps
 
-      initializer "decidim_navigation_maps.assets" do |app|
-        app.config.assets.precompile += %w(decidim_navigation_maps_manifest.js decidim_navigation_maps_manifest.css)
-      end
-
       initializer "decidim.navigation_maps.content_blocks" do
         Decidim.content_blocks.register(:homepage, :navigation_map) do |content_block|
           content_block.cell = "decidim/navigation_maps/content_blocks/navigation_map"
