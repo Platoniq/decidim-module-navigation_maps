@@ -21,12 +21,3 @@ Decidim::Webpacker.register_entrypoints(
   decidim_navigation_maps: "#{base_path}/app/packs/entrypoints/decidim_navigation_maps.js",
   decidim_navigation_maps_admin: "#{base_path}/app/packs/entrypoints/decidim_navigation_maps_admin.js"
 )
-
-# If you want to import some extra SCSS files in the Decidim main SCSS file
-# without adding any extra stylesheet inclusion tags, you can use the following
-# method to register the stylesheet import for the main application.
-Decidim::Webpacker.register_stylesheet_import("stylesheets/decidim/navigation_maps/navigation_maps")
-
-# If you want to do the same but include the SCSS file for the admin panel's
-# main SCSS file, you can use the following method.
-Decidim::Webpacker.register_stylesheet_import("stylesheets/decidim/navigation_maps/admin/navigation_maps", group: :admin)
