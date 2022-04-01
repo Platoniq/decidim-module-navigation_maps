@@ -24,7 +24,7 @@ homepage only).
 Add this line to your application's Gemfile:
 
 ```ruby
-gem "decidim-navigation_maps", "~> 1.2.0"
+gem "decidim-navigation_maps"
 ```
 
 And then execute (remember to repeat this if you are upgrading from version 1.1):
@@ -32,16 +32,24 @@ And then execute (remember to repeat this if you are upgrading from version 1.1)
 ```bash
 bundle
 bundle exec rails decidim_navigation_maps:install:migrations
+bundle exec rails decidim_navigation_maps:webpacker:install
 bundle exec rails db:migrate
 ```
+
+> NOTE: the `decidim_notify:webpacker:install` is only necessary for Decidim versions starting at 0.25.
+
+The correct version of Navigation Maps should resolved automatically by the Bundler.
+However you can force some specific version using `gem "decidim-navigation_maps", "~> 1.3.0"` in the Gemfile.
+
 
 Depending on your Decidim version, choose the corresponding Plugin version to ensure compatibility:
 
 | Navigation Maps version | Compatible Decidim versions |
 |---|---|
-| 1.0.x | 0.18.x - 0.21.x |
-| 1.1.x | 0.22.x, 0.23.x |
+| 1.3.x | 0.25.x, 0.26.x |
 | 1.2.x | 0.24.x |
+| 1.1.x | 0.22.x, 0.23.x |
+| 1.0.x | 0.18.x - 0.21.x |
 
 ## Contributing
 
