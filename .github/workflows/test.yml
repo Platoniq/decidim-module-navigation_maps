@@ -47,8 +47,8 @@ jobs:
       - run: bundle exec erblint app/{cells,views}/**/*.erb
         name: Lint ERB files
 
-      - run: npm run lint
-        name: Lint JS files
+      # - run: npm run lint
+      #   name: Lint JS files
 
       - name: Setup Database
         run: bundle exec rake test_app

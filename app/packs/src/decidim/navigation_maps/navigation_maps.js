@@ -3,18 +3,18 @@ import "jsviews/jsrender";
 
 $(function() {
 
-  var $maps = $('.navigation_maps .map');
-  var $tabs = $('#navigation_maps-tabs');
-  var maps = {};
-  var tmpl = $.templates("#navigation_maps-popup");
+  let $maps = $(".navigation_maps .map");
+  let $tabs = $("#navigation_maps-tabs");
+  let maps = {};
+  let tmpl = $.templates("#navigation_maps-popup");
 
   $maps.each(function() {
-    var id = $(this).data('id');
+    let id = $(this).data("id");
     maps[id] = new NavigationMapView(this);
     maps[id].onSetLayerProperties(function(layer, props) {
-      if(!props.popup) {
-        var node = document.createElement("div");
-        var html = tmpl.render(props);
+      if (!props.popup) {
+        let node = document.createElement("div");
+        let html = tmpl.render(props);
         $(node).html(html);
 
         layer.bindPopup(node, {
@@ -28,13 +28,13 @@ $(function() {
       }
     });
     maps[id].onClickArea(function(area) {
-      var popup = area.feature.properties && area.feature.properties.link && area.feature.properties.popup;
-      if(popup) location = area.feature.properties.link;
+      let popup = area.feature.properties && area.feature.properties.link && area.feature.properties.popup;
+      if (popup) {location = area.feature.properties.link;}
     });
   });
 
-  $tabs.on('change.zf.tabs', function(e, $tab, $content) {
-    var id = $content.find('.map').data('id');
+  $tabs.on("change.zf.tabs", function(e, $tab, $content) {
+    let id = $content.find(".map").data("id");
     maps[id].reload();
   });
 
