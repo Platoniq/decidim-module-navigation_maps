@@ -1,6 +1,6 @@
 // Creates a map view
-//= require leaflet
-//= require leaflet-geoman.min
+import '@geoman-io/leaflet-geoman-free';  
+import '@geoman-io/leaflet-geoman-free/dist/leaflet-geoman.css';  
 
 function NavigationMapView(map_object, callback) {
   var self = this;

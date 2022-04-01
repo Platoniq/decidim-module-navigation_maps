@@ -24,17 +24,18 @@ if !ENV["SKIP_MODULE_SEEDS"] && (!Rails.env.production? || ENV["SEED"])
   blueprint1 = Decidim::NavigationMaps::Blueprint.create(
     organization: organization,
     content_block: content_block,
-    image: File.new(File.join(seeds_root, "antarctica.png")),
     title: Decidim::Faker::Localized.sentence(word_count: 2),
     description: Decidim::Faker::Localized.sentence(word_count: 10)
   )
 
-  Decidim::NavigationMaps::Blueprint.create(
+  blueprint2 = Decidim::NavigationMaps::Blueprint.create(
     organization: organization,
-    image: File.new(File.join(seeds_root, "penguins.jpg")),
     title: Decidim::Faker::Localized.sentence(word_count: 2),
     description: Decidim::Faker::Localized.sentence(word_count: 10)
   )
+
+  blueprint1.image.attach(io: File.open(File.join(seeds_root, "antarctica.png")), filename: "antarctica.png", content_type: "image/png")
+  blueprint2.image.attach(io: File.open(File.join(seeds_root, "penguins.jpg")), filename: "penguins.jpg", content_type: "image/jpeg")
 
   Decidim::NavigationMaps::BlueprintArea.create(
     blueprint: blueprint1,
@@ -84,7 +85,7 @@ if !ENV["SKIP_MODULE_SEEDS"] && (!Rails.env.production? || ENV["SEED"])
     link_type: "link",
     color: "#ffbb00",
     title: { en: "Penguins" },
-    description: { en: "Penguins are beatiful animals" }
+    description: { en: "Penguins are beautiful animals" }
   )
 
   Decidim::NavigationMaps::BlueprintArea.create(
@@ -121,10 +122,10 @@ if !ENV["SKIP_MODULE_SEEDS"] && (!Rails.env.production? || ENV["SEED"])
     blueprint = Decidim::NavigationMaps::Blueprint.create(
       organization: organization,
       content_block: content_block,
-      image: File.new(File.join(seeds_root, "pla-cerda.jpg")),
       title: Decidim::Faker::Localized.sentence(word_count: 2),
       description: Decidim::Faker::Localized.sentence(word_count: 10)
     )
+    blueprint1.image.attach(io: File.open(File.join(seeds_root, "pla-cerda.jpg")), filename: "pla-cerda.jpg", content_type: "image/jpeg")
 
     Decidim::NavigationMaps::BlueprintArea.create(
       blueprint: blueprint,

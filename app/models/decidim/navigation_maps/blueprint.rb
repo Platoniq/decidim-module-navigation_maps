@@ -4,6 +4,8 @@ module Decidim
   module NavigationMaps
     # Abstract class from which all models in this engine inherit.
     class Blueprint < ApplicationRecord
+      include Decidim::HasUploadValidations
+
       self.table_name = "decidim_navigation_maps_blueprints"
 
       attribute :height, :integer, default: 475
@@ -16,11 +18,10 @@ module Decidim
                dependent: :destroy
 
       validates :organization, presence: true
-      validates :image,
-                file_content_type: { allow: ["image/jpeg", "image/png", "image/svg+xml"] }
       validates :height, numericality: { greater_than: 0 }
 
-      mount_uploader :image, Decidim::NavigationMaps::BlueprintUploader
+      has_one_attached :image
+      validates_upload :image, uploader: Decidim::NavigationMaps::BlueprintUploader
 
       def blueprint
         areas.map { |area| [area.area_id.to_s, area.to_geoson] }.to_h

@@ -1,8 +1,5 @@
-// Place all the behaviors and hooks related to the matching controller here.
-// All this logic will automatically be available in application.js.
-//= require decidim/navigation_maps/map_view
-//= require jsrender.min
-//= require_self
+import "decidim/navigation_maps/map_view.js";
+import "jsviews/jsrender";
 
 $(function() {
 

@@ -178,6 +178,11 @@
       "value-list-max-empty-lines": 0
     }
   },
+  "dependencies": {
+    "@geoman-io/leaflet-geoman-free": "^2.11.4",
+    "jquery-form": "^4.3.0",
+    "jsviews": "^1.0.11"
+  },
   "devDependencies": {
     "eslint": "^7.8.1",
     "eslint-config-airbnb-base": "^14.2.0",
