@@ -7,7 +7,7 @@ module Decidim
       delegate :available_locales, to: :current_organization
 
       def valid_blueprints
-        content_block_blueprints.where.not(image: [nil, ""]).order(:created_at)
+        content_block_blueprints.joins(:image_attachment).order(:created_at)
       end
 
       def valid_blueprints?
