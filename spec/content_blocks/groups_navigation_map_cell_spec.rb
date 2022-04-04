@@ -30,8 +30,8 @@ module Decidim::NavigationMaps::ContentBlocks
 
     context "when there are blueprints in the content block" do
       it "contains the map" do
-        expect(subject.to_s).to include(group_blueprint.image.url)
-        expect(subject.to_s).not_to include(organization_homepage_blueprint.image.url)
+        expect(subject.to_s).to include(group_blueprint.attached_uploader(:image).path)
+        expect(subject.to_s).not_to include(organization_homepage_blueprint.attached_uploader(:image).path)
       end
     end
   end
