@@ -24,7 +24,7 @@ module Decidim::NavigationMaps::ContentBlocks
 
     context "when there are blueprints in the organization" do
       it "contains the map" do
-        expect(subject.to_s).to include(blueprint.image.url)
+        expect(subject.to_s).to include(blueprint.attached_uploader(:image).path)
       end
 
       it "contains the navigation tabs" do
@@ -37,7 +37,7 @@ module Decidim::NavigationMaps::ContentBlocks
 
       context "and there's only one blueprint" do
         it "contains the map" do
-          expect(subject.to_s).to include(blueprint.image.url)
+          expect(subject.to_s).to include(blueprint.attached_uploader(:image).path)
         end
 
         it "contains the navigation tabs" do
@@ -49,7 +49,7 @@ module Decidim::NavigationMaps::ContentBlocks
         let!(:blueprint2) { create(:blueprint, organization: organization, content_block: content_block) }
 
         it "contains the map" do
-          expect(subject.to_s).to include(blueprint.image.url)
+          expect(subject.to_s).to include(blueprint.attached_uploader(:image).path)
         end
 
         it "contains the navigation tabs" do

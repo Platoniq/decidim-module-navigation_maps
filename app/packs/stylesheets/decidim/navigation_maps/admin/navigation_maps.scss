@@ -2,10 +2,10 @@
 //= require leaflet-geoman
 //= require_self
 
-@import "decidim/variables";
-@import "decidim/utils/settings";
-@import "decidim/utils/mixins";
-@import "decidim/navigation_maps/variables";
+@import "stylesheets/decidim/variables";
+@import "stylesheets/decidim/utils/settings";
+@import "stylesheets/decidim/utils/mixins";
+@import "stylesheets/decidim/navigation_maps/variables";
 
 .navigation_maps.admin {
   .accordion-item {

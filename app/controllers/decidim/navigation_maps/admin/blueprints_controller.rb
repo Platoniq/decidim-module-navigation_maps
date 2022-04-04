@@ -13,7 +13,7 @@ module Decidim
         end
 
         def show
-          render json: organization_blueprints.find(params[:id])
+          render json: organization_blueprints.find(params[:id]).to_json(except: :image)
         end
 
         def create

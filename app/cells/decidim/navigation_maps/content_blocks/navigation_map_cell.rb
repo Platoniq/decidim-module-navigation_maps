@@ -42,6 +42,11 @@ module Decidim
 
           " class=\"#{class_string}\""
         end
+
+        def image_path(image, options = {})
+          options.merge!({ only_path: true })
+          Rails.application.routes.url_helpers.rails_blob_url(image, options)
+        end
       end
     end
   end

@@ -26,6 +26,15 @@ module Decidim
         def label
           I18n.t("decidim.content_blocks.html.html_content")
         end
+
+        def image?(frm)
+          frm.image.attached?
+        end
+
+        def image_path(image, options = {})
+          options.merge!({ only_path: true })
+          Rails.application.routes.url_helpers.rails_blob_url(image, options)
+        end
       end
     end
   end

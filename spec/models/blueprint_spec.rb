@@ -30,7 +30,11 @@ module Decidim
         let(:blueprint) do
           build(
             :blueprint,
-            image: Rack::Test::UploadedFile.new(image_path, "image/jpg")
+            image: ActiveStorage::Blob.create_and_upload!(
+              io: File.open(image_path),
+              filename: "image.jpeg",
+              content_type: "image/jpeg"
+            )
           )
         end
 

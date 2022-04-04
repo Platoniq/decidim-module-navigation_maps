@@ -3,7 +3,7 @@
 require "spec_helper"
 require "carrierwave/test/matchers"
 
-module Decidim::NavigationMaps
+module Decidim::NavigationMaps::Cw
   describe BlueprintUploader do
     include CarrierWave::Test::Matchers
 

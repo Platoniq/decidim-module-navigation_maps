@@ -19,7 +19,7 @@ module Decidim::NavigationMaps::ContentBlocks
 
     context "when there are blueprints in the organization" do
       it "contains the map" do
-        expect(subject.to_s).to include(blueprint.image.url)
+        expect(subject.to_s).to include(blueprint.attached_uploader(:image).path)
       end
 
       it "Cell returns a form" do
