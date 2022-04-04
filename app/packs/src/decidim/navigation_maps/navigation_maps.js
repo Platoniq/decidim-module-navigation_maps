@@ -1,4 +1,4 @@
-import "src/decidim/navigation_maps/map_view.js";
+import NavigationMapView from "src/decidim/navigation_maps/map_view.js";
 import "jsviews/jsrender";
 
 $(function() {
@@ -29,7 +29,9 @@ $(function() {
     });
     maps[id].onClickArea(function(area) {
       let popup = area.feature.properties && area.feature.properties.link && area.feature.properties.popup;
-      if (popup) {location = area.feature.properties.link;}
+      if (popup) {
+        location = area.feature.properties.link;
+      }
     });
   });
 

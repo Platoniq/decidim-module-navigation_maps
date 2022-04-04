@@ -13,6 +13,8 @@
     },
     "globals": {
         "require": false,
+        "L": false,
+        "Foundation": false,
         "$": false,
         "jQuery": false,
         "Rails": false
