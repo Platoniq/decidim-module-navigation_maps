@@ -47,10 +47,6 @@ namespace :decidim_navigation_maps do
       @rails_app_path ||= Rails.root
     end
 
-    def copy_awesome_file_to_application(origin_path, destination_path = origin_path)
-      FileUtils.cp(navigation_maps_path.join(origin_path), rails_app_path.join(destination_path))
-    end
-
     def system!(command)
       system("cd #{rails_app_path} && #{command}") || abort("\n== Command #{command} failed ==")
     end

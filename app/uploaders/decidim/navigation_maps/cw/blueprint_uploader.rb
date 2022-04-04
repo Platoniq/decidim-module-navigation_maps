@@ -4,7 +4,7 @@ module Decidim
   module NavigationMaps
     module Cw
       # This class deals with uploading images to a Blueprints.
-      class BlueprintUploader < Decidim::ImageUploader
+      class BlueprintUploader < Decidim::Cw::ImageUploader
         process :validate_size, :validate_dimensions
 
         version :thumbnail do
