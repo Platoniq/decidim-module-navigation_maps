@@ -1,10 +1,11 @@
 // Creates a map view
 import "leaflet";
+import "leaflet/dist/leaflet.css";
 import "@geoman-io/leaflet-geoman-free";
 import "@geoman-io/leaflet-geoman-free/dist/leaflet-geoman.css";
 
 export default class NavigationMapView {
-  constructor(map_object, callback) {
+  constructor(map_object, imageDecorator) {
     this.features = {};
     this.map_object = map_object;
     this.id = map_object.dataset.id;
@@ -15,8 +16,8 @@ export default class NavigationMapView {
     this.image = new Image();
     this.image.onload = () => {
       this.createMap();
-      if (typeof callback === "function") {
-        return callback(this);
+      if (typeof imageDecorator === "function") {
+        imageDecorator(this);
       } else if (this.blueprint) {
         this.createAreas();
       }
@@ -25,6 +26,7 @@ export default class NavigationMapView {
     this.clickAreaCallback = () => {};
     this.setLayerPropertiesCallback = () => {};
   }
+
   createMap() {
     let bounds = [[0, 0], [this.image.height, this.image.width]];
     this.map = L.map(this.map_object, {
@@ -107,7 +109,7 @@ export default class NavigationMapView {
     for (let id in this.blueprint) {
       let geoarea = this.blueprint[id];
       // avoid non-polygons for the moment
-      if (geoarea.geometry && geoarea.geometry.type !== "Polygon") {
+      if (geoarea.geometry && geoarea.geometry.type === "Polygon") {
         decorator(id, geoarea);
       }
     }
