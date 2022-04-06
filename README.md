@@ -36,7 +36,7 @@ bundle exec rails decidim_navigation_maps:webpacker:install
 bundle exec rails db:migrate
 ```
 
-> NOTE: the `decidim_notify:webpacker:install` is only necessary for Decidim versions starting at 0.25.
+> NOTE: the `decidim_navigation_maps:webpacker:install` is only necessary for Decidim versions starting at 0.25.
 
 If you are upgrading from a version prior to 1.3, make sure that you migrate your existing images to Active Storae:
 
