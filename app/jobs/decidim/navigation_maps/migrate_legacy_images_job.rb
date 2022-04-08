@@ -19,9 +19,9 @@ module Decidim
 
       def migrate_all!
         Decidim::CarrierWaveMigratorService.migrate_attachment!(
-          klass: Decidim::NavigationMaps::BluePrint,
+          klass: Decidim::NavigationMaps::Blueprint,
           cw_attribute: "image",
-          cw_uploader: Decidim::NavigationMaps::Cw::ImageUploader,
+          cw_uploader: Decidim::NavigationMaps::Cw::BlueprintUploader,
           as_attribute: "image",
           logger: @logger,
           routes_mappings: routes_mappings
