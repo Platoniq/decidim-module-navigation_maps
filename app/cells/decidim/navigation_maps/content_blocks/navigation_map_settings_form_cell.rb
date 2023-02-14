@@ -28,7 +28,7 @@ module Decidim
         end
 
         def image?(frm)
-          frm.image.attached?
+          frm.image.present?
         end
 
         def image_path(image, options = {})
