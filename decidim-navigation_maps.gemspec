@@ -22,4 +22,5 @@ Gem::Specification.new do |s|
   s.add_dependency "decidim-core", Decidim::NavigationMaps::DECIDIM_VERSION
 
   s.add_development_dependency "decidim-dev", Decidim::NavigationMaps::DECIDIM_VERSION
+  s.metadata["rubygems_mfa_required"] = "true"
 end

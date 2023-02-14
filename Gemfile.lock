@@ -2,8 +2,8 @@ PATH
   remote: .
   specs:
     decidim-navigation_maps (1.4.0)
-      decidim-admin (>= 0.25, < 0.28)
-      decidim-core (>= 0.25, < 0.28)
+      decidim-admin (>= 0.27, < 0.28)
+      decidim-core (>= 0.27, < 0.28)
 
 GEM
   remote: https://rubygems.org/
