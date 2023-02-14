@@ -43,7 +43,7 @@ module Decidim::NavigationMaps
         end
 
         it "image? responds true" do
-          expect(subject.image?).to eq(true)
+          expect(subject.image?).to be(true)
         end
       end
 
@@ -84,7 +84,7 @@ module Decidim::NavigationMaps
       let(:image) { nil }
 
       it "image? responds false" do
-        expect(subject.image?).not_to eq(true)
+        expect(subject.image?).not_to be(true)
       end
     end
   end

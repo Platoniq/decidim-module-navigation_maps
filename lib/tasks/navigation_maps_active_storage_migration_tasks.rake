@@ -15,9 +15,7 @@ namespace :navigation_maps do
         path = Rails.root.join("tmp/navigation_maps_editor_images_mappings.csv")
         dirname = File.dirname(path)
         FileUtils.mkdir_p(dirname) unless File.directory?(dirname)
-        File.open(path, "wb") do |file|
-          file.write(Decidim::Exporters::CSV.new(routes_mappings).export.read)
-        end
+        File.binwrite(path, Decidim::Exporters::CSV.new(routes_mappings).export.read)
       end
     end
 

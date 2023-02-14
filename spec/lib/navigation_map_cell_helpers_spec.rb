@@ -33,7 +33,7 @@ module Decidim::NavigationMaps
 
     describe "#valid_blueprints?" do
       it "returns true" do
-        expect(instance.valid_blueprints?).to eq(true)
+        expect(instance.valid_blueprints?).to be(true)
       end
     end
 

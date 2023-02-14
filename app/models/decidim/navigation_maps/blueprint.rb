@@ -17,14 +17,13 @@ module Decidim
                class_name: "Decidim::NavigationMaps::BlueprintArea",
                dependent: :destroy
 
-      validates :organization, presence: true
       validates :height, numericality: { greater_than: 0 }
 
       has_one_attached :image
       validates_upload :image, uploader: Decidim::NavigationMaps::BlueprintUploader
 
       def blueprint
-        areas.map { |area| [area.area_id.to_s, area.to_geoson] }.to_h
+        areas.to_h { |area| [area.area_id.to_s, area.to_geoson] }
       end
     end
   end
