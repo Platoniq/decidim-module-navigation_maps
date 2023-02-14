@@ -3,7 +3,7 @@
 module Decidim
   module NavigationMaps
     # This query finds the published blueprints for and organization
-    class OrganizationBlueprints < Rectify::Query
+    class OrganizationBlueprints < Decidim::Query
       def initialize(organization)
         @organization = organization
       end
