@@ -3,7 +3,7 @@
 module Decidim
   module NavigationMaps
     # This query finds the published blueprints for a content block
-    class ContentBlockBlueprints < Rectify::Query
+    class ContentBlockBlueprints < Decidim::Query
       def initialize(content_block)
         @content_block = content_block
       end

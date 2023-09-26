@@ -10,7 +10,7 @@ Gem::Specification.new do |s|
   s.email = ["ivan@platoniq.net"]
   s.license = "AGPL-3.0"
   s.homepage = "https://github.com/Platoniq/decidim-module-navigation_maps"
-  s.required_ruby_version = ">= 2.7"
+  s.required_ruby_version = ">= 3.0"
 
   s.name = "decidim-navigation_maps"
   s.summary = "A decidim navigation_maps module"
@@ -22,4 +22,5 @@ Gem::Specification.new do |s|
   s.add_dependency "decidim-core", Decidim::NavigationMaps::DECIDIM_VERSION
 
   s.add_development_dependency "decidim-dev", Decidim::NavigationMaps::DECIDIM_VERSION
+  s.metadata["rubygems_mfa_required"] = "true"
 end

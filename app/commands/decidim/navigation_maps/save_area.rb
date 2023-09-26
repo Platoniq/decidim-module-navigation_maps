@@ -3,7 +3,7 @@
 module Decidim
   module NavigationMaps
     # This command creates or updates areas for a blueprints
-    class SaveArea < Rectify::Command
+    class SaveArea < Decidim::Command
       # Creates or updates an area for a blueprint.
       #
       # form - The form with the data.

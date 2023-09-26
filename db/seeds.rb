@@ -2,7 +2,7 @@
 
 print "Skipping seeds for decidim_navigation maps as required by SKIP_MODULE_SEEDS\n" if ENV["SKIP_MODULE_SEEDS"]
 
-if !ENV["SKIP_MODULE_SEEDS"] && (!Rails.env.production? || ENV["SEED"])
+if !ENV["SKIP_MODULE_SEEDS"] && (!Rails.env.production? || ENV.fetch("SEED", nil))
 
   print "Creating seeds for decidim_navigation maps...\n" unless Rails.env.test?
 

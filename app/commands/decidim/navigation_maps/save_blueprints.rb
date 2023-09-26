@@ -4,7 +4,7 @@ module Decidim
   module NavigationMaps
     # This command creates or updates the blueprints for the organization and
     # content block.
-    class SaveBlueprints < Rectify::Command
+    class SaveBlueprints < Decidim::Command
       # Creates a blueprint.
       #
       # forms - The form with the data.

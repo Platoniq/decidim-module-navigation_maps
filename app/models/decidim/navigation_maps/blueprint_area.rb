@@ -12,8 +12,6 @@ module Decidim
 
       attribute :link_type, :string, default: "link"
 
-      validates :blueprint, presence: true
-
       def to_geoson
         {
           type: area_type,

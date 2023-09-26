@@ -55,7 +55,7 @@ module Decidim::NavigationMaps
       end
 
       it "updates the area" do
-        expect { subject.call }.to change(BlueprintArea, :count).by(0)
+        expect { subject.call }.not_to change(BlueprintArea, :count)
       end
     end
 
