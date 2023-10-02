@@ -1,6 +1,7 @@
 # Decidim::NavigationMaps
 
-![Test](https://github.com/Platoniq/decidim-module-navigation_maps/workflows/Test/badge.svg)
+[![[CI] Lint](https://github.com/Platoniq/decidim-module-navigation_maps/actions/workflows/lint.yml/badge.svg)](https://github.com/Platoniq/decidim-module-navigation_maps/actions/workflows/lint.yml)
+[![[CI] Test](https://github.com/Platoniq/decidim-module-navigation_maps/actions/workflows/test.yml/badge.svg)](https://github.com/Platoniq/decidim-module-navigation_maps/actions/workflows/test.yml)
 [![Maintainability](https://api.codeclimate.com/v1/badges/f69b2b0ab0ffcd26f002/maintainability)](https://codeclimate.com/github/Platoniq/decidim-module-navigation_maps/maintainability)
 [![Codecov](https://codecov.io/gh/Platoniq/decidim-module-navigation_maps/branch/master/graph/badge.svg?token=XhzWO0IiWt)](https://codecov.io/gh/Platoniq/decidim-module-navigation_maps)
 
