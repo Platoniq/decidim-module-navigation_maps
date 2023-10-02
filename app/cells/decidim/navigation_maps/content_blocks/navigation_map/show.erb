@@ -18,4 +18,7 @@
 </section>
 
 <%= render partial: "template" %>
+<% unless %w[here].include?(Decidim.config.maps&.fetch(:provider)) %>
+  <%= javascript_pack_tag "decidim_leaflet" %>
+<% end %>
 <%= javascript_pack_tag "decidim_navigation_maps" %>
