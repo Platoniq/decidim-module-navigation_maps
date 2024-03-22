@@ -19,7 +19,7 @@ module Decidim
         def create
           save_settings
           parse_blueprints
-          @form = form(BlueprintForms).from_params(params).with_context(current_organization: current_organization)
+          @form = form(BlueprintForms).from_params(params).with_context(current_organization:)
           SaveBlueprints.call(@form) do
             on(:ok) do
               render plain: I18n.t("navigation_maps.create.success", scope: "decidim")

@@ -17,9 +17,9 @@ module Decidim
           type: area_type,
           geometry: area,
           properties: {
-            link: link,
+            link:,
             popup: link_type == "direct",
-            color: color,
+            color:,
             title: translated_attribute(title),
             description: translated_attribute(description)
           }

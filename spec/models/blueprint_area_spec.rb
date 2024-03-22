@@ -8,8 +8,8 @@ module Decidim
       subject { blueprint_area }
 
       let(:organization) { create(:organization) }
-      let(:blueprint) { create(:blueprint, organization: organization) }
-      let(:blueprint_area) { build(:blueprint_area, blueprint: blueprint) }
+      let(:blueprint) { create(:blueprint, organization:) }
+      let(:blueprint_area) { build(:blueprint_area, blueprint:) }
       let(:area) do
         {
           "x" => "coord x",
@@ -31,7 +31,7 @@ module Decidim
 
       # TODO: validate json area
       context "when all fields are specified" do
-        let(:blueprint_area) { create(:blueprint_area, title: title, description: description, link: link, blueprint: blueprint) }
+        let(:blueprint_area) { create(:blueprint_area, title:, description:, link:, blueprint:) }
 
         it "saves data correctly" do
           subject.area = area
@@ -49,7 +49,7 @@ module Decidim
       end
 
       context "when no area" do
-        let!(:blueprint_area) { create(:blueprint_area, blueprint: blueprint) }
+        let!(:blueprint_area) { create(:blueprint_area, blueprint:) }
 
         it "save data without area" do
           subject.area = area

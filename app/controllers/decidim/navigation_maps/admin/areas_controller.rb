@@ -15,6 +15,10 @@ module Decidim
           render json: blueprint.areas
         end
 
+        def show
+          @form = form(AreaForm).from_model(area)
+        end
+
         def new
           @form = form(AreaForm).instance(current_blueprint: blueprint)
         end
@@ -35,10 +39,6 @@ module Decidim
               render json: { message: I18n.t("navigation_maps.admin.areas.create.error", scope: "decidim"), error: message }, status: :unprocessable_entity
             end
           end
-        end
-
-        def show
-          @form = form(AreaForm).from_model(area)
         end
 
         def update
@@ -82,7 +82,7 @@ module Decidim
         end
 
         def area
-          @area ||= BlueprintArea.find_by(area_id: params[:area_id], blueprint: blueprint)
+          @area ||= BlueprintArea.find_by(area_id: params[:area_id], blueprint:)
         end
 
         def blueprints_count

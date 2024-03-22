@@ -18,16 +18,16 @@ module Decidim::NavigationMaps
     end
 
     let(:instance) { klass.new(organization, content_block) }
-    let(:organization) { create :organization }
-    let(:content_block) { create :content_block, organization: organization, manifest_name: :navigation_map, scope_name: :homepage }
-    let(:other_content_block) { create :content_block, organization: organization, manifest_name: :navigation_map }
-    let!(:blueprint1) { create(:blueprint, organization: organization, created_at: Time.current.beginning_of_day + 1.minute, content_block: content_block) }
-    let!(:blueprint2) { create(:blueprint, image: nil, organization: organization, created_at: Time.current.beginning_of_day, content_block: content_block) }
-    let!(:blueprint_on_other_block) { create(:blueprint, organization: organization, content_block: other_content_block) }
+    let(:organization) { create(:organization) }
+    let(:content_block) { create(:content_block, organization:, manifest_name: :navigation_map, scope_name: :homepage) }
+    let(:other_content_block) { create(:content_block, organization:, manifest_name: :navigation_map) }
+    let!(:blueprint) { create(:blueprint, organization:, created_at: Time.current.beginning_of_day + 1.minute, content_block:) }
+    let!(:other_blueprint) { create(:blueprint, image: nil, organization:, created_at: Time.current.beginning_of_day, content_block:) }
+    let!(:blueprint_on_other_block) { create(:blueprint, organization:, content_block: other_content_block) }
 
     describe "#valid_blueprints" do
       it "returns one blueprint" do
-        expect(instance.valid_blueprints).to eq([blueprint1])
+        expect(instance.valid_blueprints).to eq([blueprint])
       end
     end
 
@@ -39,7 +39,7 @@ module Decidim::NavigationMaps
 
     describe "#blueprints" do
       it "returns two blueprints belonging to content_block" do
-        expect(instance.blueprints).to eq([blueprint2, blueprint1])
+        expect(instance.blueprints).to eq([other_blueprint, blueprint])
         expect(instance.blueprints).not_to include(blueprint_on_other_block)
       end
     end

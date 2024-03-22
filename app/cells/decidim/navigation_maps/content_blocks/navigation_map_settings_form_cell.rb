@@ -10,7 +10,7 @@ module Decidim
         view_paths << "#{Decidim::NavigationMaps::Engine.root}/app/cells/decidim/navigation_maps/content_blocks/navigation_map_settings_form"
 
         def blueprint_form(blueprint = nil)
-          blueprint ||= Blueprint.new(content_block: content_block)
+          blueprint ||= Blueprint.new(content_block:)
           BlueprintForm.from_model(blueprint).with_context(organization: current_organization)
         end
 

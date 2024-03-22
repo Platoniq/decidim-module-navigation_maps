@@ -3,12 +3,12 @@
 require "spec_helper"
 
 module Decidim::NavigationMaps::Admin
-  describe AreasController, type: :controller do
+  describe AreasController do
     routes { Decidim::NavigationMaps::AdminEngine.routes }
 
     let(:organization) { create(:organization) }
-    let(:user) { create(:user, :confirmed, :admin, organization: organization) }
-    let(:blueprint) { create(:blueprint, organization: organization) }
+    let(:user) { create(:user, :confirmed, :admin, organization:) }
+    let(:blueprint) { create(:blueprint, organization:) }
 
     let(:attributes) do
       {
@@ -16,11 +16,11 @@ module Decidim::NavigationMaps::Admin
         area_id: area.area_id,
         blueprint_area: {
           area: json,
-          id: id,
-          title: title,
+          id:,
+          title:,
           description: title,
-          link: link,
-          color: color
+          link:,
+          color:
         }
       }
     end
@@ -46,7 +46,7 @@ module Decidim::NavigationMaps::Admin
 
     describe "GET #show" do
       context "when area exists" do
-        let!(:area) { create(:blueprint_area, blueprint: blueprint) }
+        let!(:area) { create(:blueprint_area, blueprint:) }
 
         it "returns http success" do
           get :show, params: attributes
@@ -63,7 +63,7 @@ module Decidim::NavigationMaps::Admin
     end
 
     describe "POST #create" do
-      let!(:area) { create(:blueprint_area, blueprint: blueprint) }
+      let!(:area) { create(:blueprint_area, blueprint:) }
 
       it "returns http success" do
         post :create, params: attributes
@@ -72,7 +72,7 @@ module Decidim::NavigationMaps::Admin
     end
 
     describe "POST #update" do
-      let!(:area) { create(:blueprint_area, blueprint: blueprint) }
+      let!(:area) { create(:blueprint_area, blueprint:) }
 
       it "returns http success" do
         post :update, params: attributes

@@ -15,39 +15,39 @@ $(() => {
   let $tabs = $("#navigation_maps-tabs");
   let $accordion = $(".navigation_maps.admin .accordion");
   let editors = {};
-  let new_areas = {};
+  let newAreas = {};
 
   $maps.each((_i, el) => {
     let id = $(el).data("id");
     let table = document.getElementById(`navigation_maps-table-${id}`);
     editors[id] = new NavigationMapEditor(el, table);
-    editors[id].onCreateArea((area_id) => {
-      new_areas[area_id] = true;
+    editors[id].onCreateArea((areaId) => {
+      newAreas[areaId] = true;
     });
 
-    editors[id].onClickArea((area_id, area) => {
+    editors[id].onClickArea((areaId, area) => {
       $modal.find(".modal-content").html("");
       $modal.addClass("loading").foundation("open");
       $callout.hide();
       $callout.removeClass("alert success");
       // "new" form insted of editing
-      let rel = new_areas[area_id]
+      let rel = newAreas[areaId]
         ? "new"
-        : area_id;
+        : areaId;
       $modal.find(".modal-content").load(`/admin/navigation_maps/blueprints/${id}/areas/${rel}`, () => {
-        let $input1 = $modal.find('input[name="blueprint_area[area_id]"]');
+        let $input1 = $modal.find('input[name="blueprint_area[areaId]"]');
         let $input2 = $modal.find('input[name="blueprint_area[area_type]"]');
         let $input3 = $modal.find('input[name="blueprint_area[area]"]');
-        let a = area.toGeoJSON();
+        let geoJSON = area.toGeoJSON();
         $modal.removeClass("loading");
         if ($input1.length) { 
-          $input1.val(area_id); 
+          $input1.val(areaId); 
         }
         if ($input2.length) {
-          $input2.val(a.type);
+          $input2.val(geoJSON.type);
         }
         if ($input3.length) {
-          $input3.val(JSON.stringify(a));
+          $input3.val(JSON.stringify(geoJSON));
         }
         $modal.find("ul[data-tabs=true]").each(() => {
           new Foundation.Tabs($(el)); // eslint-disable-line
@@ -63,14 +63,14 @@ $(() => {
   });
 
   document.body.addEventListener("ajax:success", (responseText) => {
-    if (new_areas[responseText.detail[0].area]) {
-      delete new_areas[responseText.detail[0].area]
+    if (newAreas[responseText.detail[0].area]) {
+      delete newAreas[responseText.detail[0].area]
     }
-    let blueprint_id = responseText.detail[0].blueprint_id;
-    let area_id = responseText.detail[0].area_id;
+    let blueprintId = responseText.detail[0].blueprintId;
+    let areaId = responseText.detail[0].areaId;
     let area = responseText.detail[0].area;
-    editors[blueprint_id].setLayerProperties(editors[blueprint_id].map._layers[area_id], area);
-    editors[blueprint_id].blueprint[area_id] = area;
+    editors[blueprintId].setLayerProperties(editors[blueprintId].map._layers[areaId], area);
+    editors[blueprintId].blueprint[areaId] = area;
     $callout.contents("p").html(responseText.detail[0].message);
     $callout.addClass("success");
   });
@@ -80,7 +80,7 @@ $(() => {
     $modal.foundation("close");
   })
 
-  $tabs.on("change.zf.tabs", (e, $tab, $content) => {
+  $tabs.on("change.zf.tabs", (_event, $tab, $content) => {
     let id = $content.find(".map").data("id");
     if (id) {
       editors[id].reload();

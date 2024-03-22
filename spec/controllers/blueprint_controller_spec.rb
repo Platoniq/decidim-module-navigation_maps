@@ -3,10 +3,10 @@
 require "spec_helper"
 
 module Decidim::NavigationMaps::Admin
-  describe BlueprintsController, type: :controller do
+  describe BlueprintsController do
     routes { Decidim::NavigationMaps::AdminEngine.routes }
 
-    let(:user) { create(:user, :confirmed, :admin, organization: organization) }
+    let(:user) { create(:user, :confirmed, :admin, organization:) }
     let(:organization) { create(:organization) }
     let(:params) do
       {
@@ -33,12 +33,12 @@ module Decidim::NavigationMaps::Admin
     end
 
     describe "GET #show" do
-      let!(:blueprint) { create(:blueprint, organization: organization) }
+      let!(:blueprint) { create(:blueprint, organization:) }
 
       it "returns http success" do
         get :show, params: { id: blueprint.id }
         expect(response).to have_http_status(:success)
-        expect(JSON.parse(response.body)["id"]).to eq(blueprint.id)
+        expect(response.parsed_body["id"]).to eq(blueprint.id)
       end
     end
 
@@ -53,7 +53,7 @@ module Decidim::NavigationMaps::Admin
 
       context "when blueprint is present" do
         it "is parsed correctly" do
-          post :create, params: params
+          post(:create, params:)
           expect(response).to have_http_status(:success)
           expect(controller.params[:blueprints]["1"][:blueprint]).to eq("x" => 0.1, "y" => 0.2)
         end

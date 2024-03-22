@@ -6,13 +6,13 @@ module Decidim::NavigationMaps
   describe BlueprintForm do
     subject { described_class.from_params(attributes).with_context(context) }
 
-    let(:organization) { create :organization }
+    let(:organization) { create(:organization) }
     let(:attributes) do
       {
-        title: title,
-        height: height,
-        id: id,
-        image: image,
+        title:,
+        height:,
+        id:,
+        image:,
         blueprint: {
           "x" => "x data",
           "y" => "y data"
@@ -31,8 +31,7 @@ module Decidim::NavigationMaps
 
     context "when there is image" do
       before do
-        allow(subject.image).to receive(:url).and_return(true)
-        allow(subject.image).to receive(:content_type).and_return("image/jpeg")
+        allow(subject.image).to receive_messages(url: true, content_type: "image/jpeg")
       end
 
       context "when everything is OK" do

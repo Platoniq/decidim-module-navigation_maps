@@ -6,7 +6,7 @@ module Decidim::NavigationMaps
   describe SaveArea do
     subject { described_class.new(form) }
 
-    let(:blueprint) { create :blueprint }
+    let(:blueprint) { create(:blueprint) }
     let(:form) do
       AreaForm
         .from_params(attributes)
@@ -15,11 +15,11 @@ module Decidim::NavigationMaps
     let(:attributes) do
       {
         area: data,
-        area_id: area_id,
-        no_popup: no_popup,
-        title: title,
+        area_id:,
+        no_popup:,
+        title:,
         description: title,
-        link: link,
+        link:,
         current_blueprint: blueprint
       }
     end
@@ -47,7 +47,7 @@ module Decidim::NavigationMaps
     end
 
     context "when id exists" do
-      let!(:blueprint_area) { create(:blueprint_area, blueprint: blueprint) }
+      let!(:blueprint_area) { create(:blueprint_area, blueprint:) }
       let(:area_id) { blueprint_area.area_id }
 
       it "broadcasts ok" do
@@ -60,7 +60,7 @@ module Decidim::NavigationMaps
     end
 
     context "when id does not exist" do
-      let(:blueprint_area) { build(:blueprint_area, id: id, blueprint: blueprint) }
+      let(:blueprint_area) { build(:blueprint_area, id:, blueprint:) }
       let(:id) { 11_101 }
 
       it "broadcasts ok" do

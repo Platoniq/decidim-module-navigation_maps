@@ -8,7 +8,7 @@ FactoryBot.define do
     image { Decidim::Dev.test_file("city.jpeg", "image/jpeg") }
     title { Decidim::Faker::Localized.word }
     description { generate_localized_title }
-    content_block { create(:content_block, organization: organization) }
+    content_block { create(:content_block, organization:) }
   end
 
   factory :blueprint_area, class: "Decidim::NavigationMaps::BlueprintArea" do

@@ -35,9 +35,8 @@ $(function() {
     });
   });
 
-  $tabs.on("change.zf.tabs", function(e, $tab, $content) {
+  $tabs.on("change.zf.tabs", function(_event, $tab, $content) {
     let id = $content.find(".map").data("id");
     maps[id].reload();
   });
-
 });

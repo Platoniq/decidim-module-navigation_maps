@@ -1,4 +1,4 @@
-<%= stylesheet_pack_tag "decidim_navigation_maps" %>
+<%= append_stylesheet_pack_tag "decidim_navigation_maps" %>
 <%= render partial: "styles", locals: { blueprints: valid_blueprints } %>
 
 <section<%= class_tag(section_classes) %>>
@@ -19,6 +19,6 @@
 
 <%= render partial: "template" %>
 <% unless %w[here].include?(Decidim.config.maps&.fetch(:provider)) %>
-  <%= javascript_pack_tag "decidim_leaflet" %>
+  <%= append_javascript_pack_tag "decidim_leaflet" %>
 <% end %>
-<%= javascript_pack_tag "decidim_navigation_maps" %>
+<%= append_javascript_pack_tag "decidim_navigation_maps" %>

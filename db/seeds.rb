@@ -22,14 +22,14 @@ if !ENV["SKIP_MODULE_SEEDS"] && (!Rails.env.production? || ENV.fetch("SEED", nil
   )
 
   blueprint1 = Decidim::NavigationMaps::Blueprint.create(
-    organization: organization,
-    content_block: content_block,
+    organization:,
+    content_block:,
     title: Decidim::Faker::Localized.sentence(word_count: 2),
     description: Decidim::Faker::Localized.sentence(word_count: 10)
   )
 
   blueprint2 = Decidim::NavigationMaps::Blueprint.create(
-    organization: organization,
+    organization:,
     title: Decidim::Faker::Localized.sentence(word_count: 2),
     description: Decidim::Faker::Localized.sentence(word_count: 10)
   )
@@ -120,15 +120,15 @@ if !ENV["SKIP_MODULE_SEEDS"] && (!Rails.env.production? || ENV.fetch("SEED", nil
     )
 
     blueprint = Decidim::NavigationMaps::Blueprint.create(
-      organization: organization,
-      content_block: content_block,
+      organization:,
+      content_block:,
       title: Decidim::Faker::Localized.sentence(word_count: 2),
       description: Decidim::Faker::Localized.sentence(word_count: 10)
     )
     blueprint1.image.attach(io: File.open(File.join(seeds_root, "pla-cerda.jpg")), filename: "pla-cerda.jpg", content_type: "image/jpeg")
 
     Decidim::NavigationMaps::BlueprintArea.create(
-      blueprint: blueprint,
+      blueprint:,
       area_id: "10",
       area_type: "Feature",
       area: {
