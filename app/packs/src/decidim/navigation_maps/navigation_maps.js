@@ -1,15 +1,17 @@
-import NavigationMapView from "src/decidim/navigation_maps/map_view.js";
+import NavigationMapView from "src/decidim/navigation_maps/map_view";
+import initializeElement from "src/decidim/navigation_maps/tabs_manager";
 import "jsviews/jsrender";
 
 $(function() {
-
   let $maps = $(".navigation_maps .map");
-  let $tabs = $("#navigation_maps-tabs");
   let maps = {};
   let tmpl = $.templates("#navigation_maps-popup");
+  let tabs = document.querySelectorAll("#tabs__navigation_maps ul.nav-tabs > li");
 
   $maps.each(function() {
+    // eslint-disable-next-line no-invalid-this
     let id = $(this).data("id");
+    // eslint-disable-next-line no-invalid-this
     maps[id] = new NavigationMapView(this);
     maps[id].onSetLayerProperties(function(layer, props) {
       if (!props.popup) {
@@ -35,8 +37,18 @@ $(function() {
     });
   });
 
-  $tabs.on("change.zf.tabs", function(_event, $tab, $content) {
-    let id = $content.find(".map").data("id");
-    maps[id].reload();
-  });
+  for (let idx = 0; idx < tabs.length; idx += 1) {
+    tabs[idx].addEventListener("click", function(event) {
+      event.preventDefault();
+      const anchorReference = event.target;
+      const activePaneId = anchorReference.getAttribute("href");
+      const activePane = document.querySelector(activePaneId);
+      const id = activePane.querySelector(".map")?.dataset?.id;
+      if (id) {
+        maps[id].reload();
+      }
+    });
+  }
 });
+
+window.addEventListener("load", initializeElement("tabs__navigation_maps"));

@@ -39,7 +39,7 @@ module Decidim
           return unless params[:content_block][:settings]
 
           @form = form(Decidim::Admin::ContentBlockForm).from_params(params)
-          Decidim::Admin::UpdateContentBlock.call(@form, content_block, content_block.scope_name&.to_sym)
+          Decidim::Admin::ContentBlocks::UpdateContentBlock.call(@form, content_block, content_block.scope_name&.to_sym)
         end
 
         def content_block

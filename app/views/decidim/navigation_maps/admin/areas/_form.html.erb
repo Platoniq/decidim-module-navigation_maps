@@ -1,39 +1,47 @@
 <div class="field">
   <%= form.translated :text_field, :title, autofocus: true, class: "navigation_maps-area-direct" %>
+</div>
+<div class="field">
   <%= form.translated :text_area, :description, class: "navigation_maps-area-direct" %>
-
+</div>
+<div class="field">
   <%= form.text_field :link %>
   <p class="help-text" id="blueprint_area_link-help"><%= link_suggestions %></p>
-
+</div>
+<div class="field">
   <%= form.color_field :color %>
-
+</div>
+<div class="field">
   <%= form.check_box :no_popup, label: t(".no_popup") %>
 </div>
 
-<script type="text/javascript">
+<%= form.hidden_field :area %>
+<%= form.hidden_field :area_id %>
+<%= form.hidden_field :area_type %>
 
-(function() {
-  var area_link = document.getElementById('blueprint_area_link');
-  var help = document.getElementById('blueprint_area_link-help');
-  var direct = document.getElementById('blueprint_area_no_popup');
-  var direct_elements = document.getElementsByClassName('navigation_maps-area-direct');
+<script>
+  (function() {
+    const areaLink = document.getElementById('blueprint_area_link');
+    const help = document.getElementById('blueprint_area_link-help');
+    const direct = document.getElementById('blueprint_area_no_popup');
+    const directElements = document.getElementsByClassName('navigation_maps-area-direct');
 
-  for(var a of help.getElementsByTagName('a')) {
-    a.addEventListener("click", function(e) {
-      area_link.value = e.target.hash;
-      e.preventDefault();
-    });
-  }
-
-  function changeDirects(checked) {
-    for(var input of direct_elements) {
-      input.disabled = checked;
+    for (let a of help.getElementsByTagName('a')) {
+      a.addEventListener("click", function(e) {
+        areaLink.value = e.target.hash;
+        e.preventDefault();
+      });
     }
-  }
-  changeDirects(direct.checked);
-  direct.addEventListener('change', function(e) {
-    changeDirects(e.target.checked);
-  });
-})();
 
+    function changeDirects(checked) {
+      for (let input of directElements) {
+        input.disabled = checked;
+      }
+    }
+
+    changeDirects(direct.checked);
+    direct.addEventListener('change', function(e) {
+      changeDirects(e.target.checked);
+    });
+  })();
 </script>

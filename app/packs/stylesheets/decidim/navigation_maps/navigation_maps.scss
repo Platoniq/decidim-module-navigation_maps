@@ -3,7 +3,7 @@
 @import "stylesheets/decidim/navigation_maps/mixins";
 @import "stylesheets/decidim/navigation_maps/variables";
 
-.home-section {
+.home__section {
   .navigation_maps {
     margin: 1em 0;
 
@@ -18,7 +18,7 @@
       }
     }
 
-    .tabs-content {
+    .tab-content {
       border-color: #f4f4f4;
     }
 
@@ -33,6 +33,12 @@
     .map-info__content {
       padding-top: 0;
       padding-left: 0;
+
+      .map-info__button {
+        a.button {
+          width: 100%;
+        }
+      }
     }
 
     .leaflet-container {
@@ -42,7 +48,7 @@
       .navigation_map-info {
         border-style: solid;
         border-width: 3px;
-        border-radius: 10px;
+        border-radius: 14px;
 
         .leaflet-popup-content-wrapper {
           border-radius: 10px;
@@ -63,6 +69,25 @@
       &.selected {
         opacity: 1;
       }
+    }
+  }
+}
+
+#tabs__navigation_maps {
+  .tab-content {
+    float: left;
+    width: 100%;
+
+    > .tab-pane {
+      display: none;
+
+      &.is-active {
+        display: block;
+      }
+    }
+
+    > .is-active {
+      display: block;
     }
   }
 }

@@ -106,6 +106,7 @@ export default class NavigationMapView {
   };
 
   forEachBlueprint (decorator) {
+    // eslint-disable-next-line guard-for-in
     for (let id in this.blueprint) {
       let geoarea = this.blueprint[id];
       // avoid non-polygons for the moment

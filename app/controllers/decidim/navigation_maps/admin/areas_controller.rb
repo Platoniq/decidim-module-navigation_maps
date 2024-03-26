@@ -42,7 +42,9 @@ module Decidim
         end
 
         def update
+          parse_areas
           @form = form(AreaForm).from_params(params, current_blueprint: blueprint)
+
           SaveArea.call(@form) do
             on(:ok) do |area|
               render json: { message: I18n.t("navigation_maps.admin.areas.update.success", scope: "decidim"),

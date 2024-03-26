@@ -1,6 +1,6 @@
 // Creates a map
 import "leaflet"
-import NavigationMapView from "src/decidim/navigation_maps/map_view.js";
+import NavigationMapView from "src/decidim/navigation_maps/map_view";
 
 export default class NavigationMapEditor extends NavigationMapView {
   constructor(mapObject, tableObject) {
@@ -35,6 +35,7 @@ export default class NavigationMapEditor extends NavigationMapView {
     });
 
     this.map.on("pm:remove", (event) => {
+      // eslint-disable-next-line prefer-reflect
       delete this.blueprint[event.layer._leaflet_id];
       this.removeAreaCallback(event.layer._leaflet_id, event.layer, this);
     });

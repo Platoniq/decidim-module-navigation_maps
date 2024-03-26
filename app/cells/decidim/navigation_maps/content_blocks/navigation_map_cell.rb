@@ -16,8 +16,6 @@ module Decidim
         end
 
         def tabs
-          return if model.settings.autohide_tabs? && valid_blueprints.count < 2
-
           render partial: "tabs", locals: { tabs: valid_blueprints }
         end
 
@@ -25,8 +23,12 @@ module Decidim
           translated_attribute(model.settings.title)
         end
 
+        def autohide_tabs?
+          model.settings.autohide_tabs? && valid_blueprints.count < 2
+        end
+
         def section_classes
-          "extended home-section"
+          "home__section"
         end
 
         def wrapper_classes
