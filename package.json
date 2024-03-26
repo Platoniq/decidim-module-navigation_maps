@@ -5,8 +5,8 @@
   "scripts": {
     "lint": "eslint -c .eslintrc.json --ext .js app/packs/",
     "lint-fix": "eslint -c .eslintrc.json --ext .js app/packs/ --fix",
-    "stylelint": "stylelint **/*.scss",
-    "stylelint-fix": "stylelint **/*.scss --fix",
+    "stylelint": "stylelint app/packs/stylesheets/**/*.scss",
+    "stylelint-fix": "stylelint app/packs/stylesheets/**/*.scss --fix",
     "prettier": "prettier --check '**/*.scss'",
     "prettify": "prettier --write '**/*.scss'"
   },
