@@ -18,7 +18,6 @@ ca:
           show:
             area: Detalls de l'àrea
             cancel: Cancel·la
-            link_suggestions: 'Truc: usa %{map} per enllaçar altres pestanyes'
             save: Desa
           update:
             error: Ha ocorregut un error desant l'àrea

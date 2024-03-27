@@ -18,7 +18,6 @@ cs:
           show:
             area: Detaily oblasti
             cancel: Zrušit
-            link_suggestions: 'Tip: použijte %{map} pro propojení dalších karet'
             save: Uložit
           update:
             error: Došlo k chybě při ukládání oblasti
