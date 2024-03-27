@@ -27,7 +27,7 @@ export default class NavigationMapView {
   }
 
   createMap() {
-    let bounds = [[0, 0], [this.image.height, this.image.width]];
+    const bounds = [[0, 0], [this.image.height, this.image.width]];
     this.map = L.map(this.mapObject, {
       minZoom: -1,
       maxZoom: 2,
@@ -47,8 +47,8 @@ export default class NavigationMapView {
   };
 
   fitBounds() {
-    let imageRatio = this.image.height / this.image.width;
-    let mapRatio = this.mapObject.offsetHeight / this.mapObject.offsetWidth;
+    const imageRatio = this.image.height / this.image.width;
+    const mapRatio = this.mapObject.offsetHeight / this.mapObject.offsetWidth;
 
     if (imageRatio > mapRatio) {
       this.map.fitBounds([[0, 0], [0, this.image.width]]);
@@ -73,7 +73,7 @@ export default class NavigationMapView {
   };
 
   setLayerProperties (layer, area) {
-    let props = area.properties;
+    const props = area.properties;
     if (props) {
       if (props.color) {
         layer.setStyle({fillColor: props.color, color: props.color});
@@ -108,7 +108,7 @@ export default class NavigationMapView {
   forEachBlueprint (decorator) {
     // eslint-disable-next-line guard-for-in
     for (let id in this.blueprint) {
-      let geoarea = this.blueprint[id];
+      const geoarea = this.blueprint[id];
       // avoid non-polygons for the moment
       if (geoarea.geometry && geoarea.geometry.type === "Polygon") {
         decorator(id, geoarea);
