@@ -27,24 +27,6 @@ module Decidim
           model.settings.autohide_tabs? && valid_blueprints.count < 2
         end
 
-        def section_classes
-          "home__section"
-        end
-
-        def wrapper_classes
-          "wrapper-home"
-        end
-
-        def row_classes
-          "row column text-center"
-        end
-
-        def class_tag(class_string)
-          return if class_string.blank?
-
-          " class=\"#{class_string}\""
-        end
-
         def image_path(image, options = {})
           options.merge!({ only_path: true })
           Rails.application.routes.url_helpers.rails_blob_url(image, options)
