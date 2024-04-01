@@ -1,7 +1,7 @@
 <%= append_stylesheet_pack_tag "decidim_navigation_maps" %>
 <%= render partial: "styles", locals: { blueprints: valid_blueprints } %>
 
-<section class="home__section" id="navigation_maps-<%= model.id %>">
+<section class="home__section navigation_maps" id="navigation_maps-<%= model.id %>">
   <% if translated_title.present? %>
     <div class="home__section-header">
       <h2 class="home__section-title"><%= decidim_sanitize translated_title %></h2>

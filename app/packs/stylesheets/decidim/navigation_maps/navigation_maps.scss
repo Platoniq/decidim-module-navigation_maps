@@ -6,19 +6,14 @@
   .navigation_maps {
     margin: 1em 0;
 
-    .tabs {
-      background-color: #f4f4f4;
-    }
+    .tabs-content {
+      > .tabs-panel {
+        display: none;
 
-    .tabs-title {
-      a {
-        font-size: 1.2em;
-        color: var(--secondary);
+        &.is-active {
+          display: block;
+        }
       }
-    }
-
-    .tab-content {
-      border-color: #f4f4f4;
     }
 
     .map {
@@ -43,6 +38,7 @@
     .leaflet-container {
       background-color: #fafafa;
       border-color: #f4f4f4;
+      z-index: 19;
 
       .navigation_map-info {
         border-style: solid;
@@ -68,25 +64,6 @@
       &.selected {
         opacity: 1;
       }
-    }
-  }
-}
-
-#tabs__navigation_maps {
-  .tab-content {
-    float: left;
-    width: 100%;
-
-    > .tab-pane {
-      display: none;
-
-      &.is-active {
-        display: block;
-      }
-    }
-
-    > .is-active {
-      display: block;
     }
   }
 }

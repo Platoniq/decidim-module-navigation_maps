@@ -1,9 +1,7 @@
 <nav>
-  <ul id="dropdown-menu-pages" class="vertical-tabs__list nav-tabs" id="navigation_maps-tabs">
+  <ul class="tabs vertical-tabs__list" data-deep-link="true" data-update-history="true" data-deep-link-smudge="true" data-deep-link-smudge-delay="500" data-tabs id="navigation_maps-tabs">
     <% tabs.each_with_index do |item, index| %>
-      <li class="<%= " is-active" if index.zero? %>">
-        <a href="#map<%= index %>"><%= translated_attribute(item.title).presence || "Tab #{index + 1}" %></a>
-      </li>
+      <li class="tabs-title<%= " is-active" if index.zero? %>"><a data-tabs-target="map<%= index %>" href="#map<%= index %>"><%= translated_attribute(item.title).presence || "Tab #{index + 1}" %></a></li>
     <% end %>
   </ul>
 </nav>

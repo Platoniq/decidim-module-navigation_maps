@@ -23,37 +23,7 @@
     position: relative;
   }
 
-  .tab-content {
-    .map {
-      height: 700px;
-    }
-
-    .thumbnail {
-      img {
-        max-height: 100px;
-      }
-    }
-
-    .delete-tab {
-      border-top: 1px solid $dark-gray;
-      padding: 1em 1em 0;
-    }
-
-    .leaflet-interactive {
-      fill: "rgba(#{$leaflet-background-color}, 1)";
-      color: "rgba(#{$leaflet-background-color}, 1)";
-      opacity: 0.6;
-      fill-opacity: 0.5;
-
-      &.selected {
-        opacity: 1;
-      }
-    }
-  }
-}
-
-#tabs__navigation_maps {
-  .nav-tabs {
+  #navigation_maps-tabs.tabs {
     float: left;
     width: 100%;
     margin: 0 0 12px;
@@ -88,7 +58,7 @@
     }
   }
 
-  .tab-content {
+  .tabs-content {
     float: left;
     width: 100%;
 
@@ -112,16 +82,38 @@
       }
     }
 
-    > .tab-pane {
+    .map {
+      height: 700px;
+    }
+
+    .thumbnail {
+      img {
+        max-height: 100px;
+      }
+    }
+
+    .delete-tab {
+      border-top: 1px solid $dark-gray;
+      padding: 1em 1em 0;
+    }
+
+    .leaflet-interactive {
+      fill: "rgba(#{$leaflet-background-color}, 1)";
+      color: "rgba(#{$leaflet-background-color}, 1)";
+      opacity: 0.6;
+      fill-opacity: 0.5;
+
+      &.selected {
+        opacity: 1;
+      }
+    }
+
+    > .tabs-panel {
       display: none;
 
       &.is-active {
         display: block;
       }
-    }
-
-    > .is-active {
-      display: block;
     }
   }
 }

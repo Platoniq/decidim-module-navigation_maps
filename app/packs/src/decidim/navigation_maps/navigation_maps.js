@@ -1,11 +1,10 @@
 import NavigationMapView from "src/decidim/navigation_maps/map_view";
-import initializeElement from "src/decidim/navigation_maps/tabs_manager";
 import "jsviews/jsrender";
 
 document.addEventListener("DOMContentLoaded", () => {
   const maps = {};
   const tmpl = $.templates("#navigation_maps-popup");
-  const tabs = document.querySelectorAll("#tabs__navigation_maps ul.nav-tabs > li");
+  const tabs = document.getElementById("navigation_maps-tabs");
 
   document.querySelectorAll(".navigation_maps .map").forEach((element) => {
     const id = element.dataset.id;
@@ -33,18 +32,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  for (let idx = 0; idx < tabs.length; idx += 1) {
-    tabs[idx].addEventListener("click", (event) => {
-      event.preventDefault();
-      const anchorReference = event.target;
-      const activePaneId = anchorReference.getAttribute("href");
-      const activePane = document.querySelector(activePaneId);
-      const id = activePane.querySelector(".map")?.dataset?.id;
-      if (id) {
-        maps[id].reload();
-      }
-    });
-  }
+  $(tabs).on("change.zf.tabs", (_event, _tab, $content) => maps[$content.find(".map").data("id")].reload());
 });
 
-window.addEventListener("load", initializeElement("tabs__navigation_maps"));
+$(".home__section.navigation_maps").foundation();

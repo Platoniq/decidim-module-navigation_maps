@@ -1,10 +1,10 @@
-<div class="tab-content">
+<div class="tabs-content" data-tabs-content="navigation_maps-tabs">
   <% tabs.each_with_index do |item, index| %>
-    <div class="tab-pane<%= " is-active" if index.zero? %>" id="map<%= index %>">
+    <div class="tabs-panel<%= " is-active" if index.zero? %>" id="map<%= index %>">
       <%= render partial: "form", locals: { form: blueprint_form(item) } %>
     </div>
   <% end %>
-  <div class="tab-pane" id="map-new">
+  <div class="tabs-panel" id="map-new">
     <%= render partial: "form", locals: { form: blueprint_form } %>
   </div>
 </div>

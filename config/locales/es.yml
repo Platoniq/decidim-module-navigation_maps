@@ -18,6 +18,7 @@ es:
           show:
             area: Detalles del área
             cancel: Cancelar
+            link_suggestions: 'Truco: usa %{map} para enlazar otras pestañas'
             save: Guardar
           update:
             error: Se ha producido un error al guardar el área

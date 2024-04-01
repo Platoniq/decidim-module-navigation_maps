@@ -2,14 +2,13 @@
 // All this logic will automatically be available in application.js.
 // import "jquery-form"; // we use a CDN instead due a bug in webpacker
 import NavigationMapEditor from "src/decidim/navigation_maps/admin/map_editor";
-import initializeElement from "src/decidim/navigation_maps/tabs_manager";
 import { createDialog } from "src/decidim/a11y";
 
 document.addEventListener("DOMContentLoaded", () => {
   const callout = document.querySelector(".navigation_maps.admin .callout");
   const modal = document.getElementById("map-edit-modal");
   const dialog = window.Decidim.currentDialogs["map-edit-modal"];
-  const tabs = document.querySelectorAll("#tabs__navigation_maps ul.nav-tabs > li");
+  const tabs = document.getElementById("navigation_maps-tabs");
   const editors = {};
   const newAreas = {};
   const $form = $("form");
@@ -56,17 +55,11 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  tabs.forEach((tab) => {
-    tab.addEventListener("click", (event) => {
-      event.preventDefault();
-      const anchorReference = event.target;
-      const activePaneId = anchorReference.getAttribute("href");
-      const activePane = document.querySelector(activePaneId);
-      const id = activePane.querySelector(".map")?.dataset?.id;
-      if (id) {
-        editors[id].reload();
-      }
-    });
+  $(tabs).on("change.zf.tabs", (_event, _tab, $content) => {
+    const id = $content.find(".map").data("id");
+    if (id) {
+      editors[id].reload();
+    }
   });
 
   // Rails AJAX events
@@ -141,5 +134,6 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 
-window.addEventListener("load", initializeElement("tabs__navigation_maps"));
+$(".admin.navigation_maps").foundation();
+
 document.querySelectorAll("[data-dialog]").forEach((component) => createDialog(component))
