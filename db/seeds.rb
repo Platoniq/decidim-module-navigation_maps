@@ -151,4 +151,12 @@ if !ENV["SKIP_MODULE_SEEDS"] && (!Rails.env.production? || ENV.fetch("SEED", nil
       description: { en: "Cerdà was from the town of Centelles" }
     )
   end
+
+  csp = organization.content_security_policy
+  scripts = csp["script-src"]&.split(" ") || []
+  unless scripts.include?("cdnjs.cloudflare.com")
+    scripts << "cdnjs.cloudflare.com"
+    csp["script-src"] = scripts.join(" ")
+    organization.update!(content_security_policy: csp)
+  end
 end

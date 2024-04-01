@@ -65,9 +65,9 @@ Depending on your Decidim version, choose the corresponding Plugin version to en
 | 1.1.x                   | 0.22.x, 0.23.x              |
 | 1.0.x                   | 0.18.x - 0.21.x             |
 
-### Content Security Policy
-
-You need to include `cdnjs.cloudflare.com` in the section of script from your Content Security Policy (CSP) configuration.
+> **IMPORTANT**: If you are upgrading or installing this module for Decidim v0.28.0 or higher you need to include
+> `cdnjs.cloudflare.com` in the section of script from your organization's Content Security Policy (CSP) configuration.
+> Otherwise, the admin page to manage the maps will not work properly.
 
 ## Contributing
 
