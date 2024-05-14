@@ -1,17 +1,17 @@
 // Creates a map
 import "leaflet"
-import NavigationMapView from "src/decidim/navigation_maps/map_view.js";
+import NavigationMapView from "src/decidim/navigation_maps/map_view";
 
 export default class NavigationMapEditor extends NavigationMapView {
-  constructor(map_object, table_object) {
+  constructor(mapObject, tableObject) {
     // Call constructor of superclass to initialize superclass-derived members.
-    super(map_object, () => {
+    super(mapObject, () => {
       this.createControls();
       if (this.blueprint) {
         this.createAreas();
       }
     });
-    this.table_object = table_object;
+    this.tableObject = tableObject;
     this.createAreaCallback = function () {};
     this.editAreaCallback = function () {};
     this.removeAreaCallback = function () {};
@@ -27,16 +27,17 @@ export default class NavigationMapEditor extends NavigationMapView {
       cutPolygon: false
     });
 
-    this.map.on("pm:create", (e) => {
-      let geojson = e.layer.toGeoJSON();
-      this.blueprint[e.layer._leaflet_id] = geojson;
-      this.attachEditorEvents(e.layer);
-      this.createAreaCallback(e.layer._leaflet_id, e.layer, this);
+    this.map.on("pm:create", (event) => {
+      let geojson = event.layer.toGeoJSON();
+      this.blueprint[event.layer._leaflet_id] = geojson;
+      this.attachEditorEvents(event.layer);
+      this.createAreaCallback(event.layer._leaflet_id, event.layer, this);
     });
 
-    this.map.on("pm:remove", (e) => {
-      delete this.blueprint[e.layer._leaflet_id];
-      this.removeAreaCallback(e.layer._leaflet_id, e.layer, this);
+    this.map.on("pm:remove", (event) => {
+      // eslint-disable-next-line prefer-reflect
+      delete this.blueprint[event.layer._leaflet_id];
+      this.removeAreaCallback(event.layer._leaflet_id, event.layer, this);
     });
   };
 
@@ -57,22 +58,22 @@ export default class NavigationMapEditor extends NavigationMapView {
   };
 
   attachEditorEvents (layer) {
-    layer.on("mouseover", (e) => {
-      e.target.getElement().classList.add("selected")
+    layer.on("mouseover", (event) => {
+      event.target.getElement().classList.add("selected")
     });
 
-    layer.on("mouseout", (e) => {
-      e.target.getElement().classList.remove("selected")
+    layer.on("mouseout", (event) => {
+      event.target.getElement().classList.remove("selected")
     });
 
-    layer.on("pm:edit", (e) => {
-      this.blueprint[e.target._leaflet_id] = e.target.toGeoJSON();
-      this.editAreaCallback(e.target._leaflet_id, e.target, this);
+    layer.on("pm:edit", (event) => {
+      this.blueprint[event.target._leaflet_id] = event.target.toGeoJSON();
+      this.editAreaCallback(event.target._leaflet_id, event.target, this);
     });
 
-    layer.on("click", (e) => {
+    layer.on("click", (event) => {
       if (!this.editing()) {
-        this.clickAreaCallback(e.target._leaflet_id, e.target, this);
+        this.clickAreaCallback(event.target._leaflet_id, event.target, this);
       }
     });
   };
@@ -80,5 +81,4 @@ export default class NavigationMapEditor extends NavigationMapView {
   getBlueprint () {
     return this.blueprint;
   };
-
 }

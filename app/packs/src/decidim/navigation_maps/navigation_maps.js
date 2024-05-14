@@ -1,21 +1,18 @@
-import NavigationMapView from "src/decidim/navigation_maps/map_view.js";
+import NavigationMapView from "src/decidim/navigation_maps/map_view";
 import "jsviews/jsrender";
 
-$(function() {
+document.addEventListener("DOMContentLoaded", () => {
+  const maps = {};
+  const tmpl = $.templates("#navigation_maps-popup");
+  const tabs = document.getElementById("navigation_maps-tabs");
 
-  let $maps = $(".navigation_maps .map");
-  let $tabs = $("#navigation_maps-tabs");
-  let maps = {};
-  let tmpl = $.templates("#navigation_maps-popup");
-
-  $maps.each(function() {
-    let id = $(this).data("id");
-    maps[id] = new NavigationMapView(this);
-    maps[id].onSetLayerProperties(function(layer, props) {
+  document.querySelectorAll(".navigation_maps .map").forEach((element) => {
+    const id = element.dataset.id;
+    maps[id] = new NavigationMapView(element);
+    maps[id].onSetLayerProperties((layer, props) => {
       if (!props.popup) {
         let node = document.createElement("div");
-        let html = tmpl.render(props);
-        $(node).html(html);
+        node.innerHTML = tmpl.render(props);
 
         layer.bindPopup(node, {
           maxHeight: 400,
@@ -27,17 +24,15 @@ $(function() {
         });
       }
     });
-    maps[id].onClickArea(function(area) {
-      let popup = area.feature.properties && area.feature.properties.link && area.feature.properties.popup;
+    maps[id].onClickArea((area) => {
+      const popup = area.feature.properties && area.feature.properties.link && area.feature.properties.popup;
       if (popup) {
         location = area.feature.properties.link;
       }
     });
   });
 
-  $tabs.on("change.zf.tabs", function(e, $tab, $content) {
-    let id = $content.find(".map").data("id");
-    maps[id].reload();
-  });
-
+  $(tabs).on("change.zf.tabs", (_event, _tab, $content) => maps[$content.find(".map").data("id")].reload());
 });
+
+$(".home__section.navigation_maps").foundation();

@@ -1,53 +1,66 @@
-@import "stylesheets/decidim/plugins/leaflet";
+@import "stylesheets/decidim/legacy/leaflet";
 @import "stylesheets/decidim/plugins/leaflet-geoman";
 @import "stylesheets/decidim/navigation_maps/variables";
 
-.home-section {
+.home__section {
   .navigation_maps {
     margin: 1em 0;
-    .tabs {
-      background-color: #f4f4f4;
-    }
-    .tabs-title {
-      a {
-        font-size: 1.2em;
-        color: var(--secondary);
+
+    .tabs-content {
+      > .tabs-panel {
+        display: none;
+
+        &.is-active {
+          display: block;
+        }
       }
     }
-    .tabs-content {
-      border-color: #f4f4f4;
-    }
+
     .map {
       height: 475px;
+
       @media (max-width: 480px) {
         height: 240px;
       }
     }
+
     .map-info__content {
-        padding-top: 0;
-        padding-left: 0;
+      padding-top: 0;
+      padding-left: 0;
+
+      .map-info__button {
+        a.button {
+          width: 100%;
+        }
+      }
     }
+
     .leaflet-container {
       background-color: #fafafa;
-      border-color:#f4f4f4;
+      border-color: #f4f4f4;
+      z-index: 19;
+
       .navigation_map-info {
         border-style: solid;
         border-width: 3px;
-        border-radius: 10px;
+        border-radius: 14px;
+
         .leaflet-popup-content-wrapper {
           border-radius: 10px;
         }
+
         .leaflet-popup-tip {
           border-width: 3px;
         }
       }
     }
+
     .leaflet-interactive {
       fill: "rgba(#{$leaflet-background-color}, 1)";
       color: "rgba(#{$leaflet-background-color}, 1)";
-      weight: 3;
       opacity: 0.6;
       fill-opacity: 0.5;
+
       &.selected {
         opacity: 1;
       }

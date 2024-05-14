@@ -10,7 +10,7 @@ module Decidim::NavigationMaps::ContentBlocks
     let(:group_content_block) do
       create(
         :content_block,
-        organization: organization,
+        organization:,
         manifest_name: :navigation_map,
         scope_name: :participatory_process_group_homepage
       )
@@ -18,13 +18,13 @@ module Decidim::NavigationMaps::ContentBlocks
     let(:organization_homepage_content_block) do
       create(
         :content_block,
-        organization: organization,
+        organization:,
         manifest_name: :navigation_map,
         scope_name: :homepage
       )
     end
-    let!(:group_blueprint) { create(:blueprint, organization: organization, content_block: group_content_block) }
-    let!(:organization_homepage_blueprint) { create(:blueprint, organization: organization, content_block: organization_homepage_content_block) }
+    let!(:group_blueprint) { create(:blueprint, organization:, content_block: group_content_block) }
+    let!(:organization_homepage_blueprint) { create(:blueprint, organization:, content_block: organization_homepage_content_block) }
 
     controller Decidim::PagesController
 

@@ -1,24 +1,25 @@
-<%= stylesheet_pack_tag "decidim_navigation_maps" %>
+<%= append_stylesheet_pack_tag "decidim_navigation_maps" %>
 <%= render partial: "styles", locals: { blueprints: valid_blueprints } %>
 
-<section<%= class_tag(section_classes) %>>
-  <div<%= class_tag(wrapper_classes) %>>
-    <div<%= class_tag(row_classes) %>>
-
-      <% if translated_title.present? %>
-        <h3 class="heading3"><%= decidim_sanitize translated_title %></h3>
-      <% end %>
-
-      <div class="navigation_maps">
-        <%= tabs %>
-        <%= render partial: "tabs_content", locals: { tabs: valid_blueprints } %>
-      </div>
+<section class="home__section navigation_maps" id="navigation_maps-<%= model.id %>">
+  <% if translated_title.present? %>
+    <div class="home__section-header">
+      <h2 class="home__section-title"><%= decidim_sanitize translated_title %></h2>
     </div>
-  </div>
+  <% end %>
+
+  <% if autohide_tabs? %>
+    <div class="navigation_maps">
+      <%= render partial: "tabs_content", locals: { tabs: valid_blueprints } %>
+    </div>
+  <% else %>
+    <div class="vertical-tabs navigation_maps" id="tabs__navigation_maps">
+      <%= tabs %>
+      <%= render partial: "tabs_content", locals: { tabs: valid_blueprints } %>
+    </div>
+  <% end %>
 </section>
 
 <%= render partial: "template" %>
-<% unless %w[here].include?(Decidim.config.maps&.fetch(:provider)) %>
-  <%= javascript_pack_tag "decidim_leaflet" %>
-<% end %>
-<%= javascript_pack_tag "decidim_navigation_maps" %>
+<%= append_javascript_pack_tag "decidim_leaflet" %>
+<%= append_javascript_pack_tag "decidim_navigation_maps" %>

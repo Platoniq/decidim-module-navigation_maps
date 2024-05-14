@@ -10,7 +10,7 @@ Gem::Specification.new do |s|
   s.email = ["ivan@platoniq.net"]
   s.license = "AGPL-3.0"
   s.homepage = "https://github.com/Platoniq/decidim-module-navigation_maps"
-  s.required_ruby_version = ">= 3.0"
+  s.required_ruby_version = ">= 3.1"
 
   s.name = "decidim-navigation_maps"
   s.summary = "A decidim navigation_maps module"

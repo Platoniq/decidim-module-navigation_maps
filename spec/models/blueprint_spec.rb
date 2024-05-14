@@ -8,8 +8,8 @@ module Decidim
       subject { blueprint }
 
       let(:organization) { create(:organization) }
-      let(:content_block) { create(:content_block, organization: organization) }
-      let(:blueprint) { create(:blueprint, organization: organization, content_block: content_block) }
+      let(:content_block) { create(:content_block, organization:) }
+      let(:blueprint) { create(:blueprint, organization:, content_block:) }
 
       it { is_expected.to be_valid }
 
@@ -42,10 +42,10 @@ module Decidim
       end
 
       context "when areas are defined" do
-        let!(:blueprint) { create(:blueprint, organization: organization) }
-        let!(:area1) { create(:blueprint_area, link: "#link", color: "#f00", title: title, description: description, blueprint: blueprint) }
-        let!(:area2) { create(:blueprint_area, link: "#another_link", color: "#f0f", title: title, description: description, blueprint: blueprint) }
-        let!(:area3) { create(:blueprint_area, area: data) }
+        let!(:blueprint) { create(:blueprint, organization:) }
+        let!(:area) { create(:blueprint_area, link: "#link", color: "#f00", title:, description:, blueprint:) }
+        let!(:other_area) { create(:blueprint_area, link: "#another_link", color: "#f0f", title:, description:, blueprint:) }
+        let!(:another_area) { create(:blueprint_area, area: data) }
 
         let(:blueprint_object) do
           {
@@ -89,24 +89,24 @@ module Decidim
         it { is_expected.to be_valid }
 
         it "areas belong to blueprint" do
-          expect(area1.blueprint).to eq(blueprint)
-          expect(area2.blueprint).to eq(blueprint)
-          expect(area3.blueprint).not_to eq(blueprint)
+          expect(area.blueprint).to eq(blueprint)
+          expect(other_area.blueprint).to eq(blueprint)
+          expect(another_area.blueprint).not_to eq(blueprint)
         end
 
         it "blueprint contains areas" do
-          expect(subject.areas).to include(area1)
-          expect(subject.areas).to include(area2)
-          expect(subject.areas).not_to include(area3)
+          expect(subject.areas).to include(area)
+          expect(subject.areas).to include(other_area)
+          expect(subject.areas).not_to include(another_area)
         end
 
         it "compacts json areas in a single object" do
-          area1.area = data
-          area1.area_id = "101"
-          area1.save
-          area2.area = data
-          area2.area_id = "102"
-          area2.save
+          area.area = data
+          area.area_id = "101"
+          area.save
+          other_area.area = data
+          other_area.area_id = "102"
+          other_area.save
           expect(subject.blueprint).to eq(blueprint_object)
         end
       end

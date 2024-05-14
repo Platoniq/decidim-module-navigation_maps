@@ -28,7 +28,7 @@ namespace :navigation_maps do
         cw_attribute: "image",
         cw_uploader: Decidim::NavigationMaps::Cw::BlueprintUploader,
         as_attribute: "image",
-        logger: logger
+        logger:
       )
     end
   end

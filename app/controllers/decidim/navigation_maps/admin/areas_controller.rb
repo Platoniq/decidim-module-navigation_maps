@@ -15,6 +15,10 @@ module Decidim
           render json: blueprint.areas
         end
 
+        def show
+          @form = form(AreaForm).from_model(area)
+        end
+
         def new
           @form = form(AreaForm).instance(current_blueprint: blueprint)
         end
@@ -37,12 +41,10 @@ module Decidim
           end
         end
 
-        def show
-          @form = form(AreaForm).from_model(area)
-        end
-
         def update
+          parse_areas
           @form = form(AreaForm).from_params(params, current_blueprint: blueprint)
+
           SaveArea.call(@form) do
             on(:ok) do |area|
               render json: { message: I18n.t("navigation_maps.admin.areas.update.success", scope: "decidim"),
@@ -82,7 +84,7 @@ module Decidim
         end
 
         def area
-          @area ||= BlueprintArea.find_by(area_id: params[:area_id], blueprint: blueprint)
+          @area ||= BlueprintArea.find_by(area_id: params[:area_id], blueprint:)
         end
 
         def blueprints_count

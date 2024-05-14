@@ -4,13 +4,13 @@ import "@geoman-io/leaflet-geoman-free";
 import "@geoman-io/leaflet-geoman-free/dist/leaflet-geoman.css";
 
 export default class NavigationMapView {
-  constructor(map_object, imageDecorator) {
+  constructor(mapObject, imageDecorator) {
     this.features = {};
-    this.map_object = map_object;
-    this.id = map_object.dataset.id;
-    this.image_path = map_object.dataset.image;
-    this.blueprint = map_object.dataset.blueprint
-      ? JSON.parse(map_object.dataset.blueprint)
+    this.mapObject = mapObject;
+    this.id = mapObject.dataset.id;
+    this.imagePath = mapObject.dataset.image;
+    this.blueprint = mapObject.dataset.blueprint
+      ? JSON.parse(mapObject.dataset.blueprint)
       : {};
     this.image = new Image();
     this.image.onload = () => {
@@ -21,14 +21,14 @@ export default class NavigationMapView {
         this.createAreas();
       }
     };
-    this.image.src = this.image_path;
+    this.image.src = this.imagePath;
     this.clickAreaCallback = () => {};
     this.setLayerPropertiesCallback = () => {};
   }
 
   createMap() {
-    let bounds = [[0, 0], [this.image.height, this.image.width]];
-    this.map = L.map(this.map_object, {
+    const bounds = [[0, 0], [this.image.height, this.image.width]];
+    this.map = L.map(this.mapObject, {
       minZoom: -1,
       maxZoom: 2,
       crs: L.CRS.Simple,
@@ -47,10 +47,10 @@ export default class NavigationMapView {
   };
 
   fitBounds() {
-    let image_ratio = this.image.height / this.image.width;
-    let map_ratio = this.map_object.offsetHeight / this.map_object.offsetWidth;
+    const imageRatio = this.image.height / this.image.width;
+    const mapRatio = this.mapObject.offsetHeight / this.mapObject.offsetWidth;
 
-    if (image_ratio > map_ratio) {
+    if (imageRatio > mapRatio) {
       this.map.fitBounds([[0, 0], [0, this.image.width]]);
     }
     else {
@@ -63,6 +63,7 @@ export default class NavigationMapView {
     this.forEachBlueprint((id, geoarea) => {
       new L.GeoJSON(geoarea, {
         onEachFeature: (feature, layer) => {
+          // eslint-disable-next-line camelcase
           layer._leaflet_id = id;
           this.setLayerProperties(layer, geoarea);
           this.attachEditorEvents(layer);
@@ -72,7 +73,7 @@ export default class NavigationMapView {
   };
 
   setLayerProperties (layer, area) {
-    let props = area.properties;
+    const props = area.properties;
     if (props) {
       if (props.color) {
         layer.setStyle({fillColor: props.color, color: props.color});
@@ -82,16 +83,16 @@ export default class NavigationMapView {
   };
 
   attachEditorEvents (layer) {
-    layer.on("mouseover", (e) => {
-      e.target.getElement().classList.add("selected")
+    layer.on("mouseover", (event) => {
+      event.target.getElement().classList.add("selected")
     });
 
-    layer.on("mouseout", (e) => {
-      e.target.getElement().classList.remove("selected")
+    layer.on("mouseout", (event) => {
+      event.target.getElement().classList.remove("selected")
     });
 
-    layer.on("click", (e) => {
-      this.clickAreaCallback(e.target, this);
+    layer.on("click", (event) => {
+      this.clickAreaCallback(event.target, this);
     });
   };
 
@@ -105,8 +106,9 @@ export default class NavigationMapView {
   };
 
   forEachBlueprint (decorator) {
+    // eslint-disable-next-line guard-for-in
     for (let id in this.blueprint) {
-      let geoarea = this.blueprint[id];
+      const geoarea = this.blueprint[id];
       // avoid non-polygons for the moment
       if (geoarea.geometry && geoarea.geometry.type === "Polygon") {
         decorator(id, geoarea);

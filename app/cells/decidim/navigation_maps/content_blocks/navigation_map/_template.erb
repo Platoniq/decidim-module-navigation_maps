@@ -1,13 +1,15 @@
 <script id="navigation_maps-popup" type="text/x-jsrender">
   <div class="map-info__content">
-    <h3>{{:title}}</h3>
+    <h3 class="h3">{{:title}}</h3>
     <div id="bodyContent">
       <p>{{:description}}</p>
-      <div class="map-info__button">
-        <a href="{{:link}}" class="button button--sc">
-          <%= t("navigation_map.view", scope: "decidim.navigation_maps.content_blocks") %>
-        </a>
-      </div>
+      {{if link}}
+        <div class="map-info__button">
+          <a href="{{:link}}" class="button button__primary button__sm">
+            <%= t("navigation_map.view", scope: "decidim.navigation_maps.content_blocks") %>
+          </a>
+        </div>
+      {{/if}}
     </div>
   </div>
 </script>

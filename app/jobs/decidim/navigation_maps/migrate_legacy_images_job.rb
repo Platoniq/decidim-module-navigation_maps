@@ -24,7 +24,7 @@ module Decidim
           cw_uploader: Decidim::NavigationMaps::Cw::BlueprintUploader,
           as_attribute: "image",
           logger: @logger,
-          routes_mappings: routes_mappings
+          routes_mappings:
         )
       end
     end

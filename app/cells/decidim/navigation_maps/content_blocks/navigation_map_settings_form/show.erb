@@ -10,30 +10,18 @@
 <%= hidden_field_tag :content_block_id, content_block.id %>
 
 <div class="navigation_maps admin">
-  <div class="callout" style="display:none" data-closable>
+  <div class="callout my-4" style="display:none" data-closable>
     <p></p>
-    <button class="close-button" aria-label="Dismiss alert" type="button" data-close>
-      <span aria-hidden="true">&times;</span>
-    </button>
   </div>
 
-  <div class="content">
+  <div class="content" id="tabs__navigation_maps">
     <%= render partial: "tabs", locals: { tabs: blueprints } %>
     <%= render partial: "tabs_content", locals: { tabs: blueprints } %>
-
-    <div class="loading">
-      <div class="inner-loading">
-        <div class="spinner"></div>
-        <div class="progress" role="progressbar" tabindex="0" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
-          <div class="progress-meter">0%</div>
-        </div>
-      </div>
-    </div>
   </div>
 </div>
 
 <%= render partial: "modal" %>
 <%# we need to rely on a CDN due a bug in webpacker that renders twice jquery if importing a plugin %>
 <%= javascript_include_tag "https://cdnjs.cloudflare.com/ajax/libs/jquery.form/4.3.0/jquery.form.min.js", integrity: "sha384-qlmct0AOBiA2VPZkMY3+2WqkHtIQ9lSdAsAn5RUJD/3vA5MKDgSGcdmIv4ycVxyn", crossorigin: "anonymous" %>
-<%= javascript_pack_tag "decidim_admin_navigation_maps" %>
-<%= stylesheet_pack_tag "decidim_admin_navigation_maps" %>
+<%= append_javascript_pack_tag "decidim_admin_navigation_maps" %>
+<%= append_stylesheet_pack_tag "decidim_admin_navigation_maps" %>

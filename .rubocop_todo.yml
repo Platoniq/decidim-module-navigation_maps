@@ -1,0 +1,3 @@
+FactoryBot/FactoryAssociationWithStrategy:
+  Exclude:
+    - 'lib/decidim/navigation_maps/test/factories.rb'

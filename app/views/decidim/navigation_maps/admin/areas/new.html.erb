@@ -1,17 +1,10 @@
-<%= decidim_form_for(@form, url: blueprint_areas_path, remote: true) do |f| %>
-  <div class="card">
-    <div class="card-divider">
-      <h2 class="card-title"><%= t ".area" %></h2>
-    </div>
-    <div class="card-section">
-      <%= render partial: "form", object: f %>
-      <%= f.hidden_field :area %>
-      <%= f.hidden_field :area_id %>
-      <%= f.hidden_field :area_type %>
-    </div>
+<h2 class="h2"><%= t ".area" %></h2>
+<%= decidim_form_for(@form, url: blueprint_areas_path, remote: true, html: { class: "form form-defaults" }) do |f| %>
+  <div class="form__wrapper">
+    <%= render partial: "form", object: f %>
   </div>
-  <div class="button--double form-general-submit">
-    <%= f.submit t(".save") %>
-    <button class="button hollow" type="button" data-close><%= t(".cancel") %></button>
+  <div class="form__wrapper-block">
+    <%= f.submit t(".save"), class: "button button__lg button__secondary" %>
+    <button class="button button__lg button__transparent-secondary" type="button" data-dialog-close="map-edit-modal"><%= t(".cancel") %></button>
   </div>
 <% end %>

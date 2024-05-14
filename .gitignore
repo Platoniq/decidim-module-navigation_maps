@@ -21,3 +21,4 @@ development_app
 
 .rbenv-vars
 *.gem
+.nvmrc

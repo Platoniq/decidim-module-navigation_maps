@@ -1,11 +1,17 @@
-<ul class="accordion" data-accordion>
-  <li class="accordion-item<%= " is-active" unless image?(form) %>" data-accordion-item>
-    <a href="#" class="accordion-title"><%= t("navigation_map_settings_form.info", scope: "decidim.navigation_maps.content_blocks") %></a>
-
-    <div class="accordion-content" data-tab-content>
+<div class="card" data-component="accordion" role="presentation" id=accordion-general_info_<%= form.ident %>">
+  <div class="card-divider">
+    <button class="card-divider-button" data-open="true" data-controls="panel-general_info_<%= form.ident %>" type="button" role="button" tabindex="0" aria-controls="panel-general_info_<%= form.ident %>" aria-expanded="true" aria-disabled="false">
+      <%= icon "arrow-right-s-line" %>
+      <h2 class="card-title">
+        <%= t("navigation_map_settings_form.info", scope: "decidim.navigation_maps.content_blocks") %>
+      </h2>
+    </button>
+  </div>
+  <div id="panel-general_info_<%= form.ident %>" class="card-section" role="region" tabindex="-1" aria-labelledby aria-hidden="false">
+    <div class="row column">
       <%= translated_field_tag :text_field_tag, "blueprints[#{form.ident}]", :title, form.title, { tabs_id: "blueprints_#{form.ident}_title", label: t("navigation_map_settings_form.title", scope: "decidim.navigation_maps.content_blocks") } %>
       <%= label_tag t("navigation_map_settings_form.height", scope: "decidim.navigation_maps.content_blocks") %>
-      <%= text_field_tag "blueprints[#{form.ident}][height]", form.height, { id: "blueprints_#{form.ident}_height" } %>
+      <%= text_field_tag "blueprints[#{form.ident}][height]", form.height, { id: "blueprints_#{form.ident}_height", autocomplete: "off" } %>
 
       <%= label_tag t("navigation_map_settings_form.blueprint_image", scope: "decidim.navigation_maps.content_blocks") %>
       <div class="thumbnail">
@@ -22,17 +28,26 @@
           <%= t("navigation_map_settings_form.remove_blueprint", scope: "decidim.navigation_maps.content_blocks") %>
         </label>
       <% end %>
-  </div>
-  </li>
-
-  <% if image?(form) %>
-  <li class="accordion-item is-active" data-accordion-item>
-    <a href="#" class="accordion-title"><%= t("navigation_map_settings_form.editor", scope: "decidim.navigation_maps.content_blocks") %></a>
-    <div class="accordion-content navigation_maps-content" data-tab-content>
-
-      <%= content_tag(:div, "", id: "navigation_maps-map-#{form.ident}", class: "map", data: { id: form.ident, image: image_path(form.image), blueprint: form.blueprint }) %>
-
     </div>
-  </li>
-  <% end %>
-</ul>
+  </div>
+</div>
+
+<% if image?(form) %>
+  <div class="card mt-4" data-component="accordion" role="presentation" id=accordion-map_editor_<%= form.ident %>">
+    <div class="card-divider">
+      <button class="card-divider-button" data-open="true" data-controls="panel-map_editor_<%= form.ident %>" type="button" role="button" tabindex="0" aria-controls="panel-map_editor_<%= form.ident %>" aria-expanded="true" aria-disabled="false">
+        <%= icon "arrow-right-s-line" %>
+        <h2 class="card-title">
+          <%= t("navigation_map_settings_form.editor", scope: "decidim.navigation_maps.content_blocks") %>
+        </h2>
+      </button>
+    </div>
+    <div id="panel-map_editor_<%= form.ident %>" class="card-section" role="region" tabindex="-1" aria-labelledby aria-hidden="false">
+      <div class="row column">
+        <div class=navigation_maps-content" data-tab-content>
+          <%= content_tag(:div, "", id: "navigation_maps-map-#{form.ident}", class: "map", data: { id: form.ident, image: image_path(form.image), blueprint: form.blueprint }) %>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>

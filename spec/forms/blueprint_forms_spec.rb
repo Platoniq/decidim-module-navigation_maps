@@ -6,8 +6,8 @@ module Decidim::NavigationMaps
   describe BlueprintForms do
     subject { described_class.from_params(attributes).with_context(context) }
 
-    let(:organization) { create :organization }
-    let(:content_block) { create(:content_block, organization: organization) }
+    let(:organization) { create(:organization) }
+    let(:content_block) { create(:content_block, organization:) }
     let(:attributes) do
       {
         "blueprints" => []

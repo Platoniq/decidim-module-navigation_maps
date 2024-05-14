@@ -19,7 +19,7 @@ module Decidim
         def create
           save_settings
           parse_blueprints
-          @form = form(BlueprintForms).from_params(params).with_context(current_organization: current_organization)
+          @form = form(BlueprintForms).from_params(params).with_context(current_organization:)
           SaveBlueprints.call(@form) do
             on(:ok) do
               render plain: I18n.t("navigation_maps.create.success", scope: "decidim")
@@ -39,7 +39,7 @@ module Decidim
           return unless params[:content_block][:settings]
 
           @form = form(Decidim::Admin::ContentBlockForm).from_params(params)
-          Decidim::Admin::UpdateContentBlock.call(@form, content_block, content_block.scope_name&.to_sym)
+          Decidim::Admin::ContentBlocks::UpdateContentBlock.call(@form, content_block, content_block.scope_name&.to_sym)
         end
 
         def content_block

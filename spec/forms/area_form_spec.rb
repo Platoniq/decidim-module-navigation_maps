@@ -6,7 +6,7 @@ module Decidim::NavigationMaps
   describe AreaForm do
     subject { described_class.from_params(attributes).with_context(context) }
 
-    let(:blueprint) { create :blueprint }
+    let(:blueprint) { create(:blueprint) }
     let(:title) { Decidim::Faker::Localized.sentence(word_count: 2) }
     let(:description) { Decidim::Faker::Localized.paragraph }
     let(:area) do
@@ -17,9 +17,9 @@ module Decidim::NavigationMaps
     end
     let(:attributes) do
       {
-        title: title,
-        description: description,
-        area: area
+        title:,
+        description:,
+        area:
       }
     end
     let(:context) do

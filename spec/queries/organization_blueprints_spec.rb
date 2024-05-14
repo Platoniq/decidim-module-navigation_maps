@@ -8,7 +8,7 @@ module Decidim::NavigationMaps
 
     let!(:organization) { create(:organization) }
     let!(:blueprints) do
-      create_list(:blueprint, 3, organization: organization)
+      create_list(:blueprint, 3, organization:)
     end
 
     describe "query" do

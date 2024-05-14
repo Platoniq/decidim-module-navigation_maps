@@ -1,101 +1,93 @@
 // Place all the behaviors and hooks related to the matching controller here.
 // All this logic will automatically be available in application.js.
 // import "jquery-form"; // we use a CDN instead due a bug in webpacker
-import NavigationMapEditor from "src/decidim/navigation_maps/admin/map_editor.js";
+import NavigationMapEditor from "src/decidim/navigation_maps/admin/map_editor";
+import { createDialog } from "src/decidim/a11y";
 
-$(() => {
+document.addEventListener("DOMContentLoaded", () => {
+  const callout = document.querySelector(".navigation_maps.admin .callout");
+  const modal = document.getElementById("map-edit-modal");
+  const dialog = window.Decidim.currentDialogs["map-edit-modal"];
+  const tabs = document.getElementById("navigation_maps-tabs");
+  const editors = {};
+  const newAreas = {};
+  const $form = $("form");
 
-  let $maps = $(".navigation_maps.admin .map");
-  let $progress = $(".navigation_maps.admin .progress");
-  let $bar = $(".navigation_maps.admin .progress-meter");
-  let $loading = $(".navigation_maps.admin .loading");
-  let $callout = $(".navigation_maps.admin .callout");
-  let $modal = $("#mapEditModal");
-  let $form = $("form");
-  let $tabs = $("#navigation_maps-tabs");
-  let $accordion = $(".navigation_maps.admin .accordion");
-  let editors = {};
-  let new_areas = {};
-
-  $maps.each((_i, el) => {
-    let id = $(el).data("id");
-    let table = document.getElementById(`navigation_maps-table-${id}`);
-    editors[id] = new NavigationMapEditor(el, table);
-    editors[id].onCreateArea((area_id) => {
-      new_areas[area_id] = true;
+  document.querySelectorAll(".navigation_maps .map").forEach((element) => {
+    const id = element.dataset.id;
+    const table = document.getElementById(`navigation_maps-table-${id}`);
+    editors[id] = new NavigationMapEditor(element, table);
+    editors[id].onCreateArea((areaId) => {
+      newAreas[areaId] = true;
     });
 
-    editors[id].onClickArea((area_id, area) => {
-      $modal.find(".modal-content").html("");
-      $modal.addClass("loading").foundation("open");
-      $callout.hide();
-      $callout.removeClass("alert success");
-      // "new" form insted of editing
-      let rel = new_areas[area_id]
+    editors[id].onClickArea((areaId, area) => {
+      const modalContent = modal.querySelector(".modal-content");
+      modal.querySelector(".modal-content").innerHTML = "";
+      dialog.open();
+      callout.style.display = "none";
+      callout.classList.remove("alert", "success");
+      const rel = newAreas[areaId]
         ? "new"
-        : area_id;
-      $modal.find(".modal-content").load(`/admin/navigation_maps/blueprints/${id}/areas/${rel}`, () => {
-        let $input1 = $modal.find('input[name="blueprint_area[area_id]"]');
-        let $input2 = $modal.find('input[name="blueprint_area[area_type]"]');
-        let $input3 = $modal.find('input[name="blueprint_area[area]"]');
-        let a = area.toGeoJSON();
-        $modal.removeClass("loading");
-        if ($input1.length) { 
-          $input1.val(area_id); 
-        }
-        if ($input2.length) {
-          $input2.val(a.type);
-        }
-        if ($input3.length) {
-          $input3.val(JSON.stringify(a));
-        }
-        $modal.find("ul[data-tabs=true]").each(() => {
-          new Foundation.Tabs($(el)); // eslint-disable-line
+        : areaId;
+
+      fetch(`/admin/navigation_maps/blueprints/${id}/areas/${rel}`).
+        then((response) => response.text()).
+        then((data) => {
+          modalContent.innerHTML = data;
+
+          const areaIdInput = modal.querySelector('input[name="blueprint_area[area_id]"]');
+          const areaTypeInput = modal.querySelector('input[name="blueprint_area[area_type]"]');
+          const areaInput = modal.querySelector('input[name="blueprint_area[area]"]');
+          const geoJSON = area.toGeoJSON();
+          if (areaIdInput) {
+            areaIdInput.value = areaId;
+          }
+          if (areaTypeInput) {
+            areaTypeInput.value = geoJSON.type;
+          }
+          if (areaInput) {
+            areaInput.value = JSON.stringify(geoJSON);
+          }
+
+          $(modal).foundation();
         });
-      });
     });
+  });
+
+  $(tabs).on("change.zf.tabs", (_event, _tab, $content) => {
+    const id = $content.find(".map").data("id");
+    if (id) {
+      editors[id].reload();
+    }
   });
 
   // Rails AJAX events
   document.body.addEventListener("ajax:error", (responseText) => {
-    $callout.contents("p").html(`${responseText.detail[0].message}: <strong>${responseText.detail[0].error}</strong>`);
-    $callout.addClass("alert");
+    callout.innerHTML = `${responseText.detail[0].message}: <strong>${responseText.detail[0].error}</strong>`;
+    callout.classList.add("alert");
   });
 
   document.body.addEventListener("ajax:success", (responseText) => {
-    if (new_areas[responseText.detail[0].area]) {
-      delete new_areas[responseText.detail[0].area]
+    if (newAreas[responseText.detail[0].area_id]) {
+      newAreas[responseText.detail[0].area_id] = false;
     }
-    let blueprint_id = responseText.detail[0].blueprint_id;
-    let area_id = responseText.detail[0].area_id;
-    let area = responseText.detail[0].area;
-    editors[blueprint_id].setLayerProperties(editors[blueprint_id].map._layers[area_id], area);
-    editors[blueprint_id].blueprint[area_id] = area;
-    $callout.contents("p").html(responseText.detail[0].message);
-    $callout.addClass("success");
+    const blueprintId = responseText.detail[0].blueprint_id;
+    const areaId = responseText.detail[0].area_id;
+    const area = responseText.detail[0].area;
+    editors[blueprintId].setLayerProperties(editors[blueprintId].map._layers[areaId], area);
+    editors[blueprintId].blueprint[areaId] = area;
+    callout.innerHTML = responseText.detail[0].message;
+    callout.classList.add("success");
   });
 
   document.body.addEventListener("ajax:complete", () => {
-    $callout.show();
-    $modal.foundation("close");
+    callout.style.display = "block";
+    dialog.close();
   })
 
-  $tabs.on("change.zf.tabs", (e, $tab, $content) => {
-    let id = $content.find(".map").data("id");
-    if (id) {
-      editors[id].reload();
-    }
-  });
-
-  $accordion.on("down.zf.accordion", () => {
-    let id = $accordion.find(".map").data("id");
-    if (id) {
-      editors[id].reload();
-    }
-  });
-
-  // If a new item si going to be created o the image is changed a reload is needed
-  let needsReload = () => {
+  // If a new item is going to be created o the image is changed a reload is needed
+  const needsReload = () => {
     let reload = false;
     if ($form.find("#map-new input:checked").length) {
       return true;
@@ -104,6 +96,7 @@ $(() => {
       return true;
     }
 
+    // eslint-disable-next-line consistent-return
     $form.find("input[type=file],input[tabs_id=blueprints___title]").each((_i, el) => {
       if ($(el).val()) {
         reload = true;
@@ -117,38 +110,30 @@ $(() => {
     url: $form.find("[name=action]").val(),
     beforeSerialize: () => {
       Object.keys(editors).forEach((key) => {
-        let editor = editors[key];
+        const editor = editors[key];
         $(`#blueprints_${editor.id}_blueprint`).val(JSON.stringify(editor.getBlueprint()));
       });
     },
     beforeSend: () => {
-      let percentVal = "0%";
-      $bar.width(percentVal).html(percentVal);
-      $progress.show();
-      $callout.hide();
-      $callout.removeClass("alert success");
-      $loading.show();
-    },
-    uploadProgress: (event, position, total, percentComplete) => { // eslint-disable-line
-      let percentVal = `${percentComplete}%`;
-      $bar.width(percentVal).html(percentVal);
+      callout.style.display = "none";
+      callout.classList.remove("alert", "success");
     },
     success: (responseText) => {
-      $callout.show();
-      $progress.hide();
-      $callout.contents("p").html(responseText);
-      $callout.addClass("success");
-      $loading.hide();
+      callout.style.display = "block";
+      callout.innerHTML = responseText;
+      callout.classList.add("success");
       if (needsReload()) {
-        $loading.show();
         location.reload();
       }
     },
     error: (xhr) => {
-      $loading.hide();
-      $callout.show();
-      $callout.contents("p").html(xhr.responseText);
-      $callout.addClass("alert");
+      callout.style.display = "block";
+      callout.innerHTML = xhr.responseText;
+      callout.classList.add("alert");
     }
   });
 });
+
+$(".admin.navigation_maps").foundation();
+
+document.querySelectorAll("[data-dialog]").forEach((component) => createDialog(component))
