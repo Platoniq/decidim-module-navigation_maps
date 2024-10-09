@@ -51,13 +51,14 @@ RAILS_ENV=production bin/rails navigation_maps:active_storage_migrations:check_m
 ```
 
 The correct version of Navigation Maps should resolved automatically by the Bundler.
-However you can force some specific version using `gem "decidim-navigation_maps", "~> 1.3.0"` in the Gemfile.
+However you can force some specific version using `gem "decidim-navigation_maps", "~> 1.6.0"` in the Gemfile.
 
 
 Depending on your Decidim version, choose the corresponding Plugin version to ensure compatibility:
 
 | Navigation Maps version | Compatible Decidim versions |
 |-------------------------|-----------------------------|
+| 1.6.x                   | 0.29.x                      |
 | 1.5.x                   | 0.28.x                      |
 | 1.4.x                   | 0.27.x                      |
 | 1.3.x                   | 0.25.x, 0.26.x              |
