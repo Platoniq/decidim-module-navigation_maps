@@ -1,6 +1,6 @@
 {
   "name": "decidim-module-navigation_maps",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A Blueprint/Map navigation for Decidim",
   "scripts": {
     "lint": "eslint -c .eslintrc.json --ext .js app/packs/",
@@ -28,9 +28,9 @@
   },
   "prettier": "@decidim/prettier-config",
   "dependencies": {
-    "@geoman-io/leaflet-geoman-free": "^2.11.4",
+    "@geoman-io/leaflet-geoman-free": "^2.16.0",
     "jquery-form": "^4.3.0",
-    "jsviews": "^1.0.11"
+    "jsviews": "^1.0"
   },
   "devDependencies": {
     "@babel/eslint-parser": "^7.23.10",
@@ -39,10 +39,10 @@
     "@babel/plugin-transform-runtime": "^7.23.9",
     "@babel/preset-env": "^7.23.9",
     "@babel/preset-react": "^7.23.3",
-    "@decidim/dev": "0.28.0",
-    "@decidim/eslint-config": "0.28.0",
-    "@decidim/prettier-config": "0.28.0",
-    "@decidim/stylelint-config": "0.28.0",
+    "@decidim/dev": "0.29.0",
+    "@decidim/eslint-config": "0.29.0",
+    "@decidim/prettier-config": "0.29.0",
+    "@decidim/stylelint-config": "0.29.0",
     "postcss-scss": "^4.0.9",
     "sass-embedded": "~1.57.1"
   }
