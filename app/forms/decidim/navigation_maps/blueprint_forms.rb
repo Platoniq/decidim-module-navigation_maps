@@ -3,7 +3,7 @@
 module Decidim
   module NavigationMaps
     class BlueprintForms < Decidim::Form
-      attribute :blueprints, Array[BlueprintForm]
+      attribute :blueprints, [BlueprintForm]
       attribute :content_block_id, Integer
     end
   end
