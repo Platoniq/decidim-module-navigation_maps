@@ -1,5 +1,5 @@
 // Creates a map
-import "leaflet"
+import "leaflet";
 import NavigationMapView from "src/decidim/navigation_maps/map_view";
 
 export default class NavigationMapEditor extends NavigationMapView {

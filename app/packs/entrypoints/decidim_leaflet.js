@@ -1,1 +1,1 @@
-import "leaflet"
+import "leaflet";
