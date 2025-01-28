@@ -1,5 +1,5 @@
 import NavigationMapView from "src/decidim/navigation_maps/map_view";
-import "jsviews/jsrender";
+import "jsrender";
 
 document.addEventListener("DOMContentLoaded", () => {
   const maps = {};
