@@ -36,9 +36,10 @@
     "sass-embedded": "^1.83.1"
   },
   "dependencies": {
+    "@geoman-io/leaflet-geoman-free": "^2.18.3",
+    "jsrender": "^1.0.9",
     "leaflet": "^1.9.4",
     "leaflet-tilelayer-here": "^2.0.1",
-    "leaflet.markercluster": "^1.5.3",
-    "jsrender": "^1.0.9"
+    "leaflet.markercluster": "^1.5.3"
   }
 }
