@@ -26,7 +26,7 @@ module Decidim
             end
 
             on(:invalid) do
-              render plain: I18n.t("navigation_maps.create.error", scope: "decidim"), status: :unprocessable_entity
+              render plain: I18n.t("navigation_maps.create.error", scope: "decidim"), status: :unprocessable_content
             end
           end
         end

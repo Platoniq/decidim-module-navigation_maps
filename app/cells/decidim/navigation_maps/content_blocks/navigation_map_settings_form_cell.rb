@@ -5,6 +5,7 @@ module Decidim
     module ContentBlocks
       class NavigationMapSettingsFormCell < Decidim::ViewModel
         include NavigationMaps::NavigationMapCellHelpers
+
         alias form model
 
         view_paths << "#{Decidim::NavigationMaps::Engine.root}/app/cells/decidim/navigation_maps/content_blocks/navigation_map_settings_form"

@@ -58,6 +58,7 @@ Depending on your Decidim version, choose the corresponding Plugin version to en
 
 | Navigation Maps version | Compatible Decidim versions |
 |-------------------------|-----------------------------|
+| 1.9.x                   | 0.32.x                      |
 | 1.8.x                   | 0.31.x                      |
 | 1.7.x                   | 0.30.x                      |
 | 1.6.x                   | 0.29.x                      |

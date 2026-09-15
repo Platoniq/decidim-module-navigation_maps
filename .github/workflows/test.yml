@@ -11,7 +11,7 @@ on:
 
 env:
   CI: "true"
-  RUBY_VERSION: 3.3.11
+  RUBY_VERSION: 3.4.7
   NODE_VERSION: 22.14.0
 
 concurrency:
@@ -21,7 +21,9 @@ concurrency:
 jobs:
   main:
     name: Tests
-    runs-on: ubuntu-22.04
+    # ubuntu-22.04 ships libvips 8.12.1, but Rails 8.1's Active Storage refuses
+    # to load ruby-vips below libvips 8.13. 24.04 ships 8.15.1.
+    runs-on: ubuntu-24.04
     timeout-minutes: 30
     services:
       postgres:
@@ -43,6 +45,13 @@ jobs:
       - uses: actions/checkout@v3
         with:
           fetch-depth: 1
+      # decidim-core 0.32 depends on ruby-vips, and
+      # UploaderImageDimensionsValidator calls `require "vips"`, so the dummy app
+      # cannot boot without libvips on the runner.
+      - run: |
+          sudo apt-get update && sudo apt-get install -y libvips libvips-tools
+        name: Install libvips
+        shell: "bash"
       - uses: ruby/setup-ruby@v1
         with:
           bundler-cache: true
