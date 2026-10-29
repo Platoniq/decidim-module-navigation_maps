@@ -79,5 +79,24 @@ module Decidim::NavigationMaps::Admin
         expect(response).to have_http_status(:success)
       end
     end
+
+    context "when the blueprint belongs to another organization" do
+      let(:blueprint) { create(:blueprint) }
+      let(:link) { "#changed" }
+      let!(:area) { create(:blueprint_area, blueprint:) }
+
+      it "does not list its areas" do
+        expect { get :index, params: { blueprint_id: blueprint.id } }.to raise_error(ActiveRecord::RecordNotFound)
+      end
+
+      it "does not show its areas" do
+        expect { get :show, params: attributes }.to raise_error(ActiveRecord::RecordNotFound)
+      end
+
+      it "does not update its areas" do
+        expect { post :update, params: attributes }.to raise_error(ActiveRecord::RecordNotFound)
+        expect(area.reload.link).not_to eq(link)
+      end
+    end
   end
 end
