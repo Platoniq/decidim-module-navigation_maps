@@ -4,6 +4,7 @@ module Decidim
   module NavigationMaps
     module NavigationMapCellHelpers
       include Cell::ViewModel::Partial
+
       delegate :available_locales, to: :current_organization
 
       def valid_blueprints

@@ -12,6 +12,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const editors = {};
   const newAreas = {};
   const $form = $("form");
+  const blueprintsPath = $form.find("[name=action]").val();
 
   document.querySelectorAll(".navigation_maps .map").forEach((element) => {
     const id = element.dataset.id;
@@ -31,7 +32,7 @@ document.addEventListener("DOMContentLoaded", () => {
         ? "new"
         : areaId;
 
-      fetch(`/admin/navigation_maps/blueprints/${id}/areas/${rel}`).
+      fetch(`${blueprintsPath}/${id}/areas/${rel}`).
         then((response) => response.text()).
         then((data) => {
           modalContent.innerHTML = data;
@@ -107,7 +108,7 @@ document.addEventListener("DOMContentLoaded", () => {
   };
 
   $form.ajaxForm({
-    url: $form.find("[name=action]").val(),
+    url: blueprintsPath,
     beforeSerialize: () => {
       Object.keys(editors).forEach((key) => {
         const editor = editors[key];

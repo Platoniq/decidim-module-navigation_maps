@@ -36,7 +36,7 @@ module Decidim
             end
 
             on(:invalid) do |message|
-              render json: { message: I18n.t("navigation_maps.admin.areas.create.error", scope: "decidim"), error: message }, status: :unprocessable_entity
+              render json: { message: I18n.t("navigation_maps.admin.areas.create.error", scope: "decidim"), error: message }, status: :unprocessable_content
             end
           end
         end
@@ -54,7 +54,7 @@ module Decidim
             end
 
             on(:invalid) do |message|
-              render json: { message: I18n.t("navigation_maps.admin.areas.update.error", scope: "decidim"), error: message }, status: :unprocessable_entity
+              render json: { message: I18n.t("navigation_maps.admin.areas.update.error", scope: "decidim"), error: message }, status: :unprocessable_content
             end
           end
         end
