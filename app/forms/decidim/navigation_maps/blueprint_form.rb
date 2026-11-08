@@ -36,7 +36,7 @@ module Decidim
       def image?
         return false unless image && image.respond_to?(:url)
 
-        image.content_type.start_with? "image" if image.content_type.present?
+        (image.content_type.presence&.start_with?("image"))
       end
     end
   end
