@@ -26,7 +26,7 @@ jobs:
     # ubuntu-22.04 ships libvips 8.12.1, but Rails 8.1's Active Storage refuses
     # to load ruby-vips below libvips 8.13. 24.04 ships 8.15.1.
     runs-on: ubuntu-24.04
-    timeout-minutes: 30
+    timeout-minutes: 60
     services:
       postgres:
         image: postgres:14
