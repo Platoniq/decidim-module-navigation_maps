@@ -12,6 +12,8 @@ on:
 env:
   CI: "true"
   RUBY_VERSION: 3.4.13
+  # Ruby 3.4.13 refuses to cache compiled code while coverage runs; the dummy app turns the bootsnap iseq cache off when SIMPLECOV is set
+  SIMPLECOV: "true"
   NODE_VERSION: 22.14.0
 
 concurrency:
