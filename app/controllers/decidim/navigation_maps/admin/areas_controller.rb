@@ -80,11 +80,11 @@ module Decidim
         end
 
         def blueprint
-          @blueprint ||= Blueprint.find(params[:blueprint_id])
+          @blueprint ||= Blueprint.where(organization: current_organization).find(params[:blueprint_id])
         end
 
         def area
-          @area ||= BlueprintArea.find_by(area_id: params[:area_id], blueprint:)
+          @area ||= blueprint.areas.find_by(area_id: params[:area_id])
         end
 
         def blueprints_count

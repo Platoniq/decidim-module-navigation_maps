@@ -41,8 +41,8 @@ module Decidim
       attr_reader :forms
 
       def initialize_blueprint(form)
-        @blueprint = Blueprint.find_or_initialize_by(id: form.id) do |blueprint|
-          blueprint.organization = @forms.current_organization
+        # scoped to the current organization of the forms
+        @blueprint = Blueprint.where(organization: @forms.current_organization).find_or_initialize_by(id: form.id) do |blueprint| # rubocop:disable Decidim/OrganizationScopedFinder
           blueprint.content_block = content_block
         end
       end
@@ -64,12 +64,15 @@ module Decidim
       end
 
       def content_block
-        Decidim::ContentBlock.where(organization: @forms.current_organization, manifest_name: :navigation_map).find_by(id: @forms.content_block_id)
+        # already filtered by the current organization
+        Decidim::ContentBlock.where(organization: @forms.current_organization, manifest_name: :navigation_map) # rubocop:disable Decidim/OrganizationScopedFinder
+                             .find_by(id: @forms.content_block_id)
       end
 
       def create_areas(blueprint)
         blueprint.each do |key, area|
-          a = BlueprintArea.find_or_initialize_by(area_id: key, blueprint: @blueprint)
+          # @blueprint is scoped to the current organization (initialize_blueprint)
+          a = BlueprintArea.find_or_initialize_by(area_id: key, blueprint: @blueprint) # rubocop:disable Decidim/OrganizationScopedFinder
           a.area = area[:geometry]
           a.area_type = area[:type]
         end
