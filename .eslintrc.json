@@ -1,3 +1,27 @@
 {
-  "extends": "@decidim"
+  "extends": "@decidim",
+  "settings": {
+    "import/resolver": {
+      "node": {
+        "extensions": [
+          ".js",
+          ".scss"
+        ],
+        "moduleDirectory": [
+          "app/packs/",
+          "node_modules/"
+        ]
+      }
+    }
+  },
+  "rules": {
+    "import/no-unresolved": [
+      "error",
+      {
+        "ignore": [
+          "^src/decidim/(?!navigation_maps/)"
+        ]
+      }
+    ]
+  }
 }
