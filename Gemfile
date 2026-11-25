@@ -3,7 +3,7 @@
 source "https://rubygems.org"
 
 ruby RUBY_VERSION
-DECIDIM_VERSION = "0.32.2"
+DECIDIM_VERSION = "0.32.3"
 
 gem "decidim", DECIDIM_VERSION
 
